@@ -4,6 +4,8 @@
 
 Source for the `@desk/ui` React component library and its documentation site.
 
+**组件文档 / Docs：<https://xyzphp.github.io/desk-ui/>**
+
 | 目录 | 内容 |
 |---|---|
 | [packages/ui](packages/ui/README.md) | 组件库 `@desk/ui`：后台应用的表单、数据、反馈组件，以及浏览器桌面壳层（窗口、Dock、菜单栏、锁屏、通知中心等） |

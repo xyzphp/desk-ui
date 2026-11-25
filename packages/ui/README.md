@@ -54,7 +54,7 @@ src/
 └── shell/        # 桌面壳：桌面、窗口、Dock、菜单栏、弹窗、锁屏、通知中心、壁纸
 ```
 
-全部组件的示例与属性说明见组件文档站（`apps/docs`）。
+全部组件的示例与属性说明见[组件文档站](https://xyzphp.github.io/desk-ui/)（源码在 `apps/docs`）。
 
 ## 开发
 
