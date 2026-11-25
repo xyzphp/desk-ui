@@ -6,18 +6,20 @@ A React 19 + TypeScript component library for admin apps and browser desktops: f
 
 ## 安装
 
-```sh
-pnpm add @desk/ui react react-dom
+暂未发布到 npm。把 desk-ui 仓库作为 git 子模块纳入 pnpm 工作区（`packages` 包含子模块的 `packages/*`），再声明依赖：
+
+```json
+{ "dependencies": { "@desk/ui": "workspace:*", "react": "^19.0.0", "react-dom": "^19.0.0" } }
 ```
 
-`react` 与 `react-dom` 19 为 peer 依赖。
+`react` 与 `react-dom` 19 为 peer 依赖。完整步骤见[仓库说明](../../README.md#使用)。
 
 ## 使用
 
-在应用入口引入一次样式表，再按需导入组件：
+以源码方式使用时，在应用入口引入一次 `@desk/ui` 即带上全部样式，再按需导入组件：
 
 ```tsx
-import '@desk/ui/styles.css';
+import '@desk/ui';
 import { Button, Workspace } from '@desk/ui';
 
 export function App() {
@@ -29,7 +31,7 @@ export function App() {
 }
 ```
 
-- 样式表 `@desk/ui/styles.css` 同样可以直接用 `<link>` 引用（例如 iframe 中的页面），壁纸图片位于同级的 `assets/`，按需加载。
+- 使用构建产物（`pnpm build` 生成的 `dist/`，将来发布到 npm 的形态）时，组件入口不自动引入样式，需要另外 `import '@desk/ui/styles.css'`。该样式表也可以直接用 `<link>` 引用（例如 iframe 中的页面），壁纸图片位于同级的 `assets/`，按需加载。
 - 列表、文档类页面放进 `Workspace`，它提供字体、底色、公共滚动条和容器查询上下文。
 - 默认文案为简体中文，通过 `ConfigProvider` 切换语言或覆盖文案；组件的 `labels` 与显式文字属性优先。
 - 使用 Vitest 测试时，可在 `setupFiles` 中加入 `@desk/ui/test-setup`，它补齐 jsdom 缺少的 Popover API 并启用 jest-dom 断言。
