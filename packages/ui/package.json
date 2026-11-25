@@ -1,6 +1,6 @@
 {
   "name": "@xyzos/desk-ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React components for admin apps and browser desktops: forms, data display, feedback, and a desktop shell.",
   "keywords": [
     "react",
