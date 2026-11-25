@@ -10,6 +10,14 @@
     "desktop",
     "window-manager"
   ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyzphp/desk-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/xyzphp/desk-ui#readme",
+  "bugs": "https://github.com/xyzphp/desk-ui/issues",
   "type": "module",
   "sideEffects": [
     "**/*.css",

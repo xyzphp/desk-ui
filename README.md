@@ -35,3 +35,7 @@ pnpm check           # 类型检查、lint、测试、元数据测试与两个�
 组件库通过 [Changesets](https://github.com/changesets/changesets) 管理版本，由 GitHub Actions 的 `Release` 工作流发布到 npm（可信发布，附来源证明）。文档站由 `Docs` 工作流部署到 GitHub Pages。
 
 贡献方式见 [CONTRIBUTING.md](CONTRIBUTING.md)，安全问题报告方式见 [SECURITY.md](SECURITY.md)。
+
+## 许可证
+
+[MIT](LICENSE)。壁纸场景及其图片素材为 AI 生成，随组件库以同一许可证提供。

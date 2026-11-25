@@ -68,3 +68,7 @@ pnpm --filter @desk/ui build       # 产出 dist/
 ```
 
 测试文件与组件同目录（`*.test.tsx`，Vitest + Testing Library）。
+
+## 许可证
+
+MIT，见 [LICENSE](LICENSE)。
