@@ -57,8 +57,10 @@
     white-space: nowrap;
   }
 
-  /* 相邻项共享 1px 边线，仅首尾保留圆角。 */
-  .ds-input-group > * {
+  /* 相邻项共享 1px 边线，仅首尾保留圆角。
+     用 :nth-child(n) 把权重提到两个类，盖过在本文件之后加载的子控件圆角（如 Layout.css 的 .ds-search）；
+     下方首尾与窄容器规则权重相同、位置在后，仍能恢复各自圆角。 */
+  .ds-input-group > :nth-child(n) {
     position: relative;
     border-radius: 0;
   }

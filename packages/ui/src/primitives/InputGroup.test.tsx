@@ -9,38 +9,38 @@ import { InputGroup, InputGroupAddon } from './InputGroup';
 describe('InputGroup', () => {
   it('把输入控件与多个按钮组合在同一表单组内，保留 Field 标签关联与按钮交互', async () => {
     const user = userEvent.setup();
-    const onRandom = vi.fn();
-    const onSave = vi.fn();
+    const onRegenerate = vi.fn();
+    const onApply = vi.fn();
 
     const { container } = render(
-      <Field label="访问路径">
-        <InputGroup data-testid="entry-group">
-          <Input defaultValue="/_entry/a1b2c3d4e5" />
-          <Button type="button" onClick={onRandom}>
-            随机生成
+      <Field label="邀请码">
+        <InputGroup data-testid="invite-group">
+          <Input defaultValue="A1B2-C3D4" />
+          <Button type="button" onClick={onRegenerate}>
+            重新生成
           </Button>
-          <Button type="button" variant="primary" onClick={onSave}>
-            保存
+          <Button type="button" variant="primary" onClick={onApply}>
+            应用
           </Button>
         </InputGroup>
       </Field>,
     );
 
-    const group = screen.getByTestId('entry-group');
-    const input = screen.getByRole('textbox', { name: '访问路径' });
-    const randomButton = screen.getByRole('button', { name: '随机生成' });
-    const saveButton = screen.getByRole('button', { name: '保存' });
+    const group = screen.getByTestId('invite-group');
+    const input = screen.getByRole('textbox', { name: '邀请码' });
+    const regenerateButton = screen.getByRole('button', { name: '重新生成' });
+    const applyButton = screen.getByRole('button', { name: '应用' });
 
     expect(group).toHaveClass('ds-input-group', 'is-responsive');
     expect(group).not.toHaveClass('is-inline');
     expect(group).toContainElement(input);
-    expect(group).toContainElement(randomButton);
-    expect(group).toContainElement(saveButton);
+    expect(group).toContainElement(regenerateButton);
+    expect(group).toContainElement(applyButton);
 
-    await user.click(randomButton);
-    await user.click(saveButton);
-    expect(onRandom).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledTimes(1);
+    await user.click(regenerateButton);
+    await user.click(applyButton);
+    expect(onRegenerate).toHaveBeenCalledTimes(1);
+    expect(onApply).toHaveBeenCalledTimes(1);
 
     const result = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
     expect(result.violations).toEqual([]);

@@ -1,21 +1,26 @@
 import { useState } from 'react';
 import { Button, Field, Input, InputGroup, InputGroupAddon, Select, Stack } from '@xyzos/desk-ui';
 
+function randomCode() {
+  const text = Math.random().toString(36).slice(2, 10).toUpperCase().padEnd(8, '0');
+  return `${text.slice(0, 4)}-${text.slice(4)}`;
+}
+
 export function InputGroupDemo() {
-  const [entryPath, setEntryPath] = useState('/_entry/a1b2c3d4e5');
+  const [inviteCode, setInviteCode] = useState('A1B2-C3D4');
   const [protocol, setProtocol] = useState('https');
   const [host, setHost] = useState('portal.example.com');
   const [status, setStatus] = useState('');
 
   return (
     <Stack gap="lg">
-      <Field label="访问入口路径" hint={status || undefined}>
+      <Field label="邀请码" hint={status || undefined}>
         <InputGroup>
           <Input
-            value={entryPath}
-            aria-label="访问入口路径"
+            value={inviteCode}
+            aria-label="邀请码"
             onChange={(event) => {
-              setEntryPath(event.currentTarget.value);
+              setInviteCode(event.currentTarget.value);
               setStatus('');
             }}
           />
@@ -23,15 +28,14 @@ export function InputGroupDemo() {
             type="button"
             icon="refresh-cw"
             onClick={() => {
-              const suffix = Math.random().toString(16).slice(2, 12);
-              setEntryPath(`/_entry/${suffix}`);
-              setStatus('已生成新的随机路径');
+              setInviteCode(randomCode());
+              setStatus('已生成新的邀请码');
             }}
           >
-            随机生成
+            重新生成
           </Button>
-          <Button type="button" icon="save" variant="primary" onClick={() => setStatus(`已保存：${entryPath}`)}>
-            保存入口
+          <Button type="button" icon="save" variant="primary" onClick={() => setStatus(`已应用：${inviteCode}`)}>
+            应用
           </Button>
         </InputGroup>
       </Field>
