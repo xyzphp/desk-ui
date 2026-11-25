@@ -224,6 +224,9 @@ export const pages: DocPage[] = [
   component('field-addon', 'forms', 'boxes', docs15.fieldAddonDoc!, () =>
     import('./pages/components/form-extras').then((module) => module.fieldAddonDoc),
   ),
+  component('input-group', 'forms', 'columns', docs15.inputGroupDoc!, () =>
+    import('./pages/components/form-extras').then((module) => module.inputGroupDoc),
+  ),
   component('timeline', 'data', 'clock-3', docs16.timelineDoc!, () =>
     import('./pages/components/display-extras').then((module) => module.timelineDoc),
   ),

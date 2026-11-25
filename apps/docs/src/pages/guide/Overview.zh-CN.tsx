@@ -117,7 +117,7 @@ export function OverviewZh({ componentCount, pageCount, categoryCount }: Overvie
           <li><strong>表单</strong>：Field、Input、InputNumber、PasswordInput、CopyField、Radio / RadioGroup、Textarea、Select / Combobox / MultiSelect、
             Range / RangeSlider、OTPInput、Rating、
             DatePicker / TimePicker / DateTimePicker、DateRangePicker / TimeRangePicker / NumberRangePicker、Checkbox / CheckboxGroup、
-            Switch、ColorPicker、FormSection / FormActions、FieldAddon、UploadZone、MessageComposer。</li>
+            Switch、ColorPicker、FormSection / FormActions、FieldAddon、InputGroup、UploadZone、MessageComposer。</li>
           <li><strong>AI 工具</strong>：AIToolbar、AIReferenceList、AIResultPanel，提供选择、生成状态与结果预览，业务请求由宿主处理。</li>
           <li><strong>反馈</strong>：Tag、HelpTip / Tooltip、Notice、ToastProvider / useToast、AnchorPopover、Popconfirm、Coachmark / Tour、
             EmptyState、Result、Spinner / LoadingOverlay。</li>

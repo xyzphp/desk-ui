@@ -3,10 +3,12 @@ import { CheckboxGroupDemo } from './CheckboxGroupDemo';
 import { FormDemo } from './FormDemo';
 import { ColorPickerDemo } from './ColorPickerDemo';
 import { FieldAddonDemo } from './FieldAddonDemo';
+import { InputGroupDemo } from './InputGroupDemo';
 import checkboxSource from './CheckboxGroupDemo.tsx?raw';
 import formSource from './FormDemo.tsx?raw';
 import colorSource from './ColorPickerDemo.tsx?raw';
 import fieldAddonSource from './FieldAddonDemo.tsx?raw';
+import inputGroupSource from './InputGroupDemo.tsx?raw';
 
 export const checkboxGroupDoc: ComponentDoc = {
   name: { 'zh-CN': '复选框组', 'en-US': 'Checkbox group' },
@@ -90,6 +92,41 @@ export const fieldAddonDoc: ComponentDoc = {
     { name: '…div 属性', type: 'ComponentProps<"div">', description: 'ref、className、style 与原生属性。' },
   ] }],
   a11y: ['组合容器不产生额外语义，子控件保留各自标签、键盘与校验；焦点落在任一子控件时表面呈现统一焦点边框。'],
+};
+
+export const inputGroupDoc: ComponentDoc = {
+  name: { 'zh-CN': '输入表单组', 'en-US': 'Input group' },
+  summary: {
+    'zh-CN': '将输入控件、前后缀文本与相邻操作按钮拼成一整行共享边框的表单组，输入项自动撑满剩余宽度。',
+    'en-US': 'Stitches inputs, static addons, and adjacent action buttons into one full-width row where the input grows to fill remaining space.',
+  },
+  usage: [
+    '用于「输入框 + 一个或多个操作按钮」「前缀/后缀 + 输入框」「下拉 + 输入框 + 动作」等需要整行对齐的组合表单。',
+    '默认 block=true 撑满父容器宽度，输入控件自动 flex 拉伸；按钮与 InputGroupAddon 保持自身宽度且不换行。',
+    '窄容器（Workspace <= 440px 或视口 <= 400px）下默认自动换行并恢复各子项独立圆角，防止输入内容被挤压。',
+    '与 FieldAddon 的区别：FieldAddon 适合主控件内嵌勾选框 / 开关 / 短单位；InputGroup 适合多个同级控件（特别是主次操作按钮）无缝拼边。',
+  ],
+  demos: [{ title: '输入框 + 多按钮、前后缀与下拉组合', layout: 'stack', code: inputGroupSource, render: () => <InputGroupDemo /> }],
+  api: [
+    {
+      component: 'InputGroup',
+      props: [
+        { name: 'block', type: 'boolean', default: 'true', description: '是否撑满父容器整行；设为 false 时按内容宽度收缩。' },
+        { name: 'responsive', type: 'boolean', default: 'true', description: '窄容器下自动换行并恢复独立圆角。' },
+        { name: 'children / …div 属性', type: 'ReactNode / ComponentProps<"div">', description: '组合的 Input、Select、Button、InputGroupAddon 与原生属性。' },
+      ],
+    },
+    {
+      component: 'InputGroupAddon',
+      props: [
+        { name: 'children / …span 属性', type: 'ReactNode / ComponentProps<"span">', description: '静态前缀或后缀文本槽。' },
+      ],
+    },
+  ],
+  a11y: [
+    '容器不注入冗余语义，可配合 Field 或 SettingsRow 提供分组标签；各子控件保留独立的键盘导航、焦点环与原生校验。',
+    '悬停或聚焦任意子控件时自动提升层叠顺序，确保焦点边框完整可见不被相邻边线裁切。',
+  ],
 };
 
 export const colorPickerDoc: ComponentDoc = {

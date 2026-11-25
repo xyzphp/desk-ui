@@ -117,7 +117,7 @@ export function OverviewEn({ componentCount, pageCount, categoryCount }: Overvie
           <li><strong>Forms</strong>: Field, Input, InputNumber, PasswordInput, CopyField, Radio / RadioGroup, Textarea, Select / Combobox / MultiSelect,
             Range / RangeSlider, OTPInput, Rating,
             DatePicker / TimePicker / DateTimePicker, DateRangePicker / TimeRangePicker / NumberRangePicker, Checkbox / CheckboxGroup,
-            Switch, ColorPicker, FormSection / FormActions, FieldAddon, UploadZone, MessageComposer.</li>
+            Switch, ColorPicker, FormSection / FormActions, FieldAddon, InputGroup, UploadZone, MessageComposer.</li>
           <li><strong>AI tools</strong>: AIToolbar, AIReferenceList, AIResultPanel cover selection, generation states, and result previews; business requests stay in the host.</li>
           <li><strong>Feedback</strong>: Tag, HelpTip / Tooltip, Notice, ToastProvider / useToast, AnchorPopover, Popconfirm, Coachmark / Tour,
             EmptyState, Result, Spinner / LoadingOverlay.</li>

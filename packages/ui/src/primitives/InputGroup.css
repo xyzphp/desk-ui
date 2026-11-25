@@ -1,0 +1,134 @@
+/* 紧贴式表单组：合并输入控件、前后缀与相邻按钮的边框与圆角，输入项自动撑满剩余宽度。 */
+@layer ds {
+  .ds-input-group {
+    --ds-input-group-height: var(--ds-field-height);
+    --ds-input-group-radius: var(--ds-radius-sm);
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ds-input-group.is-inline {
+    display: inline-flex;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .ds-input-group > :is(.ds-field, .ds-password-input, .ds-number-input, .ds-search, .ds-field-addon) {
+    flex: 1 1 180px;
+    width: auto;
+    min-width: 0;
+    min-height: var(--ds-input-group-height);
+  }
+
+  .ds-input-group > .ds-select {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .ds-input-group:not(:has(> :is(.ds-field, .ds-password-input, .ds-number-input, .ds-search, .ds-field-addon)))
+    > .ds-select {
+    flex: 1 1 160px;
+  }
+
+  .ds-input-group > .ds-select > .ds-picker-surface {
+    --ds-picker-surface-height: var(--ds-input-group-height);
+    height: 100%;
+  }
+
+  .ds-input-group > .ds-button {
+    flex: 0 0 auto;
+    min-height: var(--ds-input-group-height);
+    white-space: nowrap;
+  }
+
+  .ds-input-group-addon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    min-height: var(--ds-input-group-height);
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-win);
+    color: var(--text-2);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* 相邻项共享 1px 边线，仅首尾保留圆角。 */
+  .ds-input-group > * {
+    position: relative;
+    border-radius: 0;
+  }
+
+  .ds-input-group > .ds-select > .ds-picker-surface {
+    border-radius: 0;
+  }
+
+  .ds-input-group > :not(:first-child) {
+    margin-left: -1px;
+  }
+
+  .ds-input-group > :first-child,
+  .ds-input-group > .ds-select:first-child > .ds-picker-surface {
+    border-top-left-radius: var(--ds-input-group-radius);
+    border-bottom-left-radius: var(--ds-input-group-radius);
+  }
+
+  .ds-input-group > :last-child,
+  .ds-input-group > .ds-select:last-child > .ds-picker-surface {
+    border-top-right-radius: var(--ds-input-group-radius);
+    border-bottom-right-radius: var(--ds-input-group-radius);
+  }
+
+  /* 主按钮与悬停 / 聚焦项提层，避免边框与焦点环被相邻控件遮挡。 */
+  .ds-input-group > .ds-button--primary {
+    z-index: 1;
+  }
+
+  .ds-input-group > :is(:hover, :focus, :focus-visible, :focus-within) {
+    z-index: 2;
+  }
+
+  @container ds-workspace (max-width: 440px) {
+    .ds-input-group.is-responsive {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ds-input-group.is-responsive > :is(.ds-field, .ds-password-input, .ds-number-input, .ds-search, .ds-field-addon) {
+      flex: 1 1 100%;
+    }
+
+    .ds-input-group.is-responsive > :not(:first-child) {
+      margin-left: 0;
+    }
+
+    .ds-input-group.is-responsive > *,
+    .ds-input-group.is-responsive > .ds-select > .ds-picker-surface {
+      border-radius: var(--ds-input-group-radius);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .ds-input-group.is-responsive {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ds-input-group.is-responsive > :is(.ds-field, .ds-password-input, .ds-number-input, .ds-search, .ds-field-addon) {
+      flex: 1 1 100%;
+    }
+
+    .ds-input-group.is-responsive > :not(:first-child) {
+      margin-left: 0;
+    }
+
+    .ds-input-group.is-responsive > *,
+    .ds-input-group.is-responsive > .ds-select > .ds-picker-surface {
+      border-radius: var(--ds-input-group-radius);
+    }
+  }
+}

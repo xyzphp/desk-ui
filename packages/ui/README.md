@@ -70,6 +70,8 @@ pnpm --filter @xyzos/desk-ui build       # 产出 dist/
 
 测试文件与组件同目录（`*.test.tsx`，Vitest + Testing Library）。
 
-## 许可证
+## 许可证与第三方说明
 
-MIT，见 [LICENSE](LICENSE)。
+- **组件库**：MIT，见 [LICENSE](LICENSE)。
+- **图标依赖**：矢量图标使用 [Lucide](https://lucide.dev/)（`lucide-react`，ISC License；部分图标衍生自 Feather Icons，MIT License，Copyright (c) 2013-present Cole Bemis），作为常规运行时依赖安装，不内联进库产物。
+- **设计参考**：部分表单与选择器细节参考了 Naive UI（MIT License）的轻量视觉层次，未引入其源码或依赖。

@@ -12,7 +12,7 @@ A React 19 + TypeScript component library for admin apps and browser desktops �
 
 ## 特性
 
-- **146 个组件文档页，6 个分类**：基础、表单、反馈、布局、数据、桌面系统，每个组件都有可操作示例、属性表与无障碍说明；使用指南内置 LLMs 文档页，构建时自动生成 `llms.txt`、完整参考与逐组件 Markdown。
+- **147 个组件文档页，6 个分类**：基础、表单、反馈、布局、数据、桌面系统，每个组件都有可操作示例、属性表与无障碍说明；使用指南内置 LLMs 文档页，构建时自动生成 `llms.txt`、完整参考与逐组件 Markdown。
 - **完整的桌面壳**：桌面与图标网格、窗口（macOS / Windows 两种标题栏）、Dock 与任务栏、菜单栏、开始菜单、启动台、窗口切换、命令面板、通知中心、锁屏、右键菜单与动态场景壁纸。
 - **后台常用组件**：表单与选择器（日期 / 时间 / 范围、搜索选择、标签输入、取色器）、表格与分页、树与权限树、上传与图片裁剪、Markdown 编辑与渲染、消息线程、图表、AI 编辑工具条。
 - **主题**：设计令牌（CSS 变量）统一颜色、圆角、间距与字号，支持浅色、深色与高对比度。
@@ -107,6 +107,8 @@ pnpm check           # 类型检查、lint、测试、元数据测试与两个�
 
 贡献约定见 [CONTRIBUTING.md](CONTRIBUTING.md)，安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
 
-## 许可证
+## 许可证与第三方说明
 
-[MIT](LICENSE)。壁纸场景及其图片素材为 AI 生成，随组件库以同一许可证提供。
+- **本仓库**：[MIT](LICENSE)。壁纸场景及其图片素材为 AI 生成，随组件库以同一许可证提供。
+- **图标依赖**：矢量图标使用 [Lucide](https://lucide.dev/)（`lucide-react`，[ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE)；其中部分图标衍生自 [Feather Icons](https://feathericons.com/)，MIT License，Copyright (c) 2013-present Cole Bemis）。
+- **设计参考**：部分表单选择与层次细节参考了 [Naive UI](https://www.naiveui.com/)（MIT License）的视觉风格，未引入其代码或依赖。

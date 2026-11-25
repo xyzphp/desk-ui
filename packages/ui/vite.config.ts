@@ -51,7 +51,7 @@ export default defineConfig({
       cssFileName: 'ui',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', /^@testing-library\//, /^vitest(\/|$)/],
+      external: ['react', 'react-dom', 'react/jsx-runtime', /^lucide-react(\/|$)/, /^@testing-library\//, /^vitest(\/|$)/],
     },
     sourcemap: true,
   },

@@ -47,6 +47,12 @@ export {
 } from './layout/MonthCalendar';
 export { CheckboxGroup, type CheckboxGroupProps, type CheckboxOption } from './primitives/CheckboxGroup';
 export { FieldAddon, type FieldAddonProps } from './primitives/FieldAddon';
+export {
+  InputGroup,
+  InputGroupAddon,
+  type InputGroupProps,
+  type InputGroupAddonProps,
+} from './primitives/InputGroup';
 export { FormSection, FormActions, type FormSectionProps, type FormActionsProps } from './layout/Form';
 export { ColorPicker, type ColorPickerProps, type ColorPickerLabels, type ColorPreset } from './primitives/ColorPicker';
 export { Timeline, type TimelineProps, type TimelineItem } from './layout/Timeline';

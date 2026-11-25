@@ -9,7 +9,7 @@ export function IconPage() {
       <header className="docs-stack">
         <p className="docs-eyebrow">原生来源 · <span className="docs-code-inline">OS.icons.markup(name)</span> / <span className="docs-code-inline">data-lucide</span></p>
         <Title>图标</Title>
-        <Lead>基于 lucide 的装饰性图标，名称与原生页面的 data-lucide 一一对应，迁移时无需改名。图标按需注册，只有列在下面的名称可用；缺少的名称在 foundation/Icon.tsx 中补充。</Lead>
+        <Lead>基于第三方开源图标库 Lucide（lucide-react，ISC License；部分图标衍生自 Feather Icons，MIT License）的装饰性图标，按需注册，名称与 data-lucide 一一对应；缺少的名称在 foundation/Icon.tsx 中补充。</Lead>
       </header>
 
       <h2 className="docs-section-title">示例</h2>
