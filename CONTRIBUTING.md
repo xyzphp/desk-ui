@@ -30,7 +30,7 @@
 
 ## 文档站部署
 
-推送到 `main` 后，`Docs` 工作流自动构建并部署文档站到 GitHub Pages（<https://xyzphp.github.io/desk-ui/>），`CI` 工作流同时运行全部检查。部署失败需要重试时，触发一次新的运行（`Docs` → Run workflow），不要对失败的运行使用 Re-run：重跑会保留上一次的 `github-pages` 产物，部署步骤会因产物重复而失败。
+推送到 `main` 后，`Docs` 工作流自动构建并部署文档站到 GitHub Pages（<https://xyzphp.github.io/desk-ui/>），`CI` 工作流同时运行全部检查。构建与部署是两个 job；部署失败需要重试时，可以只重跑失败的 `deploy` job，或触发一次新的运行（`Docs` → Run workflow），不要重跑整个运行：那样会再上传一份 `github-pages` 产物，部署步骤会因产物重复而失败。
 
 ## 提交前
 
