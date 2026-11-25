@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Desktop, IconButton, Panel, Tag, Workspace, cx, useDesktop, useMessages } from '@desk/ui';
+import { Button, Desktop, IconButton, Panel, Tag, Workspace, cx, useDesktop, useMessages } from '@xyzos/desk-ui';
 import type { DemoSpec } from './types';
 import { docsMessages } from '../site/locale';
 

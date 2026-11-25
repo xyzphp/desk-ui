@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox, Field, FormActions, FormSection, Input, Select, Stack } from '@desk/ui';
+import { Button, Checkbox, Field, FormActions, FormSection, Input, Select, Stack } from '@xyzos/desk-ui';
 
 export function FormDemo() {
   const [busy, setBusy] = useState(false);

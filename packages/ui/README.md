@@ -1,4 +1,4 @@
-# @desk/ui
+# @xyzos/desk-ui
 
 React 19 + TypeScript 组件库，覆盖后台应用的表单、数据与反馈组件，以及浏览器桌面的壳层：窗口、Dock、菜单栏、桌面图标、锁屏、通知中心等。
 
@@ -6,21 +6,20 @@ A React 19 + TypeScript component library for admin apps and browser desktops: f
 
 ## 安装
 
-暂未发布到 npm。把 desk-ui 仓库作为 git 子模块纳入 pnpm 工作区（`packages` 包含子模块的 `packages/*`），再声明依赖：
-
-```json
-{ "dependencies": { "@desk/ui": "workspace:*", "react": "^19.0.0", "react-dom": "^19.0.0" } }
+```sh
+pnpm add @xyzos/desk-ui
+# 或 npm install @xyzos/desk-ui
 ```
 
-`react` 与 `react-dom` 19 为 peer 依赖。完整步骤见[仓库说明](../../README.md#使用)。
+`react` 与 `react-dom` 19 为 peer 依赖。也可以把 `desk-ui` 仓库作为 git 子模块纳入 pnpm 工作区以源码方式引用，步骤见[仓库说明](../../README.md#使用)。
 
 ## 使用
 
-以源码方式使用时，在应用入口引入一次 `@desk/ui` 即带上全部样式，再按需导入组件：
+通过 npm 安装构建产物时，在应用入口引入一次 `@xyzos/desk-ui/styles.css`，再按需导入组件：
 
 ```tsx
-import '@desk/ui';
-import { Button, Workspace } from '@desk/ui';
+import '@xyzos/desk-ui/styles.css';
+import { Button, Workspace } from '@xyzos/desk-ui';
 
 export function App() {
   return (
@@ -31,10 +30,10 @@ export function App() {
 }
 ```
 
-- 使用构建产物（`pnpm build` 生成的 `dist/`，将来发布到 npm 的形态）时，组件入口不自动引入样式，需要另外 `import '@desk/ui/styles.css'`。该样式表也可以直接用 `<link>` 引用（例如 iframe 中的页面），壁纸图片位于同级的 `assets/`，按需加载。
+- 以源码方式在同工作区使用时，入口 `src/index.ts` 已自动引入样式；以构建产物（`dist/` / npm 包）使用时，需要显式 `import '@xyzos/desk-ui/styles.css'`。该样式表也可以直接用 `<link>` 引用（例如 iframe 中的页面），壁纸图片位于同级的 `assets/`，按需加载。
 - 列表、文档类页面放进 `Workspace`，它提供字体、底色、公共滚动条和容器查询上下文。
 - 默认文案为简体中文，通过 `ConfigProvider` 切换语言或覆盖文案；组件的 `labels` 与显式文字属性优先。
-- 使用 Vitest 测试时，可在 `setupFiles` 中加入 `@desk/ui/test-setup`，它补齐 jsdom 缺少的 Popover API 并启用 jest-dom 断言。
+- 使用 Vitest 测试时，可在 `setupFiles` 中加入 `@xyzos/desk-ui/test-setup`，它补齐 jsdom 缺少的 Popover API 并启用 jest-dom 断言。
 
 ## 设计约定
 
@@ -64,9 +63,9 @@ src/
 
 ```sh
 pnpm install
-pnpm --filter @desk/ui test        # Vitest
-pnpm --filter @desk/ui typecheck
-pnpm --filter @desk/ui build       # 产出 dist/
+pnpm --filter @xyzos/desk-ui test        # Vitest
+pnpm --filter @xyzos/desk-ui typecheck
+pnpm --filter @xyzos/desk-ui build       # 产出 dist/
 ```
 
 测试文件与组件同目录（`*.test.tsx`，Vitest + Testing Library）。

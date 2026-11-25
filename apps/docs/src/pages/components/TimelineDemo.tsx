@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Stack, Text, Timeline } from '@desk/ui';
+import { Button, Stack, Text, Timeline } from '@xyzos/desk-ui';
 
 export function TimelineDemo() {
   const [opened, setOpened] = useState(false);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, SystemDialog } from '@desk/ui';
+import { Button, SystemDialog } from '@xyzos/desk-ui';
 
 /** A local controlled sequence; actual session and cancellation belong to the host. */
 export function DialogQueueDemo() {

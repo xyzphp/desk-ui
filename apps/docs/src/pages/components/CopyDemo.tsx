@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CodeBlock, CopyButton, CopyField, Field, Switch } from '@desk/ui';
+import { CodeBlock, CopyButton, CopyField, Field, Switch } from '@xyzos/desk-ui';
 
 /** 文档页充当宿主，只有点击时请求系统复制；组件库本身不调用剪贴板。 */
 export async function copyText(text: string) {

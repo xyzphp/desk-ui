@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, Inline, MultiSelect, Stack, Text } from '@desk/ui';
+import { Button, Field, Inline, MultiSelect, Stack, Text } from '@xyzos/desk-ui';
 
 export function MultiSelectDemo() {
   const [result, setResult] = useState('尚未读取');

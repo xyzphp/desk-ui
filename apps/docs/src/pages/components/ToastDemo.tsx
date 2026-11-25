@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, ToastProvider, useToast } from '@desk/ui';
+import { Button, ToastProvider, useToast } from '@xyzos/desk-ui';
 
 function ToastActions() {
   const toast = useToast();

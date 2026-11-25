@@ -10,7 +10,7 @@
   "scripts": {
     "dev:docs": "pnpm --filter @desk/docs dev",
     "build:docs": "pnpm --filter @desk/docs build",
-    "build:ui": "pnpm --filter @desk/ui build",
+    "build:ui": "pnpm --filter @xyzos/desk-ui build",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "test:metadata": "node --test apps/docs/build/docMetadata.test.mjs",

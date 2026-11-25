@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Divider, IconButton, Link, Scrollable, Text, Workspace } from '@desk/ui';
+import { Avatar, Badge, Button, Divider, IconButton, Link, Scrollable, Text, Workspace } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 import lake from '../../assets/preview-lake.svg';
 import { ProgressDemo, SkeletonDemo } from './BasicStatusDemo';

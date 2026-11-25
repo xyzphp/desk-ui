@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { appGradients, Launchpad, Stack, Text, type LaunchpadItem } from '@desk/ui';
+import { appGradients, Launchpad, Stack, Text, type LaunchpadItem } from '@xyzos/desk-ui';
 
 const applications: readonly LaunchpadItem[] = [
   { id: 'notes', name: '备忘录', description: '管理草稿与文档', keywords: ['memo', 'note'], app: { icon: 'sticky-note', color: appGradients.orange } },

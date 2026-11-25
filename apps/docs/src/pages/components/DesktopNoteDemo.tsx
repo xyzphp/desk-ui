@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, DesktopNote, Switch } from '@desk/ui';
+import { Button, DesktopNote, Switch } from '@xyzos/desk-ui';
 
 export function DesktopNoteDemo() {
   const [card, setCard] = useState(false);

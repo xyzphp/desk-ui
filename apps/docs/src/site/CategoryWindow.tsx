@@ -1,4 +1,4 @@
-import { AppLayout, AppMain, NavSidebar, useMessages } from '@desk/ui';
+import { AppLayout, AppMain, NavSidebar, useMessages } from '@xyzos/desk-ui';
 import { docText } from '../blocks/docText';
 import { findPage, pagesOf, type DocCategory } from '../registry';
 import { DocsSearch } from './DocsSearch';

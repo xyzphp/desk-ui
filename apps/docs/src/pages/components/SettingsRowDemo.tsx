@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from 'react';
-import { AppLayout, AppMain, Button, Inline, NavItem, NavSidebar, SegmentedControl, Select, SettingsRow, Stack, ThemePicker, WallpaperPicker } from '@desk/ui';
-import type { ThemeChoice, WallpaperName } from '@desk/ui';
+import { AppLayout, AppMain, Button, Inline, NavItem, NavSidebar, SegmentedControl, Select, SettingsRow, Stack, ThemePicker, WallpaperPicker } from '@xyzos/desk-ui';
+import type { ThemeChoice, WallpaperName } from '@xyzos/desk-ui';
 
 const sample = new URL('../../assets/preview-lake.svg?no-inline', import.meta.url).pathname;
 

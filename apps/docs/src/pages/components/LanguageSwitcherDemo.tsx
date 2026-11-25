@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConfigProvider, CopyButton, Field, LanguageSwitcher, PasswordInput, resolveLocale, Select, SYSTEM_LOCALE } from '@desk/ui';
+import { ConfigProvider, CopyButton, Field, LanguageSwitcher, PasswordInput, resolveLocale, Select, SYSTEM_LOCALE } from '@xyzos/desk-ui';
 import { copyText } from './CopyDemo';
 
 export function LanguageSwitcherDemo() {

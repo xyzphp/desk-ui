@@ -10,7 +10,7 @@ import {
   appGradients,
   type StartMenuAction,
   type StartMenuItem,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 const apps = [

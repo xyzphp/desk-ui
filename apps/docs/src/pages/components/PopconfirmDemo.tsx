@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Popconfirm, Stack, Switch, Text } from '@desk/ui';
+import { Popconfirm, Stack, Switch, Text } from '@xyzos/desk-ui';
 
 export function PopconfirmDemo() {
   const [open, setOpen] = useState(false);

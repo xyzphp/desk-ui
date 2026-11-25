@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from 'react';
-import { AppIcon, MenuBar, MenuBarApp, MenuBarClock, MenuBarIconButton, MenuBarLogo, MenuItem, MenuSeparator, Popover } from '@desk/ui';
+import { AppIcon, MenuBar, MenuBarApp, MenuBarClock, MenuBarIconButton, MenuBarLogo, MenuItem, MenuSeparator, Popover } from '@xyzos/desk-ui';
 import avatar from '../../assets/preview-lake.svg';
 
 /** 本地交互演示，不调用真实锁屏或退出。 */

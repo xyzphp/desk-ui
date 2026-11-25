@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Checkbox, Panel, SelectionArea, Stack, Text } from '@desk/ui';
+import { Checkbox, Panel, SelectionArea, Stack, Text } from '@xyzos/desk-ui';
 
 const files = ['设计草稿', '界面截图', '会议记录', '素材目录', '归档', '只读文件'];
 export function SelectionAreaDemo() {

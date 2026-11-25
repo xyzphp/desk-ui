@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Radio, RadioGroup } from '@desk/ui';
+import { Button, Radio, RadioGroup } from '@xyzos/desk-ui';
 
 export function RadioDemo() {
   const [result, setResult] = useState('尚未提交');

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AlertDialog, Button } from '@desk/ui';
+import { AlertDialog, Button } from '@xyzos/desk-ui';
 
 export function AlertDialogDemo() {
   const [open, setOpen] = useState(false);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Button, DocumentPane, Field, Grid, HelpTip, Input, Lead, List, ListItem, Notice, Panel, Property, PropertySheet,
   SearchField, Select, Sidebar, SidebarAddButton, SplitLayout, StatCard, Tag, Title, Toolbar, ToolbarActions, Workspace,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { OverviewContentProps } from './Overview.zh-CN';
 
 const accounts = [
@@ -79,14 +79,14 @@ export function OverviewEn({ componentCount, pageCount, categoryCount }: Overvie
         <Lead>
           This library wraps the shell of a browser desktop (windows, Dock, menu bar, and more) and the UI conventions that
           recur across admin apps into a set of React components. The docs site itself is another desktop built from the library: wallpaper, menu bar,
-          desktop icons, Dock, windows, Control Center, and context menus all come from @desk/ui. Each desktop icon is a
+          desktop icons, Dock, windows, Control Center, and context menus all come from @xyzos/desk-ui. Each desktop icon is a
           component category; hold to move it, double-click (or use the Dock) to open its window.
         </Lead>
       </header>
 
       <Grid columns={3}>
         <StatCard label="Components" value={componentCount} icon="component" description="By standalone doc entries" />
-        <StatCard label="Docs" value={pageCount} icon="book-open" description="Including the guides" />
+        <StatCard label="Docs" value={pageCount} icon="book-open" description="Including guides and LLMs docs" />
         <StatCard label="Categories" value={categoryCount} icon="layers" />
       </Grid>
 

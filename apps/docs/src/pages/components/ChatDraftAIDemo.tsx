@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AIReferenceList, AIResultPanel, Button, MessageComposer, Stack, Text } from '@desk/ui';
+import { AIReferenceList, AIResultPanel, Button, MessageComposer, Stack, Text } from '@xyzos/desk-ui';
 
 /** Local composition example using synthetic history and a fixed draft result. */
 export function ChatDraftAIDemo() {

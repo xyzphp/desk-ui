@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, SortableList, Stack, Switch, Text, type SortableListItem } from '@desk/ui';
+import { Button, SortableList, Stack, Switch, Text, type SortableListItem } from '@xyzos/desk-ui';
 
 const initial: readonly SortableListItem[] = [
   { id: 'design', label: '设计资料', icon: 'palette', description: '拖动与键盘排序示例' },

@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from 'react';
-import { NavItem, SearchField, Text, useMessages } from '@desk/ui';
+import { NavItem, SearchField, Text, useMessages } from '@xyzos/desk-ui';
 import { docText } from '../blocks/docText';
 import { findCategory, pages, pagesOf } from '../registry';
 import { searchPages } from './docSearch';

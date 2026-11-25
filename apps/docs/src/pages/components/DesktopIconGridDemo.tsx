@@ -12,7 +12,7 @@ import {
   type DesktopIconGridItem,
   type DesktopIconPlacementMode,
   type SegmentedOption,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 
 const items: DesktopIconGridItem[] = [
   { id: 'notes', label: '备忘录', app: { icon: 'sticky-note', color: appGradients.orange, brightness: 0.75 } },

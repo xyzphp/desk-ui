@@ -11,7 +11,7 @@ import {
   Popover,
   Stack,
   useLabels, wallpapers, type WallpaperName,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 
 export function OverlayMenuDemo() {
   const anchor = useRef<HTMLButtonElement>(null);

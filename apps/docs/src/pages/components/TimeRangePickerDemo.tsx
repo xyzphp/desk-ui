@@ -1,4 +1,4 @@
-import { Button, TimeRangePicker } from '@desk/ui';
+import { Button, TimeRangePicker } from '@xyzos/desk-ui';
 
 export function TimeRangePickerDemo() {
   return <form style={{ display: 'grid', gap: 12 }} onSubmit={(event) => event.preventDefault()}>

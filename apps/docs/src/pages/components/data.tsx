@@ -12,7 +12,7 @@ import {
   type PaginationLabels,
   type SortState,
   type TableColumn,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 interface TokenRow {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, RangeInput, Stack, Text } from '@desk/ui';
+import { Button, RangeInput, Stack, Text } from '@xyzos/desk-ui';
 
 export function RangeInputDemo() {
   const [value, setValue] = useState(15);

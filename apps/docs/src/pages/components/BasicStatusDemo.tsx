@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Field, Input, Progress, Range, Skeleton, Switch, Text } from '@desk/ui';
+import { Avatar, Field, Input, Progress, Range, Skeleton, Switch, Text } from '@xyzos/desk-ui';
 
 export function ProgressDemo() {
   const [value, setValue] = useState(36);

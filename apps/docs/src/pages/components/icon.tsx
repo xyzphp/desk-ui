@@ -1,4 +1,4 @@
-import { Icon, Lead, Panel, Title, iconNames } from '@desk/ui';
+import { Icon, Lead, Panel, Title, iconNames } from '@xyzos/desk-ui';
 import { Demo } from '../../blocks/Demo';
 import { PropsTable } from '../../blocks/PropsTable';
 

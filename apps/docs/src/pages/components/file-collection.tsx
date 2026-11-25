@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileCollection, Panel, SegmentedControl } from '@desk/ui';
+import { FileCollection, Panel, SegmentedControl } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 const sampleFiles = [
@@ -61,7 +61,7 @@ function FileCollectionDemo() {
   );
 }
 
-const fileCollectionSource = `import { FileCollection, Icon } from '@desk/ui';
+const fileCollectionSource = `import { FileCollection, Icon } from '@xyzos/desk-ui';
 
 const items = [
   { id: 'folder:1', name: '项目资料', icon: 'folder', secondary: '文件夹' },

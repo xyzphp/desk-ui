@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Inline, Stack, StatCard, Statistic, Switch } from '@desk/ui';
+import { Grid, Inline, Stack, StatCard, Statistic, Switch } from '@xyzos/desk-ui';
 
 export function StatisticDemo() {
   return <Inline gap="xxl" align="start">

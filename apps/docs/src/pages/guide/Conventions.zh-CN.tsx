@@ -1,4 +1,4 @@
-import { Lead, Panel, Title } from '@desk/ui';
+import { Lead, Panel, Title } from '@xyzos/desk-ui';
 
 export function ConventionsZh() {
   return (
@@ -11,7 +11,7 @@ export function ConventionsZh() {
       <h2 className="docs-section-title">接入</h2>
       <Panel>
         <ul className="docs-list">
-          <li>在应用入口 <code className="docs-code-inline">import '@desk/ui'</code> 一次，会同时引入全部样式。需要纯样式（如 iframe 扩展应用）时使用构建产物 <code className="docs-code-inline">@desk/ui/styles.css</code>。</li>
+          <li>在应用入口 <code className="docs-code-inline">import '@xyzos/desk-ui'</code> 一次，会同时引入全部样式。需要纯样式（如 iframe 扩展应用）时使用构建产物 <code className="docs-code-inline">@xyzos/desk-ui/styles.css</code>。</li>
           <li>列表 / 文档类页面整体放进 <code className="docs-code-inline">Workspace</code>：它提供字体、底色、公共滚动条和容器查询上下文。</li>
           <li>组件库不依赖任何全局宿主对象，不发请求、不读写浏览器存储；宿主能力通过属性与回调注入。</li>
           <li>默认文案由 ConfigProvider 配置并支持嵌套继承；组件 labels 或显式文字属性优先。业务标题、数据选项与领域 labels 继续由宿主提供。</li>

@@ -6,7 +6,7 @@ import {
   SegmentedControl,
   Text,
   type DesktopCardStyle,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 
 export function DesktopCardStyleDemo() {
   const [cardStyle, setCardStyle] = useState<DesktopCardStyle>('liquid');

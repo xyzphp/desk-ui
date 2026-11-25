@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Drawer, Field, Input, Inline, Notice, Select, Stack, Switch, TagInput, Textarea } from '@desk/ui';
+import { Button, Drawer, Field, Input, Inline, Notice, Select, Stack, Switch, TagInput, Textarea } from '@xyzos/desk-ui';
 
 export function DrawerDemo() {
   const [open, setOpen] = useState(false);

@@ -23,8 +23,14 @@ export const isSceneWallpaper = (name: WallpaperName): name is SceneWallpaperNam
 /** 自带场景的动态壁纸（即画作场景）：选中时宿主通常一并开启动态效果。 */
 export const isDynamicWallpaper = (name: WallpaperName) => isSceneWallpaper(name);
 
-/** 宿主给出的壁纸图片仅允许同源根路径。 */
-export const wallpaperImage = (url?: string) => url && /^\/(?![\/\\])[^\u0000-\u0020"'\\]*$/.test(url) ? `url("${url}")` : undefined;
+/** 宿主给出的壁纸图片仅允许同源根路径，或本地安全光栅图片 Data URL / Blob URL。 */
+export function wallpaperImage(url?: string) {
+  if (!url) return undefined;
+  if (/^\/(?![\/\\])[^\u0000-\u0020"'\\]*$/.test(url)) return `url("${url}")`;
+  if (/^data:image\/(?:png|jpeg|gif|webp|avif|bmp);base64,[A-Za-z0-9+/]+={0,2}$/i.test(url)) return `url("${url}")`;
+  if (/^blob:(?:null|https?:\/\/[^\u0000-\u0020"'\\()<>]+)\/[0-9a-z-]+$/i.test(url)) return `url("${url}")`;
+  return undefined;
+}
 
 interface DesktopContextValue {
   windowPlatform: WindowPlatform;
@@ -53,7 +59,7 @@ export interface DesktopProps extends ComponentProps<'div'> {
   /** 桌面卡片及工作区玻璃样式：默认 frosted（毛玻璃），liquid 为液态玻璃。 */
   cardStyle?: DesktopCardStyle;
   wallpaper?: WallpaperName;
-  /** 宿主提供的同源图片路径，预设壁纸作为回退。 */
+  /** 同源图片路径，或本地安全光栅图片 Data URL / Blob URL，预设壁纸作为回退。 */
   wallpaperUrl?: string;
   /**
    * 动态壁纸：渐变预设叠加变形光斑与摆动色带，图片壁纸缓慢推移；水族馆、森林、草原、星空是手绘画作上的动画层
@@ -100,7 +106,7 @@ export function Desktop({
 
 export interface WallpaperProps extends Omit<ComponentProps<'div'>, 'children'> {
   name?: WallpaperName;
-  /** 宿主提供的同源图片路径；有图片时显示图片，预设壁纸作为回退。 */
+  /** 同源图片路径，或本地安全光栅图片 Data URL / Blob URL；有图片时显示图片，预设壁纸作为回退。 */
   url?: string;
   /** 同 Desktop 的 wallpaperMotion。 */
   motion?: boolean;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Combobox, Field, Grid, Stack, Text } from '@desk/ui';
+import { Combobox, Field, Grid, Stack, Text } from '@xyzos/desk-ui';
 
 export function ComboboxDemo() {
   const [value, setValue] = useState('design');

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Checkbox, Field, IconButton, Select, type ButtonVariant } from '@desk/ui';
+import { Button, Checkbox, Field, IconButton, Select, type ButtonVariant } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 function Toggle() {

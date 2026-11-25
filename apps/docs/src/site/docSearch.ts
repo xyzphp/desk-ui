@@ -1,4 +1,4 @@
-import { matchesSearch } from '@desk/ui';
+import { matchesSearch } from '@xyzos/desk-ui';
 import { docText } from '../blocks/docText';
 import type { DocPage } from '../registry';
 

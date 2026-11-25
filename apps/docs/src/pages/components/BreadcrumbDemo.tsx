@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Breadcrumb, Button, Stack } from '@desk/ui';
+import { Breadcrumb, Button, Stack } from '@xyzos/desk-ui';
 
 const path = ['首页', '文件', '项目资料', '界面', '组件库', '文档'].map((label, index) => ({ id: String(index), label }));
 export function BreadcrumbDemo() {

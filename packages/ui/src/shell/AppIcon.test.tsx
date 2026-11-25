@@ -122,4 +122,15 @@ describe('统一应用图标', () => {
     expect(art).toHaveClass('ds-app-icon--image', 'ds-app-icon--tinted');
     expect(art.style.getPropertyValue('--ds-app-icon-shadow-color')).toBe('#336699');
   });
+
+  it('内置 14 组应用图标渐变均有十六进制末色供同色阴影解析', () => {
+    const keys = [
+      'slate', 'blue', 'indigo', 'green', 'orange', 'pink', 'purple',
+      'red', 'cyan', 'teal', 'amber', 'violet', 'brown', 'graphite',
+    ] as const;
+    expect(Object.keys(appGradients)).toEqual(keys);
+    for (const key of keys) {
+      expect(appGradients[key]).toMatch(/^linear-gradient\(160deg,#[\da-f]{6},#[\da-f]{6}\)$/i);
+    }
+  });
 });

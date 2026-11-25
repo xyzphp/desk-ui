@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Button, IconButton, ImagePreview, MessageComposer, Switch, Tag, UploadZone,
   type ImagePreviewLabels, type MessageComposerLabels, type UploadRejectionReason, type UploadZoneLabels,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import lake from '../../assets/preview-lake.svg';
 import coast from '../../assets/preview-coast.svg';
 import type { ComponentDoc } from '../../blocks/types';

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import type { WindowGeometry } from '@desk/ui';
+import type { WindowGeometry } from '@xyzos/desk-ui';
 
 export interface DocWindow {
   /** 一个分类对应一个窗口（单例）。 */

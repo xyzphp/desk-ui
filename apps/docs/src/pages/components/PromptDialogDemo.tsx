@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, PromptDialog } from '@desk/ui';
+import { Button, PromptDialog } from '@xyzos/desk-ui';
 
 export function PromptDialogDemo() {
   const [open, setOpen] = useState(false);

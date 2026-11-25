@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, Inline, Stack, Text, Tour, type TourStep } from '@desk/ui';
+import { Button, Inline, Stack, Text, Tour, type TourStep } from '@xyzos/desk-ui';
 
 export function TourDemo() {
   const search = useRef<HTMLButtonElement>(null);

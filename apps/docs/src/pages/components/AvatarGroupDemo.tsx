@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AvatarGroup, Field, Range, Stack, type AvatarGroupItem } from '@desk/ui';
+import { AvatarGroup, Field, Range, Stack, type AvatarGroupItem } from '@xyzos/desk-ui';
 import coast from '../../assets/preview-coast.svg';
 
 const items: readonly AvatarGroupItem[] = [

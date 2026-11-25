@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, LockCountdown, Stack } from '@desk/ui';
+import { Button, LockCountdown, Stack } from '@xyzos/desk-ui';
 
 export function LockCountdownDemo() {
   const [seconds, setSeconds] = useState(0);

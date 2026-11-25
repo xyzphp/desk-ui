@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Checkbox, DesktopCard, Divider, Progress, Text } from '@desk/ui';
+import { Checkbox, DesktopCard, Divider, Progress, Text } from '@xyzos/desk-ui';
 
 export function DesktopCardDemo() {
   const [completed, setCompleted] = useState(false);

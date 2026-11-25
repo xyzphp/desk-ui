@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AnchorPopover, Button, Field, Input } from '@desk/ui';
+import { AnchorPopover, Button, Field, Input } from '@xyzos/desk-ui';
 
 export function AnchorPopoverDemo() {
   const anchor = useRef<HTMLButtonElement>(null);

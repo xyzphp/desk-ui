@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, FormActions, Rating, Stack, Text } from '@desk/ui';
+import { Button, FormActions, Rating, Stack, Text } from '@xyzos/desk-ui';
 
 export function RatingDemo() {
   const [result, setResult] = useState('尚未评分');

@@ -1,4 +1,4 @@
-import { Button, Grid, Inline, Panel, Stack, Text } from '@desk/ui';
+import { Button, Grid, Inline, Panel, Stack, Text } from '@xyzos/desk-ui';
 
 export function StackDemo() {
   return <Stack gap="lg"><Panel title="第一段"><Text>标题与正文按公共间距纵向排列。</Text></Panel>

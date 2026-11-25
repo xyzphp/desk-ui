@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Field, Input, Modal, Notice } from '@desk/ui';
+import { Button, Field, Input, Modal, Notice } from '@xyzos/desk-ui';
 
 export function ModalDemo() {
   const [open, setOpen] = useState(false);

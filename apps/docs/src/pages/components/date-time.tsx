@@ -1,4 +1,4 @@
-import { DatePicker, DateTimePicker, Field, TimePicker } from '@desk/ui';
+import { DatePicker, DateTimePicker, Field, TimePicker } from '@xyzos/desk-ui';
 import type { ComponentDoc, PropSpec } from '../../blocks/types';
 import { DateRangePickerDemo } from './DateRangePickerDemo';
 import dateRangeSource from './DateRangePickerDemo.tsx?raw';

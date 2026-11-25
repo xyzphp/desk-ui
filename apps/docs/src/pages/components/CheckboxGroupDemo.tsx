@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, CheckboxGroup, FormActions, Stack, Text, type CheckboxOption } from '@desk/ui';
+import { Button, CheckboxGroup, FormActions, Stack, Text, type CheckboxOption } from '@xyzos/desk-ui';
 
 const options: readonly CheckboxOption[] = [
   { value: 'mail', label: '邮件通知' }, { value: 'site', label: '站内通知' },

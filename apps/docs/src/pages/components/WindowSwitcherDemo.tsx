@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { appGradients, Panel, Stack, Text, WindowSwitcher, type WindowSwitcherItem } from '@desk/ui';
+import { appGradients, Panel, Stack, Text, WindowSwitcher, type WindowSwitcherItem } from '@xyzos/desk-ui';
 
 const initial: readonly WindowSwitcherItem[] = [
   { id: 'notes', title: '备忘录 · 未命名草稿', app: { icon: 'sticky-note', color: appGradients.orange },

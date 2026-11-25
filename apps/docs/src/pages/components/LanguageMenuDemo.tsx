@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LanguageSwitcher, Text, type LanguageOption } from '@desk/ui';
+import { LanguageSwitcher, Text, type LanguageOption } from '@xyzos/desk-ui';
 
 // 仅演示多于两种语言时的菜单形态；日本語没有登记字典，不会改变界面文案。
 const options: LanguageOption[] = [

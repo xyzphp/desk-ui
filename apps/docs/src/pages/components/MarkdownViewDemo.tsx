@@ -1,4 +1,4 @@
-import { MarkdownView, Panel } from '@desk/ui';
+import { MarkdownView, Panel } from '@xyzos/desk-ui';
 
 const sample = `# 项目说明
 

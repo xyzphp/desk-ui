@@ -21,7 +21,7 @@ import docs19 from './pages/components/lock-screen?metadata';
 import docs20 from './pages/components/shell-launchers?metadata';
 import docs21 from './pages/components/shell-panels?metadata';
 import { createElement, lazy, type ReactElement } from 'react';
-import { appGradients, type IconName } from '@desk/ui';
+import { appGradients, type IconName } from '@xyzos/desk-ui';
 import { ComponentPage } from './blocks/ComponentPage';
 import type { LocalizedText } from './blocks/docText';
 import type { ComponentDoc, DocMetadata } from './blocks/types';
@@ -61,7 +61,10 @@ export const categories: DocCategory[] = [
   {
     id: 'guide',
     name: { 'zh-CN': '使用指南', 'en-US': 'Guides' },
-    summary: { 'zh-CN': '概览、设计令牌与使用约定', 'en-US': 'Overview, design tokens, and conventions' },
+    summary: {
+      'zh-CN': '概览、设计令牌、使用约定与 LLMs 文档',
+      'en-US': 'Overview, design tokens, conventions, and LLMs docs',
+    },
     icon: 'book-open',
     color: appGradients.blue,
   },
@@ -98,7 +101,7 @@ export const categories: DocCategory[] = [
     name: { 'zh-CN': '布局', 'en-US': 'Layout' },
     summary: { 'zh-CN': '面板、工具栏、列表与导航', 'en-US': 'Panels, toolbars, lists, and navigation' },
     icon: 'layout-grid',
-    color: appGradients.pink,
+    color: appGradients.teal,
   },
   {
     id: 'data',
@@ -144,6 +147,7 @@ const component = (
 
 const IconPage = lazy(() => import('./pages/components/icon').then((module) => ({ default: module.IconPage })));
 const Conventions = lazy(() => import('./pages/guide/Conventions').then((module) => ({ default: module.Conventions })));
+const LLMs = lazy(() => import('./pages/guide/LLMs').then((module) => ({ default: module.LLMs })));
 const Overview = lazy(() => import('./pages/guide/Overview').then((module) => ({ default: module.Overview })));
 const Tokens = lazy(() => import('./pages/guide/Tokens').then((module) => ({ default: module.Tokens })));
 
@@ -303,6 +307,18 @@ export const pages: DocPage[] = [
     category: 'guide',
     icon: 'shield-check',
     render: () => createElement(Conventions),
+  },
+  {
+    id: 'llms',
+    title: { 'zh-CN': 'LLMs 文档', 'en-US': 'LLMs documentation' },
+    summary: {
+      'zh-CN': '为 AI 编程工具提供可直接读取的 @xyzos/desk-ui 索引、完整参考与逐页 Markdown',
+      'en-US': 'Machine-readable @xyzos/desk-ui index, full reference, and per-page Markdown for AI coding tools',
+    },
+    category: 'guide',
+    icon: 'bot',
+    keywords: ['llm', 'llms.txt', 'llms-full.txt', 'markdown', '大语言模型', 'AI'],
+    render: () => createElement(LLMs),
   },
 
   {

@@ -6,7 +6,7 @@ import {
   type PermissionTreeLabels,
   type PermissionTreeNode,
   type SelectionTreeNode,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 const treeLabels: PermissionTreeLabels = {

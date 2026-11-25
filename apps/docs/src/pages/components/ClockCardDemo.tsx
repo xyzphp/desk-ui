@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ClockCard, DesktopCardToolbar, Button, Field, Select, Switch, clockZoneInfo } from '@desk/ui';
+import { ClockCard, DesktopCardToolbar, Button, Field, Select, Switch, clockZoneInfo } from '@xyzos/desk-ui';
 
 export function ClockCardDemo() {
   const [now, setNow] = useState(() => Date.now());

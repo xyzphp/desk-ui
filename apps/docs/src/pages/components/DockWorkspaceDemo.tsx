@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { appGradients, DockWorkspace, Panel, Text, type DockWorkspaceItem } from '@desk/ui';
+import { appGradients, DockWorkspace, Panel, Text, type DockWorkspaceItem } from '@xyzos/desk-ui';
 
 const items: DockWorkspaceItem[] = [
   {

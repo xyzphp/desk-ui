@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, ConfirmDialog } from '@desk/ui';
+import { Button, ConfirmDialog } from '@xyzos/desk-ui';
 
 export function ConfirmDialogDemo({ danger = false, simulateFailure = false }: { danger?: boolean; simulateFailure?: boolean }) {
   const [open, setOpen] = useState(false);

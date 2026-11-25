@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { DesktopCard, DesktopNote, type DesktopCardDrag, type DesktopCardProps } from '@desk/ui';
+import { DesktopCard, DesktopNote, type DesktopCardDrag, type DesktopCardProps } from '@xyzos/desk-ui';
 
 type Point = { x: number; y: number };
 

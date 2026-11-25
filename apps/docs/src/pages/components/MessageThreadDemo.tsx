@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Button, MessageThread, SegmentedControl, Stack, Text, type MessageThreadItem } from '@desk/ui';
+import { Avatar, Button, MessageThread, SegmentedControl, Stack, Text, type MessageThreadItem } from '@xyzos/desk-ui';
 
 export function MessageThreadDemo() {
   const [variant, setVariant] = useState<'bubble' | 'comment'>('bubble');

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   AppIcon, Desktop, DesktopArea, DesktopIcons, Field, Grid, Inline, Input, Range, Select, Stack, Switch,
   appGradients, type IconName,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import demoImage from '../../assets/preview-lake.svg';
 
 const symbols = [

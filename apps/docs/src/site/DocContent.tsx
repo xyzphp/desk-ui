@@ -1,5 +1,5 @@
 import { Component, Suspense, type ReactNode } from 'react';
-import { Button, Result, Spinner, useMessages } from '@desk/ui';
+import { Button, Result, Spinner, useMessages } from '@xyzos/desk-ui';
 import { docsMessages } from './locale';
 
 class DocErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {

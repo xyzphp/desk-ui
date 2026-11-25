@@ -16,7 +16,7 @@ import {
   WindowTitlebar,
   appGradients,
   type WindowGeometry,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import { AppIconDemo } from './AppIconDemo';
 import appIconDemoSource from './AppIconDemo.tsx?raw';
 import { OverlayMenuDemo as PopoverDemo, ContextMenuDemo as ContextDemo } from './OverlayMenuDemo';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Badge, Button, Coachmark, Stack, Text } from '@desk/ui';
+import { Badge, Button, Coachmark, Stack, Text } from '@xyzos/desk-ui';
 
 export function CoachmarkDemo() {
   const [target, setTarget] = useState<HTMLButtonElement | null>(null);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, FormActions, RangeSlider, Stack, Text, type RangeSliderValue } from '@desk/ui';
+import { Button, FormActions, RangeSlider, Stack, Text, type RangeSliderValue } from '@xyzos/desk-ui';
 
 export function RangeSliderDemo() {
   const [result, setResult] = useState('尚未读取');

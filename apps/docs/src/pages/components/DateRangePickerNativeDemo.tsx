@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, DateRangePicker, Icon, type DateTimeRangeValue } from '@desk/ui';
+import { Button, DateRangePicker, Icon, type DateTimeRangeValue } from '@xyzos/desk-ui';
 
 export function DateRangePickerNativeDemo() {
   const [value, setValue] = useState<DateTimeRangeValue>(['', '']);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Chip, Field, Inline, Stack, TagInput } from '@desk/ui';
+import { Button, Chip, Field, Inline, Stack, TagInput } from '@xyzos/desk-ui';
 
 export function TagInputDemo() {
   const [result, setResult] = useState('尚未读取');

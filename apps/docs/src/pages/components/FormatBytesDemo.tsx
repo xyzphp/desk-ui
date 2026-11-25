@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Field, formatBytes, Grid, InputNumber, Select, Stack, StatCard } from '@desk/ui';
+import { Field, formatBytes, Grid, InputNumber, Select, Stack, StatCard } from '@xyzos/desk-ui';
 
 export function FormatBytesDemo() {
   const [bytes, setBytes] = useState<number | null>(2097152), [base, setBase] = useState<1000 | 1024>(1024);

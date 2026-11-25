@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Desktop, LockScreen, Stack, Text } from '@desk/ui';
+import { Desktop, LockScreen, Stack, Text } from '@xyzos/desk-ui';
 
 export function LockScreenDemo({ requiresPassword }: { requiresPassword: boolean }) {
   const [busy, setBusy] = useState(false), [error, setError] = useState(''), [result, setResult] = useState('');

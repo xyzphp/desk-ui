@@ -2,8 +2,9 @@
 // 构建后从 dist/types 中删除这些行；样式由 dist/ui.js 引入，不受影响。
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('../dist/types/', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../dist/types/', import.meta.url));
 const cssImport = /^import\s+['"][^'"]+\.css['"];\r?\n/gm;
 let changed = 0;
 for (const entry of await readdir(root, { recursive: true, withFileTypes: true })) {

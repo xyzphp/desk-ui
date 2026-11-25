@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, Inline, ResizeHandle, ResizableSplit, Select, Stack, Textarea, Title } from '@desk/ui';
+import { Button, Field, Inline, ResizeHandle, ResizableSplit, Select, Stack, Textarea, Title } from '@xyzos/desk-ui';
 
 export function ResizableSplitDemo() {
   const [direction, setDirection] = useState<'horizontal' | 'vertical'>('horizontal');

@@ -1,4 +1,4 @@
-import { Lead, Panel, Title } from '@desk/ui';
+import { Lead, Panel, Title } from '@xyzos/desk-ui';
 
 export function ConventionsEn() {
   return (
@@ -11,7 +11,7 @@ export function ConventionsEn() {
       <h2 className="docs-section-title">Getting started</h2>
       <Panel>
         <ul className="docs-list">
-          <li>Import <code className="docs-code-inline">@desk/ui</code> once at the app entry to bring in all styles. For style-only use (such as iframe extension apps), load the build output <code className="docs-code-inline">@desk/ui/styles.css</code>.</li>
+          <li>Import <code className="docs-code-inline">@xyzos/desk-ui</code> once at the app entry to bring in all styles. For style-only use (such as iframe extension apps), load the build output <code className="docs-code-inline">@xyzos/desk-ui/styles.css</code>.</li>
           <li>Put list / document pages inside <code className="docs-code-inline">Workspace</code>: it provides the font, background, shared scrollbars, and container query context.</li>
           <li>The library depends on no global host object, sends no requests, and never reads or writes browser storage; host capabilities are injected through props and callbacks.</li>
           <li>Default labels come from ConfigProvider with nested inheritance; component labels or explicit text props win. Business titles, data options, and domain labels stay host-owned.</li>

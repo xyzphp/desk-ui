@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NumberRangePicker, Notice, type NumberRangeValue } from '@desk/ui';
+import { NumberRangePicker, Notice, type NumberRangeValue } from '@xyzos/desk-ui';
 
 export function NumberRangePickerDemo() {
   const [value, setValue] = useState<NumberRangeValue>([0, 100]);

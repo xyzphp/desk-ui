@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { ConfigProvider, normalizeLocaleChoice, pickMessages, resolveLocale, SYSTEM_LOCALE } from '@desk/ui';
+import { ConfigProvider, normalizeLocaleChoice, pickMessages, resolveLocale, SYSTEM_LOCALE } from '@xyzos/desk-ui';
 import { docsMessages } from './locale';
 
 /** 仅保存在本机浏览器，与外观偏好分开存放，便于其它标签页同步。 */

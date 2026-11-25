@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AIResultPanel, Field, Notice, Select, Switch, type AIResultState } from '@desk/ui';
+import { AIResultPanel, Field, Notice, Select, Switch, type AIResultState } from '@xyzos/desk-ui';
 
 export function AIResultPanelDemo() {
   const [state, setState] = useState<AIResultState>('ready');

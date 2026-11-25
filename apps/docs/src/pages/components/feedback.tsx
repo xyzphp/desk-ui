@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, CapsuleTag, Checkbox, EmptyState, HelpTip, Notice, Switch, Tag } from '@desk/ui';
+import { Button, CapsuleTag, Checkbox, EmptyState, HelpTip, Notice, Switch, Tag } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 function CheckboxDemo() {

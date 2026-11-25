@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@desk/ui';
+import { Button, Tooltip } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 import { AnchorPopoverDemo } from './AnchorPopoverDemo';
 import anchorSource from './AnchorPopoverDemo.tsx?raw';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, Notice, Select } from '@desk/ui';
+import { Button, Field, Notice, Select } from '@xyzos/desk-ui';
 
 export function SelectFormDemo() {
   const [result, setResult] = useState('');

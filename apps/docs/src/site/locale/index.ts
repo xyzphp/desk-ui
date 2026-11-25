@@ -1,4 +1,4 @@
-import { defineMessages } from '@desk/ui';
+import { defineMessages } from '@xyzos/desk-ui';
 import { enUS } from './en-US';
 import { zhCN } from './zh-CN';
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CommandPalette, Stack, Switch, Text, type CommandItem } from '@desk/ui';
+import { CommandPalette, Stack, Switch, Text, type CommandItem } from '@xyzos/desk-ui';
 
 const commands: readonly CommandItem[] = [
   { id: 'new-note', label: '新建便签', description: '创建一条空白草稿', icon: 'sticky-note', group: '内容', shortcut: 'Ctrl N', keywords: ['note'] },

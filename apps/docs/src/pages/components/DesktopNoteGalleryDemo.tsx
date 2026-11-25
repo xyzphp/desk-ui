@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AnchorPopover, Button, DesktopNote, EmptyState, IconButton, SearchField, Stack } from '@desk/ui';
+import { AnchorPopover, Button, DesktopNote, EmptyState, IconButton, SearchField, Stack } from '@xyzos/desk-ui';
 
 /** 图库浮层与正文分开，不请求或上传真实图片。 */
 export function DesktopNoteGalleryDemo() {

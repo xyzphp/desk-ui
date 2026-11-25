@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, Field, Inline, Input, Modal, Stack, WindowTitlebar } from '@desk/ui';
+import { Button, Field, Inline, Input, Modal, Stack, WindowTitlebar } from '@xyzos/desk-ui';
 
 export function ModalNativeDemo() {
   const [open, setOpen] = useState(false);

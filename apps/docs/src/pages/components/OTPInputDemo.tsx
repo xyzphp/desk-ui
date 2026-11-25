@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, FormActions, OTPInput, Stack, Text } from '@desk/ui';
+import { Button, Field, FormActions, OTPInput, Stack, Text } from '@xyzos/desk-ui';
 
 export function OTPInputDemo() {
   const [result, setResult] = useState('尚未读取');

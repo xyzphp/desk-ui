@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Field, Inline, Input, Kbd, LoadingOverlay, Panel, Result, Select, Stack, Text, type ResultStatus } from '@desk/ui';
+import { Button, Field, Inline, Input, Kbd, LoadingOverlay, Panel, Result, Select, Stack, Text, type ResultStatus } from '@xyzos/desk-ui';
 
 export function KbdDemo() {
   return <Stack gap="md">

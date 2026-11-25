@@ -1,8 +1,9 @@
 # 组件文档站（@desk/docs）
 
-`@desk/ui` 的文档站，是一个静态单页应用（Vite + React）。站点本身就是用组件库搭成的浏览器桌面：组件按分类做成桌面图标，双击图标或点击 Dock 打开分类窗口，窗口内是该分类的文档页。
+`@xyzos/desk-ui` 的文档站，是一个静态单页应用（Vite + React）。站点本身就是用组件库搭成的浏览器桌面：组件按分类做成桌面图标，双击图标或点击 Dock 打开分类窗口，窗口内是该分类的文档页。
 
-- 访问 `#/<页面 id>` 直接打开对应页面，例如 `#/window`、`#/select`。
+- 访问 `#/<页面 id>` 直接打开对应页面，例如 `#/window`、`#/select`、`#/llms`。
+- 使用指南下的 LLMs 文档页介绍可供模型读取的文档；构建时生成 `llms.txt`、`llms-full.txt`、英文版本及 `llms/<语言>/<页面 id>.md` 逐组件 Markdown。
 - 侧栏常驻全站搜索，按名称、API 标识、属性与说明检索；查询只保存在当前页面内存。
 - 示例只使用本地数据与计时器，不请求接口，也不保存用户选择的文件。
 - 构建产物是纯静态文件（hash 路由），可部署到任意静态托管，不需要服务端回退。
@@ -16,9 +17,10 @@ src/
 ├── site/                          # 桌面壳、分类窗口、窗口管理、外观偏好、站点文案
 ├── blocks/                        # 文档积木：ComponentPage 模板、Demo、PropsTable、类型
 └── pages/
-    ├── guide/                     # 概览、设计令牌、使用约定
+    ├── guide/                     # 概览、设计令牌、使用约定、LLMs 文档入口
     └── components/                # 按主题共用文件，每个主组件独立导出 ComponentDoc
 build/docMetadata.mjs              # 构建时从源码抽取搜索元数据
+build/llmsDocumentation.mjs        # 从页面注册表与 ComponentDoc 生成 LLM 文档文件
 ```
 
 ## 新增一个组件页
@@ -27,6 +29,10 @@ build/docMetadata.mjs              # 构建时从源码抽取搜索元数据
 2. 在 `src/registry.ts` 用 `component(id, 分类 id, 图标, doc)` 登记。壳层组件的示例用 `layout: 'stage'`（迷你桌面舞台）。
 3. 标题与摘要保持静态字符串，搜索元数据在构建时抽取；`pnpm test:metadata` 检查抽取规则。
 4. 运行 `pnpm typecheck`，并确认示例在浅色 / 深色下可读。
+
+## LLM 文档
+
+LLMs 文档页登记在 `src/registry.ts` 的「使用指南（`guide`）」分类下（路由 `#/llms`）。可读取的文本文件由 `build/llmsDocumentation.mjs` 在开发服务器请求和生产构建时按当前组件注册表、图标注册表与包元数据生成：索引包含快速接入说明并按分类列出逐页 Markdown，完整参考合并全部 `ComponentDoc` 的使用说明、示例代码、属性和无障碍信息。新增或修改组件文档后无需另行复制 API 到 LLM 文档。
 
 ## 命令
 

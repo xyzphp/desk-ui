@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, Input, Range, Select, Textarea } from '@desk/ui';
+import { Button, Field, Input, Range, Select, Textarea } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 import { SelectFormDemo } from './SelectFormDemo';
 import selectFormSource from './SelectFormDemo.tsx?raw';

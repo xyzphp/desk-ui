@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AIReferenceList, Notice } from '@desk/ui';
+import { AIReferenceList, Notice } from '@xyzos/desk-ui';
 
 export function AIReferenceListDemo() {
   const [selected, setSelected] = useState<readonly string[]>([]);

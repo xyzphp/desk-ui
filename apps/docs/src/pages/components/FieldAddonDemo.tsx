@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Checkbox, FieldAddon, Input, Select, Stack } from '@desk/ui';
+import { Checkbox, FieldAddon, Input, Select, Stack } from '@xyzos/desk-ui';
 
 export function FieldAddonDemo() {
   const [usage, setUsage] = useState('deleted-at');

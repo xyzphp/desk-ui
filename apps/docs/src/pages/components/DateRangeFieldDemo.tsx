@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, DateRangeField, type DateTimeRangeValue } from '@desk/ui';
+import { Button, DateRangeField, type DateTimeRangeValue } from '@xyzos/desk-ui';
 
 export function DateRangeFieldDemo({ withTime = false }: { withTime?: boolean }) {
   const [value, setValue] = useState<DateTimeRangeValue>(['', '']);

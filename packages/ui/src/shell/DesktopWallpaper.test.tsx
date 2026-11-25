@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Desktop, isDynamicWallpaper, isSceneWallpaper, Wallpaper, wallpapers } from './Desktop';
+import { Desktop, isDynamicWallpaper, isSceneWallpaper, Wallpaper, wallpaperImage, wallpapers } from './Desktop';
 import { onWallpaperBlank } from './wallpapers/pointerScope';
 
 const wallpaperOf = (container: HTMLElement) => container.querySelector('.ds-wallpaper')!;
@@ -116,5 +116,17 @@ describe('Desktop 动态壁纸', () => {
     expect(layer).toHaveClass('login-bg', 'ds-wp-grassland');
     expect(layer).not.toHaveClass('is-animated');
     await waitFor(() => expect(layer.querySelector('.ds-grassland')).not.toHaveAttribute('data-play'));
+  });
+
+  it('支持安全的光栅 Data URL 与本地 Blob URL 作为自定义壁纸，并拒绝不安全协议', () => {
+    const dataUrl = 'data:image/png;base64,iVBORw0KGgo=';
+    expect(wallpaperImage(dataUrl)).toBe(`url("${dataUrl}")`);
+    expect(wallpaperImage('blob:http://localhost:5173/123e4567-e89b-12d3-a456-426614174000')).toMatch(/^url\("blob:/);
+    expect(wallpaperImage('https://example.com/a.jpg')).toBeUndefined();
+    expect(wallpaperImage('data:image/svg+xml;base64,PHN2Zy8+')).toBeUndefined();
+    const standalone = render(<Wallpaper className="login-bg" name="grassland" url={dataUrl} />);
+    const layer = standalone.container.querySelector('.ds-wallpaper')!;
+    expect(layer).toHaveClass('login-bg', 'ds-wp-grassland', 'has-image');
+    expect(layer).not.toHaveClass('is-animated');
   });
 });

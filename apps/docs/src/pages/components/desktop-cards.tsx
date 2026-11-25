@@ -1,4 +1,4 @@
-import { ClockCard, DesktopCard, Text } from '@desk/ui';
+import { ClockCard, DesktopCard, Text } from '@xyzos/desk-ui';
 import type { ComponentDoc, PropSpec } from '../../blocks/types';
 import { DesktopCardDemo } from './DesktopCardDemo';
 import cardSource from './DesktopCardDemo.tsx?raw';

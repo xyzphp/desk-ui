@@ -296,15 +296,15 @@
   .ds-desktop-icon > span:last-child { display: -webkit-box; width: 100%; max-height: 32px; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; padding: 0 4px; border-radius: calc(4px * var(--ds-radius-scale)); color: var(--ds-desktop-foreground); font-size: 12px; line-height: 16px; text-align: center; text-overflow: ellipsis; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); overflow-wrap: anywhere; }
   .ds-desktop-icon.is-selected > span:last-child { font-weight: 650; text-shadow: 0 1px 2px rgba(0, 0, 0, .95), 0 0 4px rgba(0, 0, 0, .72); }
 
-  .ds-app-icon { display: flex; width: var(--ds-app-icon-size, 56px); height: var(--ds-app-icon-size, 56px); flex-shrink: 0; align-items: center; justify-content: center; border-radius: 22%; color: var(--ds-desktop-foreground); font-size: clamp(12px, var(--ds-app-icon-symbol-size, calc(var(--ds-app-icon-size, 56px) / 2 * var(--ds-app-icon-symbol-scale, 1))), var(--ds-app-icon-size, 56px)); box-shadow: 0 4px 10px rgb(0 0 0 / calc(.25 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .3); }
+  .ds-app-icon { display: flex; width: var(--ds-app-icon-size, 56px); height: var(--ds-app-icon-size, 56px); flex-shrink: 0; align-items: center; justify-content: center; border-radius: 22%; color: var(--ds-desktop-foreground); font-size: clamp(12px, var(--ds-app-icon-symbol-size, calc(var(--ds-app-icon-size, 56px) / 2 * var(--ds-app-icon-symbol-scale, 1))), var(--ds-app-icon-size, 56px)); box-shadow: 0 4px 10px rgb(0 0 0 / calc(.22 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .36), inset 0 0 0 .5px rgba(255, 255, 255, .18); }
   .ds-app-icon--graphic { filter: brightness(var(--ds-app-icon-brightness, 1)); }
   .ds-app-icon--image { overflow: hidden; background: var(--ds-icon-image-bg); box-shadow: none; }
   .ds-app-icon--transparent { background: transparent; border-radius: 0; overflow: visible; }
   /* 同色阴影：声明在 --image 之后，图片图标也能带色；颜色来自内联变量 --ds-app-icon-shadow-color。 */
-  .ds-app-icon--tinted, .ds-app-icon--image.ds-app-icon--tinted { box-shadow: 0 calc(var(--ds-app-icon-size, 56px) * .14) calc(var(--ds-app-icon-size, 56px) * .3) calc(var(--ds-app-icon-size, 56px) * -.04) color-mix(in srgb, var(--ds-app-icon-shadow-color) 85%, transparent), 0 1px 2px color-mix(in srgb, var(--ds-app-icon-shadow-color) 45%, transparent), inset 0 1px 0 rgba(255, 255, 255, .3); }
+  .ds-app-icon--tinted, .ds-app-icon--image.ds-app-icon--tinted { box-shadow: 0 calc(var(--ds-app-icon-size, 56px) * .14) calc(var(--ds-app-icon-size, 56px) * .3) calc(var(--ds-app-icon-size, 56px) * -.04) color-mix(in srgb, var(--ds-app-icon-shadow-color) 62%, transparent), 0 1px 2px color-mix(in srgb, var(--ds-app-icon-shadow-color) 36%, transparent), inset 0 1px 0 rgba(255, 255, 255, .36), inset 0 0 0 .5px rgba(255, 255, 255, .18); }
   .ds-app-icon--transparent.ds-app-icon--tinted { box-shadow: none; filter: brightness(var(--ds-app-icon-brightness, 1)) drop-shadow(0 calc(var(--ds-app-icon-size, 56px) * .1) calc(var(--ds-app-icon-size, 56px) * .16) color-mix(in srgb, var(--ds-app-icon-shadow-color) 80%, transparent)); }
   .ds-app-icon img { display: block; width: min(100%, var(--ds-app-icon-symbol-size, 100%)); height: min(100%, var(--ds-app-icon-symbol-size, 100%)); object-fit: contain; }
-  .ds-app-icon .ds-icon { width: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); height: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); vertical-align: 0; }
+  .ds-app-icon .ds-icon { width: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); height: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); vertical-align: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .18)); }
 
   /* Dock */
   .ds-dock-edge-trigger { position: fixed; left: 0; right: 0; bottom: 0; height: 4px; z-index: var(--dock-wrap-z-index, 8000); background: transparent; pointer-events: auto; }
@@ -361,7 +361,7 @@
   }
   @media (prefers-reduced-motion: reduce) { .ds-dock-item, .ds-dock-item .ds-app-icon, .ds-dock-wrap, .ds-dock-wrap.is-hidden, .ds-desktop-icon, .ds-wallpaper { transition: none; } .ds-dock-item.is-bouncing, .ds-wallpaper.is-animated { animation: none; } }
   @media (forced-colors: active) {
-    .ds-desktop-icon-art, .ds-app-icon { filter: none; }
+    .ds-desktop-icon-art, .ds-app-icon, .ds-app-icon .ds-icon { filter: none; }
     .ds-menubar, .ds-dock-wrap, .ds-dock, .ds-dock-tip {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;

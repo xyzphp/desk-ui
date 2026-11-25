@@ -1,4 +1,4 @@
-import { Button, Input, Panel, PasswordInput, Switch } from '@desk/ui';
+import { Button, Input, Panel, PasswordInput, Switch } from '@xyzos/desk-ui';
 import { useState, type ReactNode } from 'react';
 
 function PasswordRow({

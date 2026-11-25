@@ -1,4 +1,4 @@
-import { Lead, Panel, Title, useMessages } from '@desk/ui';
+import { Lead, Panel, Title, useMessages } from '@xyzos/desk-ui';
 import { docText } from './docText';
 import { Demo } from './Demo';
 import { PropsTable } from './PropsTable';

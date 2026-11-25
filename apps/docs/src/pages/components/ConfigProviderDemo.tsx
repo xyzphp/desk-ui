@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConfigProvider, CopyButton, Field, InputNumber, PasswordInput, Select, Switch } from '@desk/ui';
+import { ConfigProvider, CopyButton, Field, InputNumber, PasswordInput, Select, Switch } from '@xyzos/desk-ui';
 import { copyText } from './CopyDemo';
 
 export function ConfigProviderDemo() {

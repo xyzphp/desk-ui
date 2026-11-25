@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, Stack, Text, WidgetLayout, type GridPlacement } from '@desk/ui';
+import { Input, Stack, Text, WidgetLayout, type GridPlacement } from '@xyzos/desk-ui';
 
 export function WidgetLayoutDemo() {
   const [layout, setLayout] = useState<GridPlacement[]>([

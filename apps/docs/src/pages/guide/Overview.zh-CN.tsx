@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Button, DocumentPane, Field, Grid, HelpTip, Input, Lead, List, ListItem, Notice, Panel, Property, PropertySheet,
   SearchField, Select, Sidebar, SidebarAddButton, SplitLayout, StatCard, Tag, Title, Toolbar, ToolbarActions, Workspace,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 
 const accounts = [
   { id: 'a', name: '李明', role: '管理员', on: true },
@@ -79,14 +79,14 @@ export function OverviewZh({ componentCount, pageCount, categoryCount }: Overvie
         <Title>组件库概览</Title>
         <Lead>
           把浏览器桌面的壳层（窗口、Dock、菜单栏等）和后台应用里反复出现的界面约定封装成一套 React 组件。
-          本站本身就是组件库搭成的另一个桌面：壁纸、菜单栏、桌面图标、Dock、窗口、控制中心、右键菜单都来自 @desk/ui。
+          本站本身就是组件库搭成的另一个桌面：壁纸、菜单栏、桌面图标、Dock、窗口、控制中心、右键菜单都来自 @xyzos/desk-ui。
           桌面上每个图标是一个组件分类，按住可以移动，双击（或点击 Dock）打开对应窗口。
         </Lead>
       </header>
 
       <Grid columns={3}>
         <StatCard label="组件总数" value={componentCount} icon="component" description="按独立组件文档入口统计" />
-        <StatCard label="文档总数" value={pageCount} icon="book-open" description="包含使用指南" />
+        <StatCard label="文档总数" value={pageCount} icon="book-open" description="包含指南与 LLMs 文档" />
         <StatCard label="组件分类" value={categoryCount} icon="layers" />
       </Grid>
 

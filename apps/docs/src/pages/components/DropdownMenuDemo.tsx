@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DropdownMenu, MenuItem, MenuSeparator, Stack, Text } from '@desk/ui';
+import { DropdownMenu, MenuItem, MenuSeparator, Stack, Text } from '@xyzos/desk-ui';
 
 export function DropdownMenuDemo() {
   const [action, setAction] = useState('尚未执行');

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, ColorPicker, Field, FormActions, Grid, Stack, Text, type ColorPreset } from '@desk/ui';
+import { Button, ColorPicker, Field, FormActions, Grid, Stack, Text, type ColorPreset } from '@xyzos/desk-ui';
 
 const presets: readonly ColorPreset[] = [
   { value: '#0a84ff', label: '蓝色' }, { value: '#198455', label: '绿色' },

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Avatar, Button, Checkbox, Disclosure, DocumentPane, EmptyState, Field, Input, List, ListGroup, ListItem, Panel, Property, PropertySheet, SearchField,
   Select, Sidebar, SidebarAddButton, SplitLayout, Tag, Title, Toolbar, ToolbarActions,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 
 const people = [

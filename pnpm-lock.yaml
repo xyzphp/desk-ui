@@ -29,7 +29,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@desk/ui':
+      '@xyzos/desk-ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:

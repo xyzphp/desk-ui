@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Field, InputNumber } from '@desk/ui';
+import { Button, Field, InputNumber } from '@xyzos/desk-ui';
 
 export function InputNumberDemo() {
   const [amount, setAmount] = useState<number | null>(0.25);

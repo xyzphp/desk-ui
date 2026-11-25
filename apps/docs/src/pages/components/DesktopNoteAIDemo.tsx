@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AIResultPanel, AnchorPopover, Button, DesktopNote } from '@desk/ui';
+import { AIResultPanel, AnchorPopover, Button, DesktopNote } from '@xyzos/desk-ui';
 
 /** Local composition only. Documentation never sends editor text to a model. */
 export function DesktopNoteAIDemo() {

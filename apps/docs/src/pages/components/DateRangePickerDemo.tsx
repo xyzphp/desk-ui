@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, DateRangePicker, Notice, type DateTimeRangeValue } from '@desk/ui';
+import { Button, DateRangePicker, Notice, type DateTimeRangeValue } from '@xyzos/desk-ui';
 
 export function DateRangePickerDemo({ withTime = false }: { withTime?: boolean }) {
   const [value, setValue] = useState<DateTimeRangeValue>(['', '']);

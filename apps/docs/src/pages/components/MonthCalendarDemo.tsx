@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MonthCalendar, Stack, Text, type MonthCalendarEvent } from '@desk/ui';
+import { MonthCalendar, Stack, Text, type MonthCalendarEvent } from '@xyzos/desk-ui';
 
 const events: readonly MonthCalendarEvent[] = [
   { id: 'design', date: '2026-11-05', title: '设计评审', tone: 'accent' },

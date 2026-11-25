@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AIResultPanel, AIToolbar, Checkbox, Select, type AIToolSelection } from '@desk/ui';
+import { AIResultPanel, AIToolbar, Checkbox, Select, type AIToolSelection } from '@xyzos/desk-ui';
 
 export function AIToolbarDemo({ emptyModels = false }: { emptyModels?: boolean }) {
   const [busy, setBusy] = useState(false);

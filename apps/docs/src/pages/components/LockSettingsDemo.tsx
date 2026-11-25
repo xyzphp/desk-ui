@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Divider, IconButton, Inline, PasswordInput, Select, SettingsRow, Stack, Switch } from '@desk/ui';
+import { Button, Divider, IconButton, Inline, PasswordInput, Select, SettingsRow, Stack, Switch } from '@xyzos/desk-ui';
 
 export function LockSettingsDemo() {
   const [enabled, setEnabled] = useState(true);

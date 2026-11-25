@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, IconButton, WindowDialog } from '@desk/ui';
+import { Button, IconButton, WindowDialog } from '@xyzos/desk-ui';
 
 export function WindowDialogDemo() {
   const [open, setOpen] = useState(false);

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, Field, Inline, MarkdownEditor, Stack, Switch, Text, type MarkdownEditorHandle } from '@desk/ui';
+import { Button, Field, Inline, MarkdownEditor, Stack, Switch, Text, type MarkdownEditorHandle } from '@xyzos/desk-ui';
 
 /** 仅演示宿主返回安全 React 节点的接线，不提供第二套 Markdown 渲染器。 */
 function PreviewSample({ source }: { source: string }) {

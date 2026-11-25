@@ -13,7 +13,7 @@ import {
   Tooltip,
   appGradients,
   useLabels,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 
 const pages = [
   { id: 'articles', label: '文章', icon: 'file-text', color: 'blue', group: '内容' },

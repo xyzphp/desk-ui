@@ -1,4 +1,4 @@
-import { Lead, Panel, Table, Tag, Title, type TableColumn } from '@desk/ui';
+import { Lead, Panel, Table, Tag, Title, type TableColumn } from '@xyzos/desk-ui';
 
 interface Swatch {
   token: string;

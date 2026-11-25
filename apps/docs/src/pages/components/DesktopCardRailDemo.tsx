@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, DesktopCard, DesktopCardRail, DesktopCardToolbar, Input } from '@desk/ui';
+import { Button, DesktopCard, DesktopCardRail, DesktopCardToolbar, Input } from '@xyzos/desk-ui';
 
 export function DesktopCardRailDemo() {
   const [reversed, setReversed] = useState(false);

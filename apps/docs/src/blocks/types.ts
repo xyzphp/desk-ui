@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { DesktopCardStyle, DockStyle, WallpaperName, WindowPlatform } from '@desk/ui';
+import type { DesktopCardStyle, DockStyle, WallpaperName, WindowPlatform } from '@xyzos/desk-ui';
 import type { LocalizedText } from './docText';
 
 export interface PropSpec {

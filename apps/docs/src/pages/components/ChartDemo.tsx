@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Chart, Grid, Inline, Panel, Switch, type ChartType } from '@desk/ui';
+import { Chart, Grid, Inline, Panel, Switch, type ChartType } from '@xyzos/desk-ui';
 
 const data = [
   { key: 'jan', label: '一月', value: 42, displayValue: '42' },

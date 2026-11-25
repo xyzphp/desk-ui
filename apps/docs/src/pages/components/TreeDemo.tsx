@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Stack, Text, Tree, type TreeNode } from '@desk/ui';
+import { Button, Stack, Text, Tree, type TreeNode } from '@xyzos/desk-ui';
 
 const nodes: readonly TreeNode[] = [
   { id: 'workspace', label: '工作目录', icon: 'folder', selectable: false, children: [

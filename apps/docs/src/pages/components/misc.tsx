@@ -20,7 +20,7 @@ import {
   WallpaperPicker,
   type ThemeChoice,
   type WallpaperName,
-} from '@desk/ui';
+} from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 import { SettingsRowDemo, WallpaperSettingsDemo } from './SettingsRowDemo';
 import settingsSource from './SettingsRowDemo.tsx?raw';

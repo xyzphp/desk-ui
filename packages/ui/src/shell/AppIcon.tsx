@@ -3,22 +3,22 @@ import { useLabels } from '../foundation/ConfigProvider';
 import { cx } from '../foundation/cx';
 import { Icon, type IconName } from '../foundation/Icon';
 
-/** 默认与预设的应用图标渐变：前 8 组取自原系统各应用的 color 配置，其后为补充的可选色，供应用较多时区分。 */
+/** 默认与预设的应用图标渐变：覆盖 14 组高对比渐变，保证浅色矢量符号与底板层次清晰。 */
 export const appGradients = {
-  slate: 'linear-gradient(135deg,#8e9eab,#5d6d7e)',
-  blue: 'linear-gradient(135deg,#4facfe,#00f2fe)',
-  indigo: 'linear-gradient(135deg,#667eea,#536dfe)',
-  green: 'linear-gradient(135deg,#43e97b,#38f9d7)',
-  orange: 'linear-gradient(135deg,#f6d365,#fda085)',
-  pink: 'linear-gradient(135deg,#ff9a9e,#fad0c4)',
-  purple: 'linear-gradient(135deg,#a18cd1,#fbc2eb)',
-  red: 'linear-gradient(135deg,#ff6b6b,#ee5a6f)',
-  cyan: 'linear-gradient(135deg,#22d3ee,#0ea5e9)',
-  teal: 'linear-gradient(135deg,#2dd4bf,#0f9d8a)',
-  amber: 'linear-gradient(135deg,#fbbf24,#f59e0b)',
-  violet: 'linear-gradient(135deg,#8b5cf6,#6d28d9)',
-  brown: 'linear-gradient(135deg,#b08968,#7f5539)',
-  graphite: 'linear-gradient(135deg,#4b5563,#1f2937)',
+  slate: 'linear-gradient(160deg,#7c8ca0,#4b596b)',
+  blue: 'linear-gradient(160deg,#38a1ff,#1d6ef2)',
+  indigo: 'linear-gradient(160deg,#6c7cf8,#4353d8)',
+  green: 'linear-gradient(160deg,#34c759,#1b9e4b)',
+  orange: 'linear-gradient(160deg,#ff9f2e,#ea6a12)',
+  pink: 'linear-gradient(160deg,#f96894,#d9366a)',
+  purple: 'linear-gradient(160deg,#9b72f2,#6c42d9)',
+  red: 'linear-gradient(160deg,#f86565,#d93545)',
+  cyan: 'linear-gradient(160deg,#24b8e6,#0ea5e9)',
+  teal: 'linear-gradient(160deg,#26baa8,#0d8f80)',
+  amber: 'linear-gradient(160deg,#f5a623,#d97706)',
+  violet: 'linear-gradient(160deg,#8b5cf6,#6d28d9)',
+  brown: 'linear-gradient(160deg,#a67c5b,#784e32)',
+  graphite: 'linear-gradient(160deg,#525d6d,#27303d)',
 } as const;
 
 export interface AppIconAppearance {

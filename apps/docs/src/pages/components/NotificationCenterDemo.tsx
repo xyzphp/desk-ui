@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, NotificationCenter, Stack, Switch, Text, type NotificationCenterItem } from '@desk/ui';
+import { Button, NotificationCenter, Stack, Switch, Text, type NotificationCenterItem } from '@xyzos/desk-ui';
 
 const initial: readonly NotificationCenterItem[] = [
   { id: 'saved', title: '草稿已保存', message: '最新修改已保存为示例草稿。', tone: 'success', unread: true, time: '15:40' },

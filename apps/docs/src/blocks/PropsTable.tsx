@@ -1,4 +1,4 @@
-import { Panel, Table, useMessages, type TableColumn } from '@desk/ui';
+import { Panel, Table, useMessages, type TableColumn } from '@xyzos/desk-ui';
 import type { ApiSpec, PropSpec } from './types';
 import { docsMessages } from '../site/locale';
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Field, ImageCropper, Inline, Select, Stack, Text, UploadZone, type ImageCropResult, type UploadZoneLabels } from '@desk/ui';
+import { Field, ImageCropper, Inline, Select, Stack, Text, UploadZone, type ImageCropResult, type UploadZoneLabels } from '@xyzos/desk-ui';
 
 const uploadLabels: UploadZoneLabels = {
   fileList: '待裁剪图片', remove: (file) => `移除 ${file.name}`, clear: '清空图片', busy: '处理中',

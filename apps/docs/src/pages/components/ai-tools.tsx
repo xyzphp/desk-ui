@@ -1,4 +1,4 @@
-import { AIReferenceList, AIResultPanel } from '@desk/ui';
+import { AIReferenceList, AIResultPanel } from '@xyzos/desk-ui';
 import type { ComponentDoc } from '../../blocks/types';
 import { AIToolbarDemo } from './AIToolbarDemo';
 import toolbarSource from './AIToolbarDemo.tsx?raw';

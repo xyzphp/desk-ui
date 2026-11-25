@@ -1,10 +1,11 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { extname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import type { Plugin } from 'vite';
 import { defineConfig } from 'vitest/config';
 
-const wallpaperAssets = new URL('./src/shell/wallpapers/assets/', import.meta.url).pathname;
+const wallpaperAssets = fileURLToPath(new URL('./src/shell/wallpapers/assets/', import.meta.url));
 const imageTypes: Record<string, string> = { '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 
 /**
