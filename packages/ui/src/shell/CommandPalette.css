@@ -1,0 +1,19 @@
+@layer ds {
+  .ds-command-palette { display: grid; gap: var(--ds-space-md); min-width: 0; }
+  .ds-command-results { display: grid; gap: var(--ds-space-xs); max-height: 320px; min-width: 0; overflow: auto; }
+  .ds-command-option {
+    display: flex; align-items: center; gap: var(--ds-space-md); box-sizing: border-box; width: 100%; min-width: 0;
+    min-height: 44px; padding: var(--ds-space-sm) var(--ds-space-md); border: 1px solid transparent;
+    border-radius: var(--ds-radius-sm); background: transparent; color: var(--text); font: 13px var(--font); text-align: left; cursor: pointer;
+  }
+  .ds-command-option:where(:hover):not(:disabled) { background: var(--hover); }
+  .ds-command-option[aria-selected="true"] { border-color: var(--ds-selection-border); background: var(--ds-selection-bg); color: var(--accent); }
+  .ds-command-option:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-command-option:disabled { opacity: .45; cursor: default; }
+  .ds-command-option > .ds-icon { flex-shrink: 0; width: 18px; height: 18px; }
+  .ds-command-copy { display: grid; flex: 1; gap: var(--ds-space-xs); min-width: 0; overflow-wrap: anywhere; }
+  .ds-command-copy > strong { font-weight: 500; }
+  .ds-command-copy > span, .ds-command-group { color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
+  .ds-command-loading { display: flex; align-items: center; gap: var(--ds-space-sm); color: var(--text-2); font: 12px var(--font); }
+  @container ds-workspace (max-width: 600px) { .ds-command-group { display: none; } }
+}

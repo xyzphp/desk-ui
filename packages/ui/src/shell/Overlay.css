@@ -1,0 +1,125 @@
+/* 弹层、菜单、右键菜单、通知、系统弹窗、外观选择器、日历。 */
+@layer ds {
+  .ds-popover { min-width: min(220px, calc(100vw - 16px)); padding: 6px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: var(--ds-shell-panel-radius, var(--radius)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); box-shadow: var(--ds-shell-glass-shadow, var(--shadow)); animation: ds-pop .16s ease-out; }
+  .ds-popover--control { width: 300px; padding: 14px; }
+  .ds-popover--calendar { width: 260px; padding: 14px; }
+  .ds-popover--system { --ds-menu-active-bg: var(--accent); --ds-menu-active-color: var(--ds-on-accent); }
+  @keyframes ds-pop { from { opacity: 0; } }
+  .ds-popover-title { margin: 6px 0 8px; color: var(--text-2); font-size: 12px; font-weight: 600; }
+  .ds-popover-title:first-child { margin-top: 0; }
+
+  .ds-menu-item { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 10px; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .ds-menu-item .ds-icon { width: 15px; height: 15px; }
+  .ds-menu-item:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: -2px; }
+  .ds-menu-item:where(:hover, :focus-visible):not(:disabled) { background: var(--ds-menu-active-bg, var(--ds-selection-bg)); color: var(--ds-menu-active-color, var(--accent)); }
+  .ds-menu-separator { height: 1px; margin: 5px 8px; background: var(--border); }
+
+  .ds-context-menu {
+    display: flex; min-width: min(220px, calc(100vw - 16px)); max-width: min(292px, calc(100vw - 16px));
+    flex-direction: column; gap: 2px; padding: 5px; border: 1px solid var(--ds-shell-glass-border, color-mix(in srgb, var(--border) 130%, transparent));
+    border-radius: var(--ds-shell-panel-radius, calc(10px * var(--ds-radius-scale))); background: var(--ds-shell-glass-bg-strong, color-mix(in srgb, var(--bg-glass-strong) 96%, transparent)); color: var(--text);
+    box-shadow: var(--ds-shell-glass-shadow, 0 12px 34px rgb(0 0 0 / calc(.24 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .35));
+    backdrop-filter: var(--ds-shell-glass-backdrop, blur(24px) saturate(150%)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(24px) saturate(150%));
+  }
+  .ds-context-item { display: flex; flex-shrink: 0; min-height: 34px; align-items: center; gap: 10px; padding: 0 9px; border: 1px solid transparent; border-radius: calc(7px * var(--ds-radius-scale)); background: transparent; color: inherit; font: inherit; font-size: 13px; text-align: left; cursor: default; }
+  .ds-context-item > .ds-icon { width: 16px; height: 16px; color: var(--text-2); }
+  .ds-context-label { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+  .ds-context-label:has(.ds-context-wallpaper) { display: flex; align-items: center; gap: 10px; }
+  .ds-context-wallpaper { display: inline-block; width: 36px; height: 24px; flex: 0 0 36px; border: 1px solid var(--border); border-radius: calc(5px * var(--ds-radius-scale)); }
+  .ds-context-check { display: grid; width: 16px; height: 16px; flex: 0 0 16px; place-items: center; }
+  .ds-context-check .ds-icon { width: 15px; height: 15px; color: var(--accent); }
+  .ds-context-item > kbd { margin-left: auto; color: var(--text-2); font: inherit; font-size: 12px; }
+  .ds-context-item:where(:hover, :focus-visible, [aria-expanded="true"]):not(:disabled) { border-color: var(--ds-shell-glass-border, var(--border)); background: var(--ds-shell-item-hover, var(--hover)); }
+  .ds-context-item:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-menu-item:disabled { opacity: .5; cursor: default; }
+  .ds-context-item:disabled { opacity: .5; }
+  .ds-context-divider { height: 1px; flex: 0 0 auto; margin: 3px 8px; background: var(--border); }
+
+  .ds-notifications { position: fixed; top: calc(var(--menubar-h) + 10px); right: 10px; z-index: 9800; display: flex; flex-direction: column; gap: 10px; width: 340px; max-width: calc(100% - 20px); }
+  .ds-notification {
+    display: flex; box-sizing: border-box; width: 100%; gap: 10px; padding: 12px 14px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(16px * var(--ds-radius-scale));
+    background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px));
+    box-shadow: var(--ds-shell-glass-shadow, 0 10px 30px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); color: var(--text); font: inherit; text-align: left;
+    animation: ds-slide-in .3s cubic-bezier(.2, .9, .3, 1.2); cursor: pointer;
+  }
+  .ds-notification-copy { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .ds-notification .ds-app-icon { --ds-app-icon-size: 36px; width: 36px; height: 36px; }
+  .ds-notification h4 { margin: 0 0 2px; font-size: 13px; }
+  .ds-notification p { margin: 0; color: var(--text-2); font-size: 12px; line-height: 1.4; }
+  .ds-notification--inline {
+    border: 1px solid var(--ds-shell-glass-border, var(--border)); border-radius: var(--ds-radius-md); background: var(--ds-shell-glass-chip-bg, var(--bg-panel));
+    backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: var(--ds-shell-glass-shadow-sm, none); animation: none;
+  }
+  @media (forced-colors: active) {
+    .ds-popover, .ds-context-menu, .ds-notification {
+      border-color: CanvasText;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+    }
+  }
+  .ds-notification:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 2px; }
+  .ds-notification:disabled { opacity: .55; cursor: default; }
+  @keyframes ds-slide-in { from { opacity: 0; transform: translateX(110%); } }
+
+  /* 外观选择：分段控件、主题卡片、强调色、壁纸缩略图（控制中心） */
+  .ds-segmented { display: flex; gap: 4px; margin: 0 0 8px; padding: 3px; border-radius: calc(9px * var(--ds-radius-scale)); background: var(--hover); }
+  .ds-popover .ds-segmented { border: 1px solid var(--ds-shell-glass-border, transparent); background: var(--ds-shell-glass-bg-soft, var(--hover)); }
+  .ds-segmented--settings {
+    --ds-segment-flex: 0 0 auto; --ds-segment-height: 24px; --ds-segment-padding: 12px; --ds-segment-border: 0px;
+    --ds-segment-radius: calc(5px * var(--ds-radius-scale)); --ds-segment-active: var(--text); --ds-segment-shadow: 0 1px 3px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)));
+    display: inline-flex; flex-wrap: wrap; gap: 0; margin: 0; padding: 2px; border-radius: calc(7px * var(--ds-radius-scale));
+  }
+  .ds-segmented button {
+    flex: var(--ds-segment-flex, 1); min-width: 0; min-height: var(--ds-segment-height, 30px); padding: 4px var(--ds-segment-padding, 5px);
+    border: var(--ds-segment-border, 1px) solid transparent; border-radius: var(--ds-segment-radius, calc(7px * var(--ds-radius-scale))); background: transparent;
+    color: var(--text); font: inherit; font-size: 12px; white-space: nowrap; cursor: pointer;
+  }
+  .ds-segmented button[aria-pressed="true"] {
+    border-color: var(--border); background: var(--bg-panel); color: var(--ds-segment-active, var(--accent));
+    box-shadow: var(--ds-segment-shadow, 0 1px 3px rgb(0 0 0 / calc(.12 * var(--ds-shadow-strength))));
+  }
+  .ds-popover .ds-segmented button[aria-pressed="true"] {
+    border-color: var(--ds-shell-glass-border, var(--border));
+    background: var(--ds-shell-glass-chip-bg, var(--bg-panel));
+  }
+  .ds-segmented button:disabled { opacity: .45; cursor: not-allowed; }
+  .ds-segmented button:focus-visible, .ds-theme-picker button:focus-visible, .ds-accent-picker button:focus-visible, .ds-wallpaper-picker button:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: 2px; }
+  .ds-theme-picker { display: flex; gap: 8px; margin-bottom: 8px; }
+  .ds-theme-picker button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; border: 2px solid transparent; border-radius: calc(10px * var(--ds-radius-scale)); background: var(--hover); color: var(--text); font: inherit; font-size: 12px; cursor: pointer; }
+  .ds-popover .ds-theme-picker button:not([aria-pressed="true"]) { border-color: var(--ds-shell-glass-border, transparent); background: var(--ds-shell-glass-chip-bg, var(--hover)); }
+  .ds-theme-picker button[aria-pressed="true"] { border-color: var(--accent); }
+  .ds-swatch { width: 44px; height: 30px; border-radius: calc(6px * var(--ds-radius-scale)); box-shadow: 0 0 0 .5px var(--border); }
+  .ds-swatch--light { background: var(--ds-theme-swatch-light); }
+  .ds-swatch--dark { background: var(--ds-theme-swatch-dark); }
+  .ds-swatch--auto { background: var(--ds-theme-swatch-auto); }
+  .ds-accent-picker { display: flex; gap: 10px; margin-bottom: 8px; }
+  .ds-accent-picker--settings { flex-wrap: wrap; margin-bottom: 0; }
+  .ds-accent-picker button { display: block; flex: 0 0 22px; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); }
+  .ds-accent-picker button[aria-pressed="true"] { outline: 2px solid var(--text-2); outline-offset: 2px; }
+  .ds-wallpaper-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .ds-wallpaper-picker--settings { --ds-wallpaper-height: 60px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .ds-wallpaper-picker > :where(button) { display: block; width: 100%; min-width: 0; height: var(--ds-wallpaper-height, 40px); padding: 0; border-radius: calc(8px * var(--ds-radius-scale)); cursor: pointer; border: 2px solid transparent; }
+  .ds-wallpaper-picker button[aria-pressed="true"] { border-color: var(--accent); }
+  /* 水族馆缩略图带一条小鱼，和纯渐变预设区分开。 */
+  .ds-wallpaper-picker button:disabled { opacity: .55; cursor: wait; }
+  .ds-wallpaper-custom {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; overflow: hidden;
+    background: color-mix(in srgb, var(--accent) 9%, var(--bg-win)) center / cover; color: var(--text-2); font: 650 12px var(--font);
+  }
+  .ds-wallpaper-custom:where(:hover):not(:disabled) { background-color: var(--hover); }
+  .ds-wallpaper-custom[aria-pressed="true"] { color: var(--ds-desktop-foreground); text-shadow: 0 1px 4px rgba(0, 0, 0, .7); }
+  @container (max-width: 520px) {
+    .ds-wallpaper-picker--settings { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .ds-calendar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 600; }
+  .ds-calendar-head button { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-chip-bg, var(--hover)); color: var(--text); cursor: pointer; }
+  .ds-calendar-head button:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: 2px; }
+  .ds-calendar-head .ds-icon { width: 15px; height: 15px; }
+  .ds-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 2px; }
+  .ds-calendar-weekday { padding: 4px 0; color: var(--text-2); font-size: 12px; }
+  .ds-calendar-day { padding: 6px 0; border-radius: 50%; font-size: 12px; }
+  .ds-calendar-day.is-today { background: var(--accent); color: var(--ds-on-accent); font-weight: 700; }
+  .ds-calendar-day.is-muted { opacity: .3; }
+}

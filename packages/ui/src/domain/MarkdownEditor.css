@@ -1,0 +1,29 @@
+@layer ds {
+  .ds-markdown { min-width: 0; color: var(--text); font: 13px var(--font); }
+  .ds-markdown-toolbar {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-sm); min-width: 0;
+    padding: 6px 0; overflow-x: auto; border-block: 1px solid var(--border);
+  }
+  .ds-markdown-toolbar > *, .ds-markdown-tools > * { flex-shrink: 0; }
+  .ds-markdown-modes { margin: 0; padding: 0; min-width: 0; border: 0; }
+  .ds-markdown-tools, .ds-markdown-history { display: flex; align-items: center; gap: 2px; }
+  .ds-markdown-history { padding-right: var(--ds-space-sm); margin-right: var(--ds-space-xs); border-right: 1px solid var(--border); }
+  .ds-markdown-writing { display: grid; min-width: 0; border: 1px solid var(--border); border-radius: var(--ds-radius-sm); margin-top: var(--ds-space-sm); }
+  .ds-markdown-writing:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-markdown-writing:has([aria-invalid="true"]) { border-color: var(--ds-danger); }
+  .ds-markdown-writing--split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .ds-markdown-input, .ds-markdown-preview {
+    box-sizing: border-box; width: 100%; min-width: 0; height: 280px; margin: 0; padding: var(--ds-space-md);
+    overflow: auto; border: 0; border-radius: var(--ds-radius-sm); background: var(--bg-panel); color: var(--text); font-size: 13px; line-height: 1.7;
+  }
+  .ds-markdown-input { resize: vertical; font-family: var(--font-mono); }
+  .ds-markdown-input:disabled { background: var(--bg-win); color: var(--text-2); }
+  .ds-markdown-input::placeholder { color: var(--text-2); opacity: .7; }
+  .ds-markdown-preview { font-family: var(--font); outline: none; }
+  .ds-markdown-writing--split > .ds-markdown-preview { border-left: 1px solid var(--border); }
+  .ds-markdown-footer { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-sm); margin-top: var(--ds-space-md); }
+  @container ds-workspace (max-width: 600px) {
+    .ds-markdown-writing--split { grid-template-columns: minmax(0, 1fr); }
+    .ds-markdown-writing--split > .ds-markdown-preview { border-left: 0; border-top: 1px solid var(--border); }
+  }
+}

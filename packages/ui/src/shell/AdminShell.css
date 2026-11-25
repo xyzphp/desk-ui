@@ -1,0 +1,563 @@
+/* 管理后台外框：左侧应用菜单 + 页面页签栏。B 轨道组件，原生页面没有对应实现；
+ * 配色、圆角与选中态沿用 Nav.css 的 .ds-nav-item 与窗口标题栏。 */
+@layer ds {
+  .ds-admin {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    background: var(--bg-win);
+    color: var(--text);
+    font-size: 13px;
+  }
+  .ds-admin-main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+  }
+  .ds-admin-content {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .ds-admin-sidebar {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    width: var(--ds-admin-sidebar-width, 208px);
+    min-height: 0;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    transition: width 0.18s ease;
+  }
+  .ds-admin-sidebar[data-collapsed] {
+    width: var(--ds-admin-sidebar-collapsed-width, 56px);
+  }
+  .ds-admin-sidebar-title {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    height: var(--ds-page-tabs-height, 40px);
+    padding: 0 16px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ds-admin-sidebar-brand {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .ds-admin-sidebar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+  .ds-admin-sidebar[data-collapsed] > .ds-admin-sidebar-title {
+    position: relative;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-brand {
+    flex: 1 1 auto;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.12s ease;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-brand > :not(:first-child),
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-title-text {
+    display: none;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-actions .ds-button--icon {
+    flex: 0 0 28px;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    padding: 0;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-actions {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s ease;
+  }
+  .ds-admin-sidebar[data-collapsed] > .ds-admin-sidebar-title:hover .ds-admin-sidebar-actions,
+  .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-actions:focus-within {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .ds-admin-sidebar[data-collapsed]
+    > .ds-admin-sidebar-title:has(.ds-admin-sidebar-actions):hover
+    .ds-admin-sidebar-brand,
+  .ds-admin-sidebar[data-collapsed]
+    > .ds-admin-sidebar-title:has(.ds-admin-sidebar-actions:focus-within)
+    .ds-admin-sidebar-brand {
+    opacity: 0;
+  }
+  .ds-admin-menu {
+    flex: 1;
+    min-height: 0;
+    padding: 8px;
+    overflow: hidden auto;
+  }
+  .ds-admin-sidebar-footer {
+    flex: 0 0 auto;
+    padding: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .ds-admin-menu-group + .ds-admin-menu-group {
+    margin-top: 8px;
+  }
+  .ds-admin-menu-label {
+    display: flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-label {
+    min-height: 9px;
+    padding: 4px 8px;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-label > span {
+    display: none;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-label::before {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    content: '';
+  }
+
+  .ds-admin-menu-item {
+    --ds-app-icon-size: 22px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 36px;
+    margin: 2px 0;
+    padding: 0 10px;
+    border: 0;
+    border-radius: calc(7px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .ds-admin-menu-item:hover:not([aria-current='page']) {
+    background: color-mix(in srgb, var(--text) 6%, transparent);
+  }
+  .ds-admin-menu-item:focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: -2px;
+  }
+  .ds-admin-menu-item[aria-current='page'] {
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .ds-admin-menu-item:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .ds-admin-menu-item[data-dragging] {
+    opacity: 0.45;
+  }
+  .ds-admin-menu-item[data-drop]::before {
+    position: absolute;
+    top: -2px;
+    right: 6px;
+    left: 6px;
+    height: 2px;
+    border-radius: calc(1px * var(--ds-radius-scale));
+    background: var(--accent);
+    content: '';
+  }
+  .ds-admin-menu-item[data-drop='after']::before {
+    top: auto;
+    bottom: -2px;
+  }
+  .ds-admin-menu-icon {
+    display: inline-grid;
+    flex: 0 0 22px;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+  }
+  .ds-admin-menu-icon > .ds-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--text-2);
+  }
+  .ds-admin-menu-item[aria-current='page'] .ds-admin-menu-icon > .ds-icon {
+    color: var(--accent);
+  }
+  .ds-admin-menu-icon .ds-app-icon:not(.ds-app-icon--tinted),
+  .ds-page-tab-icon .ds-app-icon {
+    box-shadow: 0 1px 2px rgb(0 0 0 / calc(0.18 * var(--ds-shadow-strength)));
+  }
+  .ds-admin-menu-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ds-admin-menu-item[data-open]::after {
+    flex: 0 0 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--text-2) 60%, transparent);
+    content: '';
+  }
+  .ds-admin-menu-badge {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border-radius: 999px;
+    background: var(--ds-danger);
+    color: var(--ds-on-accent);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu {
+    padding: 8px 6px;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-item {
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-badge {
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+  }
+  .ds-admin-sidebar[data-collapsed] .ds-admin-menu-item[data-open]::after {
+    position: absolute;
+    right: 3px;
+    bottom: 4px;
+  }
+
+  /* 列表密度只调整栏宽与行距，图标和选中态保持一致。 */
+  .ds-admin-sidebar[data-variant='list'][data-density='compact']:not([data-collapsed]) {
+    width: var(--ds-admin-sidebar-compact-width, 184px);
+  }
+  .ds-admin-sidebar[data-variant='list'][data-density='compact']:not([data-collapsed]) .ds-admin-menu {
+    padding: 6px 8px;
+  }
+  .ds-admin-sidebar[data-variant='list'][data-density='compact']:not([data-collapsed]) .ds-admin-menu-item {
+    gap: 8px;
+    min-height: 34px;
+    margin: 1px 0;
+  }
+  .ds-admin-sidebar[data-variant='list'][data-density='compact']:not([data-collapsed])
+    .ds-admin-menu-group
+    + .ds-admin-menu-group {
+    margin-top: 6px;
+  }
+
+  /* 图标栏形态：图标在上、名称在下，选中项为强调色浅底的圆角块。 */
+  .ds-admin-sidebar[data-variant='rail'] {
+    width: var(--ds-admin-sidebar-width, 76px);
+  }
+  .ds-admin-sidebar[data-variant='rail'] > .ds-admin-sidebar-title {
+    display: flex;
+    justify-content: center;
+    height: var(--ds-admin-header-height, 48px);
+    padding: 0;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-sidebar-brand {
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu {
+    padding: 8px 6px;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-label {
+    min-height: 9px;
+    padding: 4px 8px;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-label > span {
+    display: none;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-label::before {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    content: '';
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-item {
+    --ds-app-icon-size: 26px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-height: 58px;
+    margin: 4px 0;
+    padding: 7px 2px 6px;
+    border-radius: calc(10px * var(--ds-radius-scale));
+    font-size: 12px;
+    text-align: center;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-icon {
+    flex-basis: 26px;
+    width: 26px;
+    height: 26px;
+    font-size: 26px;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-icon > .ds-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-text {
+    flex: 0 0 auto;
+    width: 100%;
+    line-height: 1.25;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-badge {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-menu-item[data-open]::after {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    flex: none;
+  }
+  .ds-admin-sidebar[data-variant='rail'] .ds-admin-sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ds-admin-header {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    height: var(--ds-admin-header-height, 48px);
+    padding: 0 12px 0 16px;
+    box-sizing: border-box;
+    background: var(--bg-win);
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-admin-header-title {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ds-admin-header-center {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .ds-admin-header-end {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .ds-page-tabs {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: stretch;
+    min-width: 0;
+    height: var(--ds-page-tabs-height, 40px);
+    box-sizing: border-box;
+    background: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-page-tabs-list {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    gap: 2px;
+    min-width: 0;
+    padding: 0 8px;
+    overflow: auto hidden;
+    scrollbar-width: none;
+  }
+  .ds-page-tabs-extra {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-left: 1px solid var(--border);
+  }
+  .ds-page-tab {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    max-width: 200px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-radius: calc(8px * var(--ds-radius-scale)) calc(8px * var(--ds-radius-scale)) 0 0;
+    color: var(--text-2);
+  }
+  .ds-page-tab[data-dragging] {
+    opacity: 0.45;
+  }
+  .ds-page-tab[data-drop]::before {
+    position: absolute;
+    top: 4px;
+    bottom: 0;
+    width: 2px;
+    border-radius: calc(1px * var(--ds-radius-scale));
+    background: var(--accent);
+    content: '';
+  }
+  .ds-page-tab[data-drop='before']::before {
+    left: -2px;
+  }
+  .ds-page-tab[data-drop='after']::before {
+    right: -2px;
+  }
+  .ds-page-tab:hover {
+    background: color-mix(in srgb, var(--text) 6%, transparent);
+    color: var(--text);
+  }
+  .ds-page-tab[data-selected] {
+    border-color: var(--border);
+    background: var(--bg-win);
+    color: var(--text);
+    font-weight: 600;
+  }
+  .ds-page-tab-button {
+    --ds-app-icon-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .ds-page-tab-button:focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: -2px;
+  }
+  .ds-page-tab-icon {
+    display: inline-grid;
+    flex: 0 0 16px;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
+  .ds-page-tab-icon > .ds-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .ds-page-tab-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ds-page-tab-close {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 -4px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+  }
+  .ds-page-tab-close:hover {
+    background: var(--hover);
+    color: var(--text);
+  }
+  .ds-page-tab-close .ds-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-admin-sidebar,
+    .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-brand,
+    .ds-admin-sidebar[data-collapsed] .ds-admin-sidebar-actions {
+      transition: none;
+    }
+  }
+  @media (forced-colors: active) {
+    .ds-admin-menu-item[aria-current='page'],
+    .ds-page-tab[data-selected] {
+      outline: 1px solid Highlight;
+      outline-offset: -1px;
+    }
+  }
+}

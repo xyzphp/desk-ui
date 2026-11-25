@@ -1,0 +1,6 @@
+@layer ds {
+  .ds-result { padding: var(--ds-space-xl) var(--ds-space-lg); min-width: 0; color: var(--text); text-align: center; }
+  .ds-result-icon { display: grid; place-items: center; width: 56px; height: 56px; color: var(--ds-display-color); }
+  .ds-result-icon > .ds-icon { width: 42px; height: 42px; }
+  .ds-result-title { margin: 0; font: 600 18px var(--font); overflow-wrap: anywhere; }
+}

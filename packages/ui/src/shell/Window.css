@@ -1,0 +1,60 @@
+/* 窗口与标题栏控件。
+ * 平台布局由标题栏 / 控件自身的 data-platform 决定，避免外层窗口影响内嵌示例。 */
+@layer ds {
+  .ds-window { position: absolute; display: flex; flex-direction: column; min-width: 360px; min-height: 240px; border-radius: var(--radius); background: var(--bg-win); box-shadow: var(--shadow); overflow: hidden; animation: ds-win-open .22s cubic-bezier(.2, .9, .3, 1.2); }
+  .ds-window.is-inactive { box-shadow: 0 10px 30px rgb(0 0 0 / calc(.18 * var(--ds-shadow-strength))), 0 0 0 .5px var(--border); }
+  .ds-window.is-maximized { border-radius: 0; transition: height .25s cubic-bezier(.2, .9, .3, 1); }
+  .ds-window.is-minimized { opacity: 0; transform: scale(.2) translateY(100vh); pointer-events: none; }
+  .ds-window.is-dragging { user-select: none; }
+  .ds-window.is-embedded { inset: var(--ds-window-embedded-inset, 0); min-width: 0; min-height: 0; border-radius: 0; box-shadow: none; animation: none; }
+  @keyframes ds-win-open { from { opacity: 0; transform: scale(.9); } }
+
+  .ds-window-titlebar { position: relative; display: flex; flex-shrink: 0; align-items: center; height: 38px; padding: 0 12px; background: var(--bg-sidebar); border-bottom: 1px solid var(--border); }
+  .ds-window-title { position: absolute; left: 78px; right: 78px; min-width: 0; margin: 0; overflow: hidden; color: var(--text); font-size: 13px; font-weight: 600; text-align: center; text-overflow: ellipsis; white-space: nowrap; pointer-events: none; }
+  .ds-window-icon { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 16px; height: 16px; margin-right: 12px; }
+  .ds-window-titlebar-actions { position: relative; z-index: 1; display: flex; flex: 0 0 auto; align-items: center; gap: 3px; margin-left: auto; }
+  .ds-window.is-inactive > .ds-window-titlebar > .ds-window-title { color: var(--text-2); }
+  .ds-window-body { position: relative; flex: 1; min-height: 0; overflow: auto; }
+  .ds-window-body--contained { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+
+  .ds-resizer { position: absolute; z-index: 5; padding: 0; border: 0; background: transparent; }
+  .ds-resizer:focus-visible { outline: 1px solid var(--focus-outline); outline-offset: -2px; }
+  .ds-resizer--e { right: 0; top: 0; bottom: 0; width: 6px; cursor: ew-resize; }
+  .ds-resizer--s { left: 0; right: 0; bottom: 0; height: 6px; cursor: ns-resize; }
+  .ds-resizer--w { left: 0; top: 0; bottom: 0; width: 6px; cursor: ew-resize; }
+  .ds-resizer--se { right: 0; bottom: 0; width: 14px; height: 14px; cursor: nwse-resize; }
+
+  .ds-window-controls { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 1px; position: relative; z-index: 1; }
+  .ds-window-controls > button { display: grid; place-items: center; position: relative; flex: 0 0 auto; width: 20px; height: 28px; margin: 0; padding: 0; border: 0; border-radius: calc(7px * var(--ds-radius-scale)); background: transparent; color: rgba(0, 0, 0, .72); cursor: pointer; appearance: none; }
+  .ds-window-controls > button::before { position: absolute; width: 12px; height: 12px; border: 1px solid rgba(0, 0, 0, .16); border-radius: 50%; background: var(--traffic-color); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35); content: ""; }
+  .ds-window-controls .is-close { --traffic-color: var(--ds-window-close); order: 0; }
+  .ds-window-controls .is-minimize { --traffic-color: var(--ds-window-minimize); order: 1; }
+  .ds-window-controls .is-maximize { --traffic-color: var(--ds-window-maximize); order: 2; }
+  .ds-window-controls .ds-icon { position: relative; width: 12px; height: 12px; opacity: 0; }
+  .ds-window-controls:hover .ds-icon, .ds-window-controls:focus-within .ds-icon { opacity: 1; }
+  .ds-window-controls > button:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: 1px; }
+  .ds-window-controls > button:active::before { filter: brightness(.88); }
+  .ds-window.is-inactive > .ds-window-titlebar > .ds-window-controls > button::before { background: color-mix(in srgb, var(--text-2) 42%, var(--bg-panel)); }
+
+  .ds-window-titlebar[data-platform="macos"] { padding-left: 15px; }
+  .ds-window-titlebar[data-platform="windows"] { padding-right: 0; }
+  .ds-window-titlebar[data-platform="windows"] > .ds-window-controls { order: 2; margin-left: auto; align-self: stretch; }
+  .ds-window-titlebar[data-platform="windows"] > .ds-window-title { position: static; flex: 1; order: 0; text-align: left; }
+  .ds-window-titlebar[data-platform="windows"] > .ds-window-icon { order: 0; }
+  .ds-window-titlebar[data-platform="windows"] > .ds-window-titlebar-actions { order: 1; }
+  .ds-window-titlebar[data-platform="windows"].has-actions > .ds-window-controls { margin-left: 0; }
+  .ds-window-controls[data-platform="windows"] { gap: 0; }
+  .ds-window-controls[data-platform="windows"] > .is-minimize { order: 0; }
+  .ds-window-controls[data-platform="windows"] > .is-maximize { order: 1; }
+  .ds-window-controls[data-platform="windows"] > .is-close { order: 2; }
+  .ds-window-controls[data-platform="windows"] > button { width: 42px; height: 38px; border-radius: 0; color: var(--text-2); }
+  .ds-window-controls[data-platform="windows"] > button::before { display: none; }
+  .ds-window-controls[data-platform="windows"] .ds-icon { width: 15px; height: 15px; opacity: 1; }
+  .ds-window-controls[data-platform="windows"] > button:hover { background: var(--hover); color: var(--text); }
+  .ds-window-controls[data-platform="windows"] > .is-close:hover { background: var(--ds-window-close-hover); color: var(--ds-on-accent); }
+  .ds-window-controls[data-platform="windows"] > button:active { filter: brightness(.9); }
+
+  .ds-spinner { display: inline-block; width: 26px; height: 26px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: ds-spin .8s linear infinite; }
+  @keyframes ds-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .ds-window { animation: none; } .ds-spinner { animation-duration: 2s; } }
+}

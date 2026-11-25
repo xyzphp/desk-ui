@@ -1,0 +1,66 @@
+/* 渐变预设的动态层：变形光斑、摆动色带与细颗粒噪点；画作场景壁纸见 wallpapers/wallpapers.css。
+ * 只动画 transform / opacity，由合成器完成；颜色全部引用 tokens.css 的壁纸令牌。
+ * 未开启动态壁纸或系统要求减弱动态效果时，动画停在负延迟对应的那一帧：画面完整但静止。 */
+@layer ds {
+  /* ---------- 渐变预设：会变形的光斑 + 摆动色带 ---------- */
+  .ds-wallpaper-flow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .ds-wallpaper-flow > span { position: absolute; left: 50%; top: 50%; pointer-events: none; will-change: transform, opacity; }
+  /* 椭圆渐变配合非等比缩放与旋转，形状会缓慢“呼吸”变形，而不是一个圆在平移。 */
+  .ds-wf-blob {
+    width: 72vmax; height: 72vmax; margin: -36vmax 0 0 -36vmax; border-radius: 50%;
+    background: radial-gradient(closest-side, var(--ds-wf-color), color-mix(in srgb, var(--ds-wf-color) 42%, transparent) 55%, transparent);
+    animation: ds-wf-loop-a 34s ease-in-out infinite;
+  }
+  .ds-wf-blob:nth-child(1) { --ds-wf-color: var(--ds-wallpaper-glow-a); opacity: .85; }
+  .ds-wf-blob:nth-child(2) { --ds-wf-color: var(--ds-wallpaper-glow-b); opacity: .8; animation-name: ds-wf-loop-b; animation-duration: 41s; animation-delay: -9s; }
+  .ds-wf-blob:nth-child(3) {
+    --ds-wf-color: var(--ds-wallpaper-glow-c); width: 56vmax; height: 56vmax; margin: -28vmax 0 0 -28vmax; opacity: .7;
+    animation-name: ds-wf-loop-c; animation-duration: 29s; animation-delay: -17s;
+  }
+  /* 色带：横跨全屏的柔边长条，像极光一样缓慢起伏、转向。 */
+  .ds-wf-ribbon {
+    width: 160vmax; height: 30vmax; margin: -15vmax 0 0 -80vmax; border-radius: 50%; opacity: .5; mix-blend-mode: soft-light;
+    background: linear-gradient(90deg, transparent 4%, var(--ds-wallpaper-glow-b) 30%, var(--ds-wallpaper-glow-c) 52%, var(--ds-wallpaper-glow-a) 74%, transparent 96%);
+    -webkit-mask-image: radial-gradient(closest-side, black 20%, transparent);
+    mask-image: radial-gradient(closest-side, black 20%, transparent);
+    animation: ds-wf-ribbon 26s ease-in-out infinite alternate;
+  }
+  .ds-wf-ribbon:nth-child(5) {
+    height: 22vmax; margin-top: -11vmax; opacity: .42; mix-blend-mode: screen;
+    background: linear-gradient(90deg, transparent 6%, var(--ds-wallpaper-glow-c) 34%, var(--ds-wallpaper-glow-a) 60%, transparent 94%);
+    animation-name: ds-wf-ribbon-alt; animation-duration: 33s; animation-delay: -12s;
+  }
+  @keyframes ds-wf-loop-a {
+    0%, 100% { transform: translate3d(-30vmax, 18vmax, 0) rotate(0deg) scale(1.15, .85); }
+    33% { transform: translate3d(-4vmax, -20vmax, 0) rotate(120deg) scale(.9, 1.25); }
+    66% { transform: translate3d(22vmax, 10vmax, 0) rotate(240deg) scale(1.3, 1); }
+  }
+  @keyframes ds-wf-loop-b {
+    0%, 100% { transform: translate3d(28vmax, -20vmax, 0) rotate(0deg) scale(1, 1.2); }
+    33% { transform: translate3d(6vmax, 22vmax, 0) rotate(-120deg) scale(1.25, .9); }
+    66% { transform: translate3d(-26vmax, -6vmax, 0) rotate(-240deg) scale(.95, 1.1); }
+  }
+  @keyframes ds-wf-loop-c {
+    0%, 100% { transform: translate3d(4vmax, 6vmax, 0) rotate(0deg) scale(.9); opacity: .55; }
+    25% { transform: translate3d(-20vmax, -12vmax, 0) rotate(90deg) scale(1.2, .95); opacity: .75; }
+    50% { transform: translate3d(14vmax, -22vmax, 0) rotate(180deg) scale(1.05, 1.3); opacity: .6; }
+    75% { transform: translate3d(24vmax, 14vmax, 0) rotate(270deg) scale(1.3, 1); opacity: .8; }
+  }
+  @keyframes ds-wf-ribbon {
+    from { transform: translate3d(-6vmax, -18vmax, 0) rotate(-16deg) scale(1, .7); }
+    to { transform: translate3d(8vmax, 14vmax, 0) rotate(12deg) scale(1.12, 1.25); }
+  }
+  @keyframes ds-wf-ribbon-alt {
+    from { transform: translate3d(10vmax, 20vmax, 0) rotate(18deg) scale(1.1, 1.2); }
+    to { transform: translate3d(-8vmax, -16vmax, 0) rotate(-10deg) scale(.95, .75); }
+  }
+  /* 细颗粒噪点：消除大面积渐变的色带断层，也让流动的颜色更有质感；静态贴图，只绘制一次。画作场景不需要。 */
+  .ds-wallpaper.is-animated:not(.has-image, .ds-wp-aquarium, .ds-wp-forest, .ds-wp-grassland, .ds-wp-galaxy)::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--ds-wallpaper-grain-opacity); mix-blend-mode: overlay;
+    background-image: var(--ds-wallpaper-grain);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-wallpaper.is-animated .ds-wallpaper-flow > span { animation-play-state: paused; }
+  }
+}

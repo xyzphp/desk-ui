@@ -1,0 +1,28 @@
+/* 来源：workspace-ui.css 的 .workspace-button，并合并 apps.css 的 .btn 变体。 */
+@layer ds {
+  .ds-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: var(--ds-control-md); padding: 6px 10px;
+    border: 1px solid var(--border); border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel); color: var(--text);
+    font: inherit; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer;
+  }
+  .ds-button[hidden] { display: none; }
+  .ds-button .ds-icon { width: 14px; height: 14px; }
+  .ds-button:where(:hover):where(:not(:disabled)) { background: var(--hover); }
+  .ds-button:disabled { opacity: .45; cursor: default; }
+  .ds-button:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-button[aria-pressed="true"] {
+    border-color: var(--ds-selection-border);
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+  }
+  .ds-button--quiet { border-color: transparent; background: transparent; }
+  .ds-button--primary { border-color: var(--accent); background: var(--accent); color: var(--ds-on-accent); }
+  .ds-button--primary:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 86%, var(--ds-shade)); color: var(--ds-on-accent); }
+  .ds-button--danger { color: var(--ds-danger); }
+  .ds-button--danger:hover:not(:disabled) { background: color-mix(in srgb, var(--ds-danger) 8%, transparent); }
+  .ds-button--icon { flex: 0 0 var(--ds-control-sm); width: var(--ds-control-sm); min-width: var(--ds-control-sm); height: var(--ds-control-sm); min-height: var(--ds-control-sm); padding: 5px; }
+  .ds-button--sm { min-height: var(--ds-control-sm); padding: 4px 8px; }
+  .ds-button--block { display: flex; width: 100%; }
+}

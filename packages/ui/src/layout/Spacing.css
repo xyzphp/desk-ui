@@ -1,0 +1,18 @@
+@layer ds {
+  .ds-stack, .ds-inline {
+    display: flex; min-width: 0; gap: var(--ds-layout-gap); align-items: var(--ds-layout-align);
+    justify-content: var(--ds-layout-justify);
+  }
+  .ds-stack { flex-direction: column; }
+  .ds-inline { flex-flow: row wrap; }
+  .ds-inline.is-nowrap { flex-wrap: nowrap; }
+  .ds-stack > *, .ds-inline > *, .ds-grid > * { min-width: 0; }
+  .ds-grid { display: grid; min-width: 0; align-content: start; gap: var(--ds-layout-gap); grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr)); }
+  .ds-grid.is-auto { grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ds-grid-min)), 1fr)); }
+  @container ds-workspace (max-width: 800px) {
+    .ds-grid:not(.is-fixed, .is-auto) { grid-template-columns: repeat(var(--ds-grid-compact), minmax(0, 1fr)); }
+  }
+  @container ds-workspace (max-width: 600px) {
+    .ds-grid:not(.is-fixed, .is-auto) { grid-template-columns: minmax(0, 1fr); }
+  }
+}

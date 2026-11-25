@@ -1,0 +1,221 @@
+/* 来源：ai-assist.css；按用户要求结合 Naive UI 的轻量选择、卡片与编辑面板。 */
+@layer ds {
+  .ds-ai-toolbar {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-md);
+    background: var(--bg-panel);
+    color: var(--text);
+    font-size: 13px;
+  }
+  .ds-ai-titlebar { cursor: default; touch-action: none; user-select: none; }
+  .ds-ai-titlebar:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: -2px; }
+  .ds-ai-actions {
+    display: grid;
+    flex: 0 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    min-width: 0;
+    gap: 7px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-ai-actions > .ds-button { min-width: 0; padding-inline: 8px; }
+  .ds-ai-actions > .ds-button > span { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+  .ds-ai-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; gap: 12px; padding: 12px; overflow: auto; overscroll-behavior: contain; }
+  .ds-ai-bottom { display: flex; flex: 0 0 auto; flex-direction: column; min-width: 0; gap: 10px; padding: 12px; border-top: 1px solid var(--border); }
+  .ds-ai-composer {
+    container: ds-ai-composer / inline-size;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    min-width: 0;
+    gap: 8px 10px;
+    padding: 6px 9px;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel);
+  }
+  .ds-ai-composer:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-ai-instruction {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    min-height: 32px;
+    max-height: 96px;
+    padding: 5px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 1.6;
+    resize: none;
+    overflow-y: auto;
+  }
+  .ds-ai-instruction:focus, .ds-ai-instruction:focus-visible { outline: none; }
+  .ds-ai-instruction::placeholder { color: var(--text-2); opacity: 0.72; }
+  .ds-ai-options { display: flex; flex-wrap: wrap; align-items: center; min-width: 0; margin: 0; padding: 0; gap: 4px 8px; border: 0; }
+  .ds-ai-options:empty { display: none; }
+  .ds-ai-composer-actions { display: flex; grid-column: 2; flex-wrap: nowrap; align-items: center; justify-self: end; min-width: 0; max-width: 100%; gap: 6px; }
+  .ds-ai-model-choice { min-width: 0; max-width: 160px; padding: 5px 6px; color: var(--text-2); font-size: 12px; }
+  .ds-ai-model-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ds-ai-send { flex: 0 0 32px; width: 32px; min-width: 32px; min-height: 32px; padding: 6px; border-radius: 50%; }
+  .ds-ai-picker {
+    width: 220px;
+    max-width: calc(100vw - 16px);
+    max-height: 320px;
+    padding: 12px;
+    overflow: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-md);
+    background: var(--bg-panel);
+    box-shadow: var(--shadow);
+  }
+  .ds-ai-picker-section { display: grid; gap: 6px; min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-ai-picker-section > legend { margin-bottom: 8px; padding: 0; color: var(--text-2); font-size: 12px; }
+  .ds-ai-picker-option { justify-content: flex-start; width: 100%; min-width: 0; text-align: left; }
+  .ds-ai-picker-option > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .ds-ai-picker-check { display: flex; flex: 0 0 14px; margin-left: auto; visibility: hidden; }
+  .ds-ai-picker-check > .ds-icon { width: 14px; height: 14px; }
+  .ds-ai-picker-option[aria-pressed="true"] > .ds-ai-picker-check { visibility: visible; }
+  .ds-ai-status { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--text-2); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+  .ds-ai-result { display: flex; flex-direction: column; min-width: 0; gap: 12px; }
+  .ds-ai-reference-list { display: flex; flex-direction: column; min-width: 0; gap: 8px; }
+  .ds-ai-reference-row {
+    --ds-checkbox-text: var(--text);
+    --ds-checkbox-font-size: 13px;
+    --ds-checkbox-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    min-height: 44px;
+    gap: 8px 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel);
+    transition:
+      border-color 0.15s,
+      background-color 0.15s;
+  }
+  .ds-ai-reference-row:where(:hover):not(.is-disabled) { border-color: var(--ds-input-border-hover); }
+  .ds-ai-reference-row.is-selected { --ds-checkbox-text: var(--accent); border-color: var(--ds-selection-border); background: var(--ds-selection-bg); }
+  .ds-ai-reference-row.is-disabled { background: var(--bg-win); }
+  .ds-ai-reference-detail { min-width: 0; max-width: 100%; font-size: 12px; }
+  .ds-ai-reference-detail[open] { flex-basis: 100%; padding-top: 8px; border-top: 1px solid var(--border); }
+  .ds-ai-reference-detail > summary {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+    max-width: 100%;
+    list-style: none;
+    color: var(--text-2);
+    cursor: pointer;
+    overflow-wrap: anywhere;
+  }
+  .ds-ai-reference-detail > summary::-webkit-details-marker { display: none; }
+  .ds-ai-reference-detail > summary > .ds-icon { width: 13px; height: 13px; transition: transform 0.15s; }
+  .ds-ai-reference-detail[open] > summary > .ds-icon { transform: rotate(180deg); }
+  .ds-ai-reference-detail > summary:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-ai-reference-content {
+    max-height: 220px;
+    margin: 8px 0 0;
+    padding: 10px;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: var(--bg-win);
+    color: var(--text);
+    white-space: pre-wrap;
+    overflow: auto;
+    overflow-wrap: anywhere;
+    font: inherit;
+    line-height: 1.7;
+    user-select: text;
+  }
+  .ds-ai-comparison { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .ds-ai-comparison.is-comparing { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-ai-compare-pane { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+  .ds-ai-pane-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 32px;
+    gap: 8px;
+    padding: 0 0 6px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ds-ai-result-count { margin-left: auto; color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .ds-ai-original {
+    flex: 1;
+    min-height: 180px;
+    max-height: 280px;
+    margin: 0;
+    padding: 12px;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-win);
+    color: var(--text);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.7;
+    user-select: text;
+  }
+  .ds-ai-original:focus-visible { outline: none; }
+  .ds-ai-result-surface {
+    position: relative;
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel);
+    user-select: text;
+  }
+  .ds-ai-result-surface:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-ai-result-surface:has([aria-invalid="true"]) { border-color: var(--ds-danger); }
+  .ds-ai-editor {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    min-height: 180px;
+    max-height: 280px;
+    margin: 0;
+    padding: 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.7;
+    resize: vertical;
+  }
+  .ds-ai-editor::selection, .ds-ai-original::selection { background: var(--ds-selection-bg); color: var(--text); }
+  .ds-ai-editor::placeholder { color: var(--text-2); opacity: 0.65; }
+  .ds-ai-editor:focus { outline: none; }
+  .ds-ai-result.is-disabled { opacity: 0.55; }
+  .ds-ai-result-actions { display: flex; flex-wrap: wrap; align-items: center; min-width: 0; gap: 7px; }
+  .ds-ai-skeleton { position: absolute; inset: 16px 12px auto; pointer-events: none; }
+  @container ds-workspace (max-width: 600px) {
+    .ds-ai-comparison.is-comparing { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-ai-reference-row, .ds-ai-reference-detail > summary > .ds-icon { transition: none; }
+  }
+  @media (forced-colors: active) {
+    .ds-ai-reference-row.is-selected { border-color: Highlight; }
+  }
+}

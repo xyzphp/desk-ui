@@ -1,0 +1,32 @@
+{
+  "name": "desk-ui-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@11.0.9",
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
+  },
+  "scripts": {
+    "dev:docs": "pnpm --filter @desk/docs dev",
+    "build:docs": "pnpm --filter @desk/docs build",
+    "build:ui": "pnpm --filter @desk/ui build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:metadata": "node --test apps/docs/build/docMetadata.test.mjs",
+    "lint": "eslint packages/ui/src apps/docs/src apps/docs/build scripts && node scripts/check-quality.mjs",
+    "format": "prettier --write",
+    "format:check": "prettier --check eslint.config.mjs .prettierrc.json scripts apps/docs/build",
+    "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm test:metadata && pnpm build:ui && pnpm build:docs",
+    "changeset": "changeset",
+    "release": "pnpm build:ui && changeset publish"
+  },
+  "devDependencies": {
+    "@babel/core": "8.1.0",
+    "@babel/eslint-parser": "8.0.7",
+    "@changesets/cli": "3.0.3",
+    "eslint": "10.14.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "prettier": "3.9.10"
+  }
+}

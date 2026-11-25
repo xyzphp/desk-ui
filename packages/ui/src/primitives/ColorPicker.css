@@ -1,0 +1,17 @@
+@layer ds {
+  .ds-color-picker { display: flex; flex-direction: column; gap: var(--ds-space-sm); min-width: 0; }
+  .ds-color-control { width: 100%; }
+  .ds-color-native {
+    flex: 0 0 30px; width: 30px; height: 28px; margin: 2px 2px 2px 5px; padding: 1px;
+    border: 0; border-radius: calc(4px * var(--ds-radius-scale)); background: transparent; cursor: pointer;
+  }
+  .ds-color-native:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 1px; }
+  .ds-color-native:disabled { cursor: default; opacity: .55; }
+  .ds-color-input {
+    flex: 1; width: 100%; min-width: 0; min-height: calc(var(--ds-field-height) - 2px); padding: 6px 9px;
+    border: 0; background: transparent; color: var(--text); font: 13px var(--font-mono);
+  }
+  .ds-color-input::placeholder { color: var(--text-2); opacity: .7; }
+  .ds-color-presets { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
+  .ds-color-dot { width: 14px; height: 14px; flex-shrink: 0; border: 1px solid var(--border); border-radius: calc(4px * var(--ds-radius-scale)); }
+}

@@ -1,0 +1,52 @@
+/* 根容器、图标与全局滚动条。 */
+@layer ds {
+  .ds-workspace {
+    container: ds-workspace / inline-size;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    background: var(--bg-panel);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    --scrollbar-thumb: color-mix(in srgb, var(--text) 23%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--text) 38%, transparent);
+  }
+  .ds-workspace *, .ds-workspace *::before, .ds-workspace *::after { box-sizing: border-box; }
+  .ds-workspace :is(button, input, select, textarea) { font-family: inherit; }
+  /* 输入控件自带重置，不依赖 Workspace 祖先；复合控件由外框单独表达焦点。 */
+  .ds-control-input { box-sizing: border-box; outline: none; box-shadow: none; }
+  .ds-control-input::selection { background: var(--ds-selection-bg); color: var(--text); }
+
+  .ds-icon { display: inline-block; flex: 0 0 auto; width: 1em; height: 1em; vertical-align: -.14em; }
+
+  /* 全局滚动条：所有滚动容器（含页面、文本域、下拉列表与第三方内容之外的全部元素）统一成细、无轨道的圆角滑块，
+   * 颜色取当前元素的正文色混合，因此随浅色 / 深色主题与所在面板自动适配；悬停时滑块变粗变深。
+   * 不再依赖 .ds-scrollable 祖先；需要隐藏滚动条时用 .ds-scrollable-hidden。 */
+  * { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb, color-mix(in srgb, var(--text, rgb(115, 119, 128)) 28%, transparent)) transparent; }
+  @supports selector(::-webkit-scrollbar) {
+    /* 非 auto 的标准属性会让 Chromium 忽略自定义伪元素，因此这里还原为 auto。 */
+    * { scrollbar-width: auto; scrollbar-color: auto; }
+    *::-webkit-scrollbar { width: 8px; height: 8px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb {
+      min-width: 24px; min-height: 24px; border: 2px solid transparent; border-radius: calc(10px * var(--ds-radius-scale));
+      background: var(--scrollbar-thumb, color-mix(in srgb, var(--text, rgb(115, 119, 128)) 28%, transparent)) padding-box;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb-hover, color-mix(in srgb, var(--text, rgb(115, 119, 128)) 45%, transparent)) padding-box;
+    }
+    *::-webkit-scrollbar-thumb:active { background: var(--scrollbar-thumb-hover, color-mix(in srgb, var(--text, rgb(115, 119, 128)) 58%, transparent)) padding-box; }
+    *::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+    *::-webkit-scrollbar-corner, *::-webkit-resizer { background: transparent; }
+  }
+  @media (forced-colors: active) {
+    * { scrollbar-color: auto; }
+    *::-webkit-scrollbar-thumb { background: CanvasText padding-box; }
+  }
+  .ds-scrollable-hidden { scrollbar-width: none; }
+  .ds-scrollable-hidden::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+  .ds-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+}

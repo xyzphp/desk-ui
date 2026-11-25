@@ -1,0 +1,16 @@
+@layer ds {
+  .ds-search-select { width: 100%; min-width: 0; }
+  .ds-search-select-input {
+    flex: 1; min-width: 0; width: 100%; min-height: calc(var(--ds-field-height) - 2px); padding: 6px 9px;
+    border: 0; background: transparent; color: var(--text); font: 13px var(--font);
+  }
+  .ds-search-select-input::placeholder { color: var(--text-2); opacity: .7; }
+  .ds-search-select-panel { padding: 5px; }
+  .ds-search-select-filter { border-bottom: 1px solid var(--border); margin-bottom: 5px; }
+  .ds-search-select-status { padding: 7px 10px 3px; color: var(--text-2); font-size: 12px; }
+  .ds-choice-option.is-active { box-shadow: inset 2px 0 0 var(--ds-input-border-focus); }
+  .ds-choice-option.is-active:not([aria-selected="true"]) { background: var(--hover); }
+  .ds-multi-values { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: var(--ds-space-xs); min-width: 0; padding: 4px 6px; }
+  .ds-multi-placeholder { color: var(--text-2); opacity: .7; padding: 2px 3px; font-size: 13px; }
+  .ds-multi-count { padding: 3px 6px; border-radius: calc(5px * var(--ds-radius-scale)); background: var(--hover); color: var(--text-2); font-size: 12px; }
+}

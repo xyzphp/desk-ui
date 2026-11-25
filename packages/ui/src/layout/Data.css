@@ -1,0 +1,47 @@
+/* Table、Pagination、Tabs、Stepper。来源：workspace-ui.css 的 .workspace-table / .workspace-pagination / .workspace-tabs / .workspace-stepper。 */
+@layer ds {
+  .ds-table-scroll { flex: 1; min-height: 80px; overflow: auto; }
+  .ds-table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: 12px; text-align: left; }
+  .ds-table :is(th, td) { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ds-table :is(th, td).is-end { text-align: right; }
+  .ds-table--wrap td { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; vertical-align: top; line-height: 1.6; }
+  .ds-table th { position: sticky; top: 0; z-index: 1; background: var(--bg-win); color: var(--text-2); font-size: 12px; font-weight: 550; }
+  .ds-table tbody tr:hover { background: var(--hover); }
+  .ds-table tbody tr.is-selected { background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); }
+  .ds-table tbody tr[tabindex]:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-table-sort { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-width: 0; min-height: 28px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+  .ds-table-sort > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ds-table-sort > .ds-icon { width: 12px; height: 12px; color: var(--text-2); opacity: .45; }
+  .ds-table-sort:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; border-radius: calc(4px * var(--ds-radius-scale)); }
+  .ds-table-sort:hover, th[aria-sort="ascending"] > .ds-table-sort, th[aria-sort="descending"] > .ds-table-sort { color: var(--accent); }
+  .ds-table-sort:hover > .ds-icon, th:is([aria-sort="ascending"], [aria-sort="descending"]) > .ds-table-sort > .ds-icon { color: inherit; opacity: 1; }
+
+  .ds-pagination { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; padding: 12px 20px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 12px; }
+  .ds-pagination-total, .ds-pagination-position { min-width: 0; overflow-wrap: anywhere; }
+  .ds-pagination-actions { min-width: 0; }
+  .ds-pagination-size { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+
+  .ds-load-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; min-width: 0; color: var(--text-2); font-size: 12px; }
+  .ds-load-more > span { min-width: 0; overflow-wrap: anywhere; }
+
+  .ds-tabs { display: flex; flex: 0 0 auto; align-items: stretch; gap: 8px; min-width: 0; overflow: auto; border-bottom: 1px solid var(--border); }
+  .ds-tab { flex: 0 0 auto; min-height: 40px; padding: 9px 14px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--text-2); font: inherit; font-size: 13px; white-space: nowrap; cursor: pointer; }
+  .ds-tab:hover { color: var(--accent); background: var(--hover); }
+  .ds-tab:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-tab[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--accent); font-weight: 650; }
+  .ds-tab-panel { min-width: 0; padding-top: 16px; }
+
+  .ds-stepper { flex: 0 0 auto; padding: 18px 20px 16px; border-bottom: 1px solid var(--border); background: var(--bg-panel); }
+  .ds-stepper ol { display: grid; grid-template-columns: repeat(var(--ds-steps, 4), minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+  .ds-stepper li { position: relative; min-width: 0; }
+  .ds-stepper li:not(:first-child)::before { position: absolute; top: 15px; left: calc(-50% + 20px); width: calc(100% - 40px); height: 2px; background: var(--border); content: ""; }
+  .ds-stepper li.is-complete + li::before { background: var(--accent); }
+  .ds-step { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; gap: 9px; padding: 0 5px; border: 0; background: transparent; color: var(--text-2); font: inherit; font-size: 12px; text-align: center; white-space: normal; cursor: pointer; }
+  .ds-step:hover:not(:disabled) { color: var(--accent); }
+  .ds-step:disabled { opacity: .45; cursor: default; }
+  .ds-step:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; border-radius: calc(6px * var(--ds-radius-scale)); }
+  .ds-step[aria-current="step"] { color: var(--accent); font-weight: 650; }
+  .ds-step-indicator { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--border); border-radius: 50%; background: var(--bg-panel); color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .ds-stepper :is(.is-complete, [aria-current="step"]) .ds-step-indicator { border-color: var(--accent); background: var(--accent); color: var(--ds-on-accent); }
+  .ds-step small { display: block; margin-top: 3px; color: var(--text-2); font-size: 12px; font-weight: 400; }
+}

@@ -1,0 +1,8 @@
+@layer ds {
+  .ds-form-section, .ds-form-actions { margin: 0; padding: 0; min-width: 0; border: 0; color: var(--text); font: 13px var(--font); }
+  .ds-form-section-label { margin-bottom: var(--ds-space-md); padding: 0; font-size: 13px; font-weight: 600; }
+  .ds-form-section-description { margin: 0 0 var(--ds-space-lg); color: var(--text-2); font-size: 12px; line-height: 1.6; }
+  .ds-form-actions { border-top: 1px solid var(--border); padding-top: var(--ds-space-lg); }
+  .ds-form-actions-status { color: var(--text-2); font-size: 12px; }
+  .ds-form-actions-buttons { margin-left: auto; }
+}

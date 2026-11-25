@@ -1,0 +1,49 @@
+@layer ds {
+  .ds-field-addon {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    min-height: var(--ds-field-height);
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel);
+    transition: border-color .15s;
+  }
+  .ds-field-addon:hover { border-color: var(--ds-input-border-hover); }
+  .ds-field-addon:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-field-addon:has([aria-invalid="true"]) { border-color: var(--ds-danger); }
+  .ds-field-addon-main { display: flex; flex: 1; min-width: 0; align-items: stretch; }
+  /* 自带边框 / 底色的库控件外壳抹平，由组合表面统一呈现边框与焦点态。 */
+  .ds-field-addon-main > .ds-select,
+  .ds-field-addon-main > .ds-control-input {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .ds-field-addon-main > .ds-control-input { padding: 0 9px; }
+  .ds-field-addon-main > .ds-select > .ds-picker-surface {
+    --ds-picker-surface-height: calc(var(--ds-field-height) - 2px);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .ds-field-addon-item {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    margin-left: 1px;
+    padding: 0 10px 0 9px;
+    border-left: 1px solid var(--border);
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-field-addon { transition: none; }
+  }
+}

@@ -1,0 +1,372 @@
+/* 桌面壳：壁纸、菜单栏、桌面图标、应用图标、Dock。
+ * 使用 ds- 类名，样式变量与 Windows / macOS 两套 Dock 的取值全部限定在 .ds-desktop 内，嵌套的桌面互不影响。 */
+@layer ds {
+  .ds-desktop {
+    --menubar-h: 28px;
+    --dock-space: 86px;
+    --desktop-icon-size: 56px;
+    --ds-maximize-inset: 0px;
+    --desktop-icons-bottom: calc(var(--dock-space) + 8px);
+    /* 嵌套的 Desktop（示例舞台）不继承外层 Windows 风格的变量。 */
+    --menubar-display: initial;
+    --menubar-top: initial;
+    --menubar-bottom: initial;
+    --system-bar-height: initial;
+    --menubar-background: initial;
+    --menubar-backdrop: initial;
+    --menubar-pointer-events: initial;
+    --menubar-app-display: initial;
+    --menubar-logo-width: initial;
+    --menubar-avatar-size: initial;
+    --menubar-right-max-width: initial;
+    --menubar-control-flex: initial;
+    --menubar-clock-direction: initial;
+    --menubar-clock-gap: initial;
+    --menubar-clock-height: initial;
+    --menubar-clock-size: initial;
+    --menubar-clock-line-height: initial;
+    --shell-bottom-space: initial;
+    --shell-popover-top: initial;
+    --shell-popover-bottom: initial;
+    --dock-wrap-height: initial;
+    --dock-wrap-padding: initial;
+    --dock-wrap-align: initial;
+    --dock-wrap-background: initial;
+    --dock-wrap-backdrop: initial;
+    --dock-wrap-shadow: initial;
+    --dock-wrap-z-index: initial;
+    --dock-bottom: initial;
+    --dock-height: initial;
+    --dock-item: initial;
+    --dock-hidden-transform: initial;
+    --dock-hidden-opacity: initial;
+    --dock-hidden-visibility: initial;
+    --dock-max-width: initial;
+    --dock-radius: initial;
+    --dock-align: initial;
+    --dock-icon-size: initial;
+    --dock-item-radius: initial;
+    --dock-padding: initial;
+    --dock-hover-bg: initial;
+    --dock-overflow-x: initial;
+    --dock-overflow-y: initial;
+    --dock-background: initial;
+    --dock-backdrop: initial;
+    --dock-shadow: initial;
+    --dock-dot-width: initial;
+    --dock-dot-height: initial;
+    --dock-dot-bottom: initial;
+    --dock-dot-color: initial;
+    --dock-tip-display: initial;
+    --dock-sep-height: initial;
+    /* 嵌套的 Desktop（示例舞台）默认回到毛玻璃卡片变量，不继承外层液态玻璃覆盖。 */
+    --ds-card-surface-bg: initial;
+    --ds-card-surface-backdrop: initial;
+    --ds-card-surface-border: initial;
+    --ds-card-surface-border-hover: initial;
+    --ds-card-surface-shadow: initial;
+    --ds-card-surface-rim: initial;
+    --ds-card-chip-bg: initial;
+    --ds-card-chip-border: initial;
+    /* 嵌套的 Desktop（示例舞台）同时重置桌面壳与浮层玻璃变量，避免外层样式泄漏。 */
+    --menubar-background: initial;
+    --menubar-backdrop: initial;
+    --menubar-shadow: initial;
+    --dock-wrap-background: initial;
+    --dock-wrap-backdrop: initial;
+    --dock-wrap-shadow: initial;
+    --dock-background: initial;
+    --dock-backdrop: initial;
+    --dock-shadow: initial;
+    --dock-hover-bg: initial;
+    --dock-position: initial;
+    --dock-rim-content: initial;
+    --ds-shell-glass-bg: initial;
+    --ds-shell-glass-bg-strong: initial;
+    --ds-shell-glass-card: initial;
+    --ds-shell-glass-bg-soft: initial;
+    --ds-shell-glass-chip-bg: initial;
+    --ds-shell-glass-border: initial;
+    --ds-shell-glass-border-hover: initial;
+    --ds-shell-glass-backdrop: initial;
+    --ds-shell-glass-backdrop-soft: initial;
+    --ds-shell-glass-shadow: initial;
+    --ds-shell-glass-shadow-sm: initial;
+    --ds-shell-glass-rim: initial;
+    --ds-shell-glass-rim-content: initial;
+    --ds-shell-item-hover: initial;
+    --ds-shell-panel-radius: initial;
+    --ds-lock-veil-bg: initial;
+    --ds-lock-veil-backdrop: initial;
+    --ds-lock-glass-field-bg: initial;
+    --ds-lock-glass-field-focus: initial;
+    --ds-lock-glass-field-border: initial;
+    --ds-lock-glass-backdrop: initial;
+    --ds-lock-glass-shadow: initial;
+    --ds-lock-unlock-bg: initial;
+    --ds-lock-unlock-hover: initial;
+    --ds-lock-unlock-border: initial;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* contain 使内部 position: fixed 的壳层元素相对本容器定位，因此同一组件既能铺满页面，也能放进示例舞台。 */
+    contain: layout paint;
+    background: var(--bg-win);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    user-select: none;
+  }
+  .ds-desktop[data-card-style="liquid"] {
+    --ds-card-surface-bg: var(--ds-liquid-glass-bg);
+    --ds-card-surface-backdrop: var(--ds-liquid-glass-filter);
+    --ds-card-surface-border: var(--ds-liquid-glass-border);
+    --ds-card-surface-border-hover: var(--ds-liquid-glass-border-hover);
+    --ds-card-surface-shadow: var(--ds-liquid-glass-shadow);
+    --ds-card-surface-rim: var(--ds-liquid-glass-rim);
+    --ds-card-chip-bg: var(--ds-liquid-glass-chip-bg);
+    --ds-card-chip-border: var(--ds-liquid-glass-border);
+    --menubar-background: var(--ds-liquid-glass-bg);
+    --menubar-backdrop: var(--ds-liquid-glass-filter);
+    --menubar-shadow: inset 0 -1px 0 var(--ds-liquid-glass-border), inset 0 1px 0 var(--ds-liquid-glass-border-hover), 0 4px 14px rgb(0 0 0 / calc(0.08 * var(--ds-shadow-strength)));
+    --dock-background: var(--ds-liquid-glass-bg);
+    --dock-backdrop: var(--ds-liquid-glass-filter);
+    --dock-shadow: var(--ds-liquid-glass-shadow);
+    --dock-hover-bg: var(--ds-liquid-glass-chip-bg);
+    --dock-position: relative;
+    --dock-rim-content: "";
+    --ds-shell-glass-bg: var(--ds-liquid-glass-bg);
+    --ds-shell-glass-bg-strong: var(--ds-liquid-glass-bg-strong);
+    --ds-shell-glass-card: var(--ds-liquid-glass-card);
+    --ds-shell-glass-bg-soft: var(--ds-liquid-glass-bg-soft);
+    --ds-shell-glass-chip-bg: var(--ds-liquid-glass-chip-bg);
+    --ds-shell-glass-border: var(--ds-liquid-glass-border);
+    --ds-shell-glass-border-hover: var(--ds-liquid-glass-border-hover);
+    --ds-shell-glass-backdrop: var(--ds-liquid-glass-filter);
+    --ds-shell-glass-backdrop-soft: var(--ds-liquid-glass-filter-soft);
+    --ds-shell-glass-shadow: var(--ds-liquid-glass-shadow);
+    --ds-shell-glass-shadow-sm: var(--ds-liquid-glass-shadow-sm);
+    --ds-shell-glass-rim: var(--ds-liquid-glass-rim);
+    --ds-shell-glass-rim-content: "";
+    --ds-shell-item-hover: var(--ds-liquid-glass-chip-bg);
+    --ds-shell-panel-radius: calc(16px * var(--ds-radius-scale));
+    --ds-lock-veil-bg: linear-gradient(180deg, rgba(12, 18, 30, .14), rgba(12, 18, 30, .38));
+    --ds-lock-veil-backdrop: blur(12px) saturate(165%);
+    --ds-lock-glass-field-bg: rgba(255, 255, 255, .18);
+    --ds-lock-glass-field-focus: rgba(255, 255, 255, .28);
+    --ds-lock-glass-field-border: rgba(255, 255, 255, .44);
+    --ds-lock-glass-backdrop: var(--ds-liquid-glass-filter-soft);
+    --ds-lock-glass-shadow: var(--ds-liquid-glass-shadow-sm);
+    --ds-lock-unlock-bg: rgba(255, 255, 255, .74);
+    --ds-lock-unlock-hover: rgba(255, 255, 255, .88);
+    --ds-lock-unlock-border: rgba(255, 255, 255, .64);
+  }
+  .ds-desktop *, .ds-desktop *::before, .ds-desktop *::after { box-sizing: border-box; }
+  .ds-desktop :is(button, input, select, textarea) { font-family: inherit; }
+
+  .ds-wallpaper { position: absolute; inset: 0; background-size: cover; background-position: center; transition: background .8s; }
+  [data-theme="dark"] .ds-wallpaper { filter: brightness(.62) saturate(1.1); }
+  .ds-wp-sequoia { background: var(--ds-wallpaper-sequoia); }
+  .ds-wp-sonoma { background: var(--ds-wallpaper-sonoma); }
+  .ds-wp-aurora { background: var(--ds-wallpaper-aurora); }
+  .ds-wp-dusk { background: var(--ds-wallpaper-dusk); }
+  /* 动态壁纸：渐变预设的流动层见 WallpaperScene.css，画作场景见 wallpapers/wallpapers.css；这里只映射各预设的光斑主色。 */
+  .ds-wallpaper.is-animated { overflow: hidden; }
+  .ds-wp-sequoia { --ds-wallpaper-glow-a: var(--ds-wallpaper-sequoia-glow-a); --ds-wallpaper-glow-b: var(--ds-wallpaper-sequoia-glow-b); --ds-wallpaper-glow-c: var(--ds-wallpaper-sequoia-glow-c); }
+  .ds-wp-sonoma { --ds-wallpaper-glow-a: var(--ds-wallpaper-sonoma-glow-a); --ds-wallpaper-glow-b: var(--ds-wallpaper-sonoma-glow-b); --ds-wallpaper-glow-c: var(--ds-wallpaper-sonoma-glow-c); }
+  .ds-wp-aurora { --ds-wallpaper-glow-a: var(--ds-wallpaper-aurora-glow-a); --ds-wallpaper-glow-b: var(--ds-wallpaper-aurora-glow-b); --ds-wallpaper-glow-c: var(--ds-wallpaper-aurora-glow-c); }
+  .ds-wp-dusk { --ds-wallpaper-glow-a: var(--ds-wallpaper-dusk-glow-a); --ds-wallpaper-glow-b: var(--ds-wallpaper-dusk-glow-b); --ds-wallpaper-glow-c: var(--ds-wallpaper-dusk-glow-c); }
+  /* 自定义图片：缓慢推近并沿对角线平移（Ken Burns），节奏比渐变流动层更慢，避免看久了晕。 */
+  .ds-wallpaper.is-animated.has-image { animation: ds-wallpaper-pan 32s ease-in-out infinite alternate; will-change: transform; }
+  @keyframes ds-wallpaper-pan {
+    0% { transform: scale(1.08) translate3d(-3%, -2%, 0); }
+    50% { transform: scale(1.14) translate3d(.6%, 1.4%, 0); }
+    100% { transform: scale(1.18) translate3d(3%, -1%, 0); }
+  }
+
+  /* Windows 风格：菜单栏移到底部变为任务栏，Dock 铺满底部。 */
+  .ds-desktop[data-dock-style="windows"] {
+    --menubar-h: 32px;
+    --menubar-display: flex;
+    --menubar-top: auto;
+    --menubar-bottom: 0px;
+    --system-bar-height: 56px;
+    --menubar-background: transparent;
+    --menubar-backdrop: none;
+    --menubar-pointer-events: none;
+    --menubar-app-display: none;
+    --menubar-logo-width: 48px;
+    --menubar-avatar-size: 36px;
+    --menubar-right-max-width: calc(100% - 58px);
+    --menubar-control-flex: 0 0 auto;
+    --menubar-clock-direction: column-reverse;
+    --menubar-clock-gap: 0px;
+    --menubar-clock-height: 44px;
+    --menubar-clock-size: 12px;
+    --menubar-clock-line-height: 17px;
+    --shell-bottom-space: var(--dock-space);
+    --shell-popover-top: auto;
+    --shell-popover-bottom: calc(var(--shell-bottom-space) + 4px);
+    --dock-space: 56px;
+    --dock-wrap-height: var(--shell-bottom-space);
+    --dock-wrap-padding: 0 300px;
+    --dock-wrap-align: center;
+    --dock-wrap-background: var(--bg-glass);
+    --dock-wrap-backdrop: blur(30px) saturate(180%);
+    --dock-wrap-shadow: inset 0 1px 0 var(--border);
+    --dock-wrap-z-index: 8999;
+    --dock-bottom: 0px;
+    --dock-height: 56px;
+    --dock-item: 44px;
+    --dock-hidden-transform: none;
+    --dock-hidden-opacity: 1;
+    --dock-hidden-visibility: hidden;
+    --dock-max-width: 100%;
+    --dock-radius: 0px;
+    --dock-align: center;
+    --dock-icon-size: 32px;
+    --dock-item-radius: calc(6px * var(--ds-radius-scale));
+    --dock-padding: 2px 8px;
+    --dock-hover-bg: var(--hover);
+    --dock-overflow-x: auto;
+    --dock-overflow-y: hidden;
+    --dock-background: transparent;
+    --dock-backdrop: none;
+    --dock-shadow: none;
+    --dock-dot-width: 16px;
+    --dock-dot-height: 3px;
+    --dock-dot-bottom: 0px;
+    --dock-dot-color: var(--accent);
+    --dock-tip-display: none;
+    --dock-sep-height: 32px;
+    --ds-maximize-inset: var(--dock-space);
+    --desktop-icons-bottom: 8px;
+    --menubar-shadow: none;
+    --dock-position: static;
+    --dock-rim-content: none;
+  }
+  .ds-desktop[data-card-style="liquid"][data-dock-style="windows"] {
+    --dock-wrap-background: var(--ds-liquid-glass-bg);
+    --dock-wrap-backdrop: var(--ds-liquid-glass-filter);
+    --dock-wrap-shadow: inset 0 1px 0 var(--ds-liquid-glass-border), 0 -4px 16px rgb(0 0 0 / calc(0.1 * var(--ds-shadow-strength)));
+    --dock-hover-bg: var(--ds-liquid-glass-chip-bg);
+  }
+  /* 应用按钮组靠左：开始按钮是 Dock 的第一项，整组靠左，右侧仍给托盘留出空间。 */
+  .ds-desktop[data-dock-style="windows"][data-dock-align="left"] { --dock-wrap-justify: flex-start; --dock-wrap-padding: 0 300px 0 8px; }
+  @media (max-width: 1100px) {
+    .ds-desktop[data-dock-style="windows"] { --dock-wrap-padding: 0 8px; --dock-wrap-align: flex-start; }
+    .ds-desktop[data-dock-style="windows"][data-dock-align="left"] { --dock-wrap-padding: 0 8px; }
+  }
+
+  /* 菜单栏 */
+  .ds-menubar { position: fixed; top: var(--menubar-top, 0); bottom: var(--menubar-bottom, auto); left: 0; right: 0; height: var(--system-bar-height, var(--menubar-h)); display: var(--menubar-display, grid); grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); justify-content: space-between; align-items: center; padding: 0 10px; background: var(--menubar-background, var(--bg-glass)); backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); -webkit-backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); box-shadow: var(--menubar-shadow, none); z-index: 9000; font-size: 13px; pointer-events: var(--menubar-pointer-events, auto); }
+  .ds-menubar-left, .ds-menubar-center, .ds-menubar-right { display: flex; align-items: center; min-width: 0; height: 100%; pointer-events: auto; }
+  .ds-menubar-center { justify-content: center; }
+  .ds-menubar-right { justify-content: flex-end; max-width: var(--menubar-right-max-width, none); }
+  .ds-menubar-right > * { flex: var(--menubar-control-flex, 0 1 auto); }
+  .ds-menubar-item, .ds-menubar-logo, .ds-menubar-app { padding: 0 10px; height: 22px; line-height: 22px; border-radius: calc(5px * var(--ds-radius-scale)); cursor: default; }
+  .ds-menubar-item:hover, .ds-menubar-logo:hover, .ds-menubar-item.is-active, .ds-menubar-logo.is-active { background: var(--ds-shell-item-hover, var(--hover)); }
+  .ds-menubar-icon { display: grid; width: 30px; place-items: center; padding: 0; border: 0; background: transparent; color: var(--text); cursor: pointer; }
+  .ds-menubar-icon .ds-icon { width: 15px; height: 15px; }
+  .ds-menubar-icon:focus-visible, .ds-menubar-logo:focus-visible, .ds-menubar-clock:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .ds-menubar-logo { display: flex; align-items: center; justify-content: center; width: var(--menubar-logo-width, 36px); height: 100%; padding: 0; border: 0; background: transparent; color: var(--text); font-size: 15px; cursor: pointer; }
+  .ds-menubar-logo .ds-app-icon { --ds-app-icon-size: var(--menubar-avatar-size, 24px); width: var(--menubar-avatar-size, 24px); height: var(--menubar-avatar-size, 24px); box-shadow: none; }
+  .ds-menubar-image { display: block; width: var(--menubar-avatar-size, 24px); height: var(--menubar-avatar-size, 24px); object-fit: contain; }
+  .ds-menubar-image.is-avatar { border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--border); }
+  .ds-menubar-app { display: var(--menubar-app-display, block); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+  .ds-menubar-clock { display: flex; flex-direction: var(--menubar-clock-direction, row); justify-content: center; align-items: flex-end; gap: var(--menubar-clock-gap, 5px); height: var(--menubar-clock-height, 22px); padding: 0 10px; border: 0; background: transparent; color: var(--text); font: inherit; font-size: var(--menubar-clock-size, 13px); line-height: var(--menubar-clock-line-height, 22px); white-space: nowrap; font-variant-numeric: tabular-nums; cursor: pointer; }
+  .ds-menubar-clock > span:empty { display: none; }
+
+  /* 桌面区域与图标 */
+  .ds-desktop-area { position: absolute; top: var(--menubar-h); left: 0; right: 0; bottom: 0; }
+  .ds-desktop[data-dock-style="windows"] > .ds-desktop-area { top: 0; bottom: var(--dock-space); }
+  .ds-desktop-icons { position: absolute; top: 16px; right: 16px; bottom: var(--desktop-icons-bottom); left: 16px; display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 6px; overflow-x: hidden; overflow-y: auto; }
+  .ds-desktop-icon { display: flex; width: max(84px, calc(var(--desktop-icon-size, 56px) + 28px)); height: calc(var(--desktop-icon-size, 56px) + 48px); flex: 0 0 auto; flex-direction: column; align-items: center; gap: 4px; padding: 6px 2px; border: 1px solid transparent; border-radius: calc(9px * var(--ds-radius-scale)); background: transparent; font: inherit; text-align: center; cursor: default; transition: background .12s, border-color .12s, box-shadow .12s; }
+  .ds-desktop-icon:where(:not([data-dragging])):hover { background: rgba(255, 255, 255, .1); }
+  .ds-desktop-icon.is-selected:where(:not([data-dragging])) { border-color: rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .22); box-shadow: 0 3px 12px rgb(0 0 0 / calc(.18 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .14); }
+  .ds-desktop-icon:where(:not([data-dragging])):focus-visible { outline: 2px solid rgba(255, 255, 255, .88); outline-offset: 1px; }
+  .ds-desktop-icon-art { display: grid; width: var(--desktop-icon-size, 56px); height: var(--desktop-icon-size, 56px); flex: 0 0 auto; place-items: center; pointer-events: none; filter: brightness(var(--ds-app-icon-brightness, 1)); }
+  .ds-desktop-icon.has-app-unread > .ds-desktop-icon-art { position: relative; }
+  .ds-app-icon-unread { position: absolute; top: -6px; right: -6px; display: flex; min-width: 22px; height: 22px; align-items: center; justify-content: center; box-sizing: border-box; padding: 0 5px; border: 2px solid var(--bg-panel); border-radius: calc(12px * var(--ds-radius-scale)); background: var(--ds-dialog-danger); color: var(--ds-on-accent); font-size: 12px; font-weight: 600; line-height: 18px; }
+  .ds-desktop-icon.app-attention-flash > .ds-desktop-icon-art,
+  .ds-dock-item.app-attention-flash > .ds-app-icon { animation: ds-app-attention 1.2s ease-in-out infinite; }
+  @keyframes ds-app-attention { 0%, 100% { opacity: 1; } 50% { opacity: .15; } }
+  .ds-desktop-icon-art .ds-app-icon { --ds-app-icon-size: var(--desktop-icon-size, 56px); width: 100%; height: 100%; }
+  .ds-desktop-icon > span:last-child { display: -webkit-box; width: 100%; max-height: 32px; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; padding: 0 4px; border-radius: calc(4px * var(--ds-radius-scale)); color: var(--ds-desktop-foreground); font-size: 12px; line-height: 16px; text-align: center; text-overflow: ellipsis; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); overflow-wrap: anywhere; }
+  .ds-desktop-icon.is-selected > span:last-child { font-weight: 650; text-shadow: 0 1px 2px rgba(0, 0, 0, .95), 0 0 4px rgba(0, 0, 0, .72); }
+
+  .ds-app-icon { display: flex; width: var(--ds-app-icon-size, 56px); height: var(--ds-app-icon-size, 56px); flex-shrink: 0; align-items: center; justify-content: center; border-radius: 22%; color: var(--ds-desktop-foreground); font-size: clamp(12px, var(--ds-app-icon-symbol-size, calc(var(--ds-app-icon-size, 56px) / 2 * var(--ds-app-icon-symbol-scale, 1))), var(--ds-app-icon-size, 56px)); box-shadow: 0 4px 10px rgb(0 0 0 / calc(.25 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .3); }
+  .ds-app-icon--graphic { filter: brightness(var(--ds-app-icon-brightness, 1)); }
+  .ds-app-icon--image { overflow: hidden; background: var(--ds-icon-image-bg); box-shadow: none; }
+  .ds-app-icon--transparent { background: transparent; border-radius: 0; overflow: visible; }
+  /* 同色阴影：声明在 --image 之后，图片图标也能带色；颜色来自内联变量 --ds-app-icon-shadow-color。 */
+  .ds-app-icon--tinted, .ds-app-icon--image.ds-app-icon--tinted { box-shadow: 0 calc(var(--ds-app-icon-size, 56px) * .14) calc(var(--ds-app-icon-size, 56px) * .3) calc(var(--ds-app-icon-size, 56px) * -.04) color-mix(in srgb, var(--ds-app-icon-shadow-color) 85%, transparent), 0 1px 2px color-mix(in srgb, var(--ds-app-icon-shadow-color) 45%, transparent), inset 0 1px 0 rgba(255, 255, 255, .3); }
+  .ds-app-icon--transparent.ds-app-icon--tinted { box-shadow: none; filter: brightness(var(--ds-app-icon-brightness, 1)) drop-shadow(0 calc(var(--ds-app-icon-size, 56px) * .1) calc(var(--ds-app-icon-size, 56px) * .16) color-mix(in srgb, var(--ds-app-icon-shadow-color) 80%, transparent)); }
+  .ds-app-icon img { display: block; width: min(100%, var(--ds-app-icon-symbol-size, 100%)); height: min(100%, var(--ds-app-icon-symbol-size, 100%)); object-fit: contain; }
+  .ds-app-icon .ds-icon { width: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); height: min(100%, var(--ds-app-icon-symbol-size, calc(50% * var(--ds-app-icon-symbol-scale, 1)))); vertical-align: 0; }
+
+  /* Dock */
+  .ds-dock-edge-trigger { position: fixed; left: 0; right: 0; bottom: 0; height: 4px; z-index: var(--dock-wrap-z-index, 8000); background: transparent; pointer-events: auto; }
+  .ds-dock-wrap { position: fixed; left: 0; right: 0; bottom: var(--dock-bottom, 6px); display: flex; justify-content: var(--dock-wrap-justify, center); align-items: var(--dock-wrap-align, stretch); height: var(--dock-wrap-height, auto); padding: var(--dock-wrap-padding, 0); background: var(--dock-wrap-background, transparent); backdrop-filter: var(--dock-wrap-backdrop, none); -webkit-backdrop-filter: var(--dock-wrap-backdrop, none); box-shadow: var(--dock-wrap-shadow, none); z-index: var(--dock-wrap-z-index, 8000); pointer-events: none; transform: translateY(0); will-change: transform; transition: transform .36s cubic-bezier(.22, .86, .34, 1), opacity 0s; }
+  .ds-dock-wrap.is-hidden { transform: var(--dock-hidden-transform, translateY(calc(100% + 48px))); opacity: var(--dock-hidden-opacity, 0); transition: transform .26s cubic-bezier(.4, 0, .7, 1), opacity 0s .26s; }
+  @starting-style {
+    .ds-dock-wrap {
+      transform: var(--dock-hidden-transform, translateY(calc(100% + 48px)));
+      opacity: var(--dock-hidden-opacity, 0);
+    }
+  }
+  .ds-dock-wrap.is-hidden .ds-dock { visibility: var(--dock-hidden-visibility, visible); pointer-events: none; }
+  .ds-dock { pointer-events: auto; position: var(--dock-position, static); display: flex; flex: 0 1 auto; align-items: var(--dock-align, flex-end); gap: 4px; width: max-content; min-width: 0; max-width: var(--dock-max-width, calc(100% - 16px)); padding: var(--dock-padding, 6px 8px); height: var(--dock-height, 70px); border-radius: var(--dock-radius, calc(20px * var(--ds-radius-scale))); overflow-x: var(--dock-overflow-x, visible); overflow-y: var(--dock-overflow-y, visible); background: var(--dock-background, var(--bg-glass)); backdrop-filter: var(--dock-backdrop, blur(30px) saturate(180%)); -webkit-backdrop-filter: var(--dock-backdrop, blur(30px) saturate(180%)); box-shadow: var(--dock-shadow, 0 10px 30px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength))), inset 0 0 0 .5px rgba(255, 255, 255, .3)); }
+  .ds-dock::before {
+    content: var(--dock-rim-content, none);
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: var(--ds-shell-glass-rim, none);
+    -webkit-mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
+    -webkit-mask-composite: xor;
+    mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .ds-dock-item { position: relative; flex: 0 0 auto; width: var(--dock-item, 54px); height: var(--dock-item, 54px); display: flex; align-items: var(--dock-align, flex-end); justify-content: center; border: 0; padding: 0; background: transparent; border-radius: var(--dock-item-radius, 0px); cursor: pointer; transition: width .15s, height .15s, margin .15s; }
+  .ds-dock-item:hover { background: var(--dock-hover-bg, transparent); }
+  .ds-dock-item .ds-app-icon { --ds-app-icon-size: var(--dock-icon-size, 54px); width: var(--ds-app-icon-size, 100%); height: var(--ds-app-icon-size, 100%); }
+  .ds-dock-item .ds-app-icon { transition: font-size .15s; }
+  .ds-dock-item.is-bouncing { animation: ds-dock-bounce .6s ease 2; }
+  @keyframes ds-dock-bounce { 50% { transform: translateY(-18px); } }
+  .ds-dock-dot { position: absolute; bottom: var(--dock-dot-bottom, -5px); width: var(--dock-dot-width, 4px); height: var(--dock-dot-height, 4px); border-radius: calc(4px * var(--ds-radius-scale)); background: var(--dock-dot-color, var(--text)); opacity: 0; }
+  .ds-dock-item.is-running .ds-dock-dot { opacity: .8; }
+  .ds-dock-tip { display: var(--dock-tip-display, block); position: absolute; bottom: calc(100% + 14px); padding: 4px 10px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); color: var(--text); white-space: nowrap; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .15s; box-shadow: var(--ds-shell-glass-shadow-sm, 0 2px 10px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); }
+  .ds-dock-item:hover .ds-dock-tip, .ds-dock-item:focus-visible .ds-dock-tip { opacity: 1; }
+  .ds-dock-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--dock-item-radius, calc(12px * var(--ds-radius-scale))); }
+  .ds-dock-separator { flex: 0 0 1px; width: 1px; height: var(--dock-sep-height, 48px); margin: 0 6px 3px; background: var(--border); align-self: var(--dock-align, flex-end); }
+
+  @media (max-width: 900px) {
+    .ds-desktop:not([data-dock-style="windows"]) { --menubar-h: 56px; }
+    .ds-desktop:not([data-dock-style="windows"]) > .ds-menubar { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 28px 28px; }
+    .ds-desktop:not([data-dock-style="windows"]) > .ds-menubar-left { grid-area: 1 / 1; }
+    .ds-desktop:not([data-dock-style="windows"]) > .ds-menubar-center { grid-area: 2 / 1 / 3 / -1; }
+    .ds-desktop:not([data-dock-style="windows"]) > .ds-menubar-right { grid-area: 1 / 2; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-desktop-icon.app-attention-flash > .ds-desktop-icon-art,
+    .ds-dock-item.app-attention-flash > .ds-app-icon {
+      animation: none;
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) { .ds-dock-item, .ds-dock-item .ds-app-icon, .ds-dock-wrap, .ds-dock-wrap.is-hidden, .ds-desktop-icon, .ds-wallpaper { transition: none; } .ds-dock-item.is-bouncing, .ds-wallpaper.is-animated { animation: none; } }
+  @media (forced-colors: active) {
+    .ds-desktop-icon-art, .ds-app-icon { filter: none; }
+    .ds-menubar, .ds-dock-wrap, .ds-dock, .ds-dock-tip {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+    }
+    .ds-dock::before { display: none; }
+  }
+}

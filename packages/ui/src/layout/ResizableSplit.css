@@ -1,0 +1,19 @@
+@layer ds {
+  .ds-resize-handle {
+    display: flex; flex: 0 0 var(--ds-resize-hit-size); align-items: center; justify-content: center;
+    width: var(--ds-resize-hit-size); min-height: 0; touch-action: none; user-select: none; cursor: col-resize;
+    border-radius: var(--ds-radius-sm); background: transparent;
+  }
+  .ds-resize-handle[hidden] { display: none; }
+  .ds-resize-handle::before { content: ''; width: 2px; height: 28px; border-radius: calc(2px * var(--ds-radius-scale)); background: var(--border); }
+  .ds-resize-handle:where(:hover, :focus-visible), .ds-resize-handle.is-dragging { background: var(--hover); }
+  .ds-resize-handle:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-resize-handle[aria-orientation="horizontal"] { width: 100%; height: var(--ds-resize-hit-size); cursor: row-resize; }
+  .ds-resize-handle[aria-orientation="horizontal"]::before { width: 28px; height: 2px; }
+  .ds-resize-handle[aria-disabled="true"] { opacity: .4; cursor: default; }
+  .ds-resizable-split { display: flex; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: hidden; }
+  .ds-resizable-primary { flex: 0 0 var(--ds-pane-size); min-width: 0; min-height: 0; overflow: auto; }
+  .ds-resizable-secondary { flex: 1 1 0; min-width: 0; min-height: 0; overflow: auto; }
+  .ds-resizable-split.is-vertical, .ds-resizable-split.is-stacked { flex-direction: column; }
+  .ds-resizable-split.is-stacked > .ds-resizable-primary { flex: 0 0 auto; max-height: 45%; }
+}

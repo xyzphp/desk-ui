@@ -1,0 +1,68 @@
+/* 文字、头像、未读、分隔和进度兼容原生来源；结合 Naive UI 的轻量层次与语义色。 */
+@layer ds {
+  .ds-display-tone--default { --ds-display-color: var(--text); }
+  .ds-display-tone--muted { --ds-display-color: var(--text-2); }
+  .ds-display-tone--accent { --ds-display-color: var(--accent); }
+  .ds-display-tone--success { --ds-display-color: var(--ds-success); }
+  .ds-display-tone--warning { --ds-display-color: var(--ds-warning); }
+  .ds-display-tone--danger { --ds-display-color: var(--ds-danger); }
+  .ds-text { color: var(--ds-display-color, var(--text)); font: inherit; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+  p.ds-text { margin: 0; }
+  .ds-text--sm { font-size: 12px; }
+  .ds-text--lg { font-size: 14px; }
+  .ds-text.is-strong { font-weight: 600; }
+  .ds-text.is-code { padding: 2px 5px; border: 1px solid var(--border); border-radius: calc(4px * var(--ds-radius-scale)); background: var(--bg-win); font-family: var(--font-mono); }
+  .ds-text.is-ellipsis { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ds-link { color: var(--accent); font: inherit; font-size: 13px; line-height: 1.6; text-decoration: none; text-underline-offset: 3px; overflow-wrap: anywhere; cursor: pointer; }
+  .ds-link:where(:hover):not([aria-disabled="true"]) { text-decoration: underline; }
+  .ds-link.is-quiet { color: var(--text-2); }
+  .ds-link.is-quiet:where(:hover):not([aria-disabled="true"]) { color: var(--accent); }
+  .ds-link[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+  .ds-link:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 3px; border-radius: calc(2px * var(--ds-radius-scale)); }
+  .ds-divider { --ds-divider-spacing: 16px; display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; margin-block: var(--ds-divider-spacing); color: var(--text-2); font-size: 12px; }
+  .ds-divider::before, .ds-divider::after { flex: 1; min-width: 0; border-top: 1px solid var(--border); content: ''; }
+  .ds-divider:not(:has(.ds-divider-label))::after { display: none; }
+  .ds-divider--sm { --ds-divider-spacing: 8px; }
+  .ds-divider--lg { --ds-divider-spacing: 24px; }
+  .ds-divider--start:has(.ds-divider-label)::before, .ds-divider--end:has(.ds-divider-label)::after { flex: 0 0 24px; }
+  .ds-divider.is-dashed::before, .ds-divider.is-dashed::after { border-top-style: dashed; }
+  .ds-divider-label { flex: 0 1 auto; overflow-wrap: anywhere; }
+  .ds-divider.is-vertical { align-self: center; width: 1px; height: 1em; min-height: 16px; margin: 0 var(--ds-divider-spacing); border-left: 1px solid var(--border); }
+  .ds-divider.is-vertical::before, .ds-divider.is-vertical::after { display: none; }
+  .ds-divider.is-vertical.is-dashed { border-left-style: dashed; }
+  .ds-avatar { position: relative; display: inline-flex; flex: 0 0 var(--ds-avatar-size, 40px); align-items: center; justify-content: center; width: var(--ds-avatar-size, 40px); height: var(--ds-avatar-size, 40px); overflow: hidden; box-sizing: border-box; border: 1px solid color-mix(in srgb, var(--ds-display-color) 12%, var(--border)); border-radius: 50%; background: color-mix(in srgb, var(--ds-display-color) 10%, var(--bg-panel)); color: var(--ds-display-color); vertical-align: middle; font: inherit; font-size: var(--ds-avatar-font-size, 16px); font-weight: 600; }
+  .ds-avatar.is-rounded { border-radius: var(--ds-radius-sm); }
+  .ds-avatar-fallback { display: grid; place-items: center; max-width: 100%; overflow: hidden; white-space: nowrap; }
+  .ds-avatar-fallback > .ds-icon { width: 1.15em; height: 1.15em; }
+  .ds-avatar-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+  .ds-badge { position: relative; display: inline-flex; align-items: center; vertical-align: middle; }
+  .ds-badge-indicator { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; min-height: 20px; padding: 1px 6px; box-sizing: border-box; border: 1px solid color-mix(in srgb, var(--ds-display-color) 24%, var(--border)); border-radius: 999px; background: color-mix(in srgb, var(--ds-display-color) 12%, var(--bg-panel)); color: var(--ds-display-color); font: inherit; font-size: 12px; font-weight: 500; line-height: 16px; white-space: nowrap; }
+  .ds-badge.has-anchor > .ds-badge-indicator { position: absolute; top: 0; right: 0; z-index: 1; transform: translate(40%, -35%); box-shadow: 0 0 0 2px var(--bg-panel); pointer-events: none; }
+  .ds-badge-indicator.is-dot { min-width: 8px; min-height: 8px; width: 8px; height: 8px; padding: 0; border: 0; background: var(--ds-display-color); }
+  .ds-progress { display: flex; align-items: center; min-width: 0; gap: 10px; }
+  .ds-progress-track { display: block; flex: 1; min-width: 0; height: 8px; overflow: hidden; border-radius: 999px; background: var(--hover); }
+  .ds-progress.is-small > .ds-progress-track { height: 5px; }
+  .ds-progress-fill { display: block; height: 100%; border-radius: inherit; background: var(--ds-display-color); transition: width .2s; }
+  .ds-progress-value { flex: 0 0 auto; min-width: 34px; color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+  .ds-progress-fill.is-indeterminate { animation: ds-progress-move 1.4s ease-in-out infinite alternate; }
+  @keyframes ds-progress-move { from { transform: translateX(-15%); } to { transform: translateX(200%); } }
+  .ds-skeleton { min-width: 0; }
+  .ds-skeleton-content[hidden] { display: none; }
+  .ds-skeleton-placeholder { display: flex; align-items: flex-start; min-width: 0; gap: 12px; }
+  .ds-skeleton-avatar { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--hover); }
+  .ds-skeleton-lines { display: grid; flex: 1; min-width: 0; gap: 12px; padding-block: 4px; }
+  .ds-skeleton-lines > span { display: block; height: 9px; border-radius: calc(4px * var(--ds-radius-scale)); background: var(--hover); }
+  .ds-skeleton-lines > span:last-child:not(:first-child) { width: 62%; }
+  .ds-skeleton.is-animated :is(.ds-skeleton-avatar, .ds-skeleton-lines > span) { background: linear-gradient(90deg, var(--hover), color-mix(in srgb, var(--text) 10%, var(--hover)), var(--hover)); background-size: 200% 100%; animation: ds-skeleton-pulse 1.6s ease-in-out infinite; }
+  @keyframes ds-skeleton-pulse { to { background-position: -200% 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-progress-fill { transition: none; }
+    .ds-progress-fill.is-indeterminate, .ds-skeleton.is-animated :is(.ds-skeleton-avatar, .ds-skeleton-lines > span) { animation: none; }
+  }
+  @media (forced-colors: active) {
+    .ds-avatar, .ds-badge-indicator { border-color: CanvasText; }
+    .ds-badge-indicator.is-dot, .ds-progress-fill { background: Highlight; }
+    .ds-progress-track { border: 1px solid CanvasText; }
+    .ds-skeleton-lines > span, .ds-skeleton-avatar { border: 1px solid GrayText; }
+  }
+}

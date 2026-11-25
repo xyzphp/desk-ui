@@ -1,0 +1,578 @@
+/* 账号 / 角色权限树与 API 范围树共用；一级竖排、二级横向并排、三级竖排交替，不绘制左侧连接线。 */
+@layer ds {
+  .account-perm-tree,
+  .account-perm-tree *,
+  .account-perm-tree *::before,
+  .account-perm-tree *::after {
+    box-sizing: border-box;
+  }
+
+  .ds-permission-tree,
+  .account-perm-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+    padding-left: 0;
+  }
+
+  .ds-permission-tree > .ds-permission-node,
+  .ds-permission-tree > .ds-permission-leaf,
+  .account-perm-tree > .account-perm-node {
+    padding: 6px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  }
+
+  .ds-permission-tree > .ds-permission-node:first-child,
+  .ds-permission-tree > .ds-permission-leaf:first-child,
+  .account-perm-tree > .account-perm-node:first-child {
+    padding-top: 0;
+  }
+
+  .ds-permission-tree > .ds-permission-node:last-child,
+  .ds-permission-tree > .ds-permission-leaf:last-child,
+  .account-perm-tree > .account-perm-node:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .ds-permission-node {
+    min-width: 0;
+    padding-left: 0;
+  }
+  .ds-permission-node--nested {
+    padding-left: 0;
+  }
+  .ds-permission-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    min-height: var(--ds-control-sm);
+  }
+  .ds-permission-leaf {
+    min-width: 0;
+  }
+  .ds-permission-leaf > .ds-permission-row {
+    min-height: 26px;
+  }
+  .ds-permission-toggle,
+  .ds-permission-spacer {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 24px;
+  }
+  .ds-permission-toggle {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+  }
+  .ds-permission-toggle:hover {
+    background: var(--hover);
+    color: var(--accent);
+  }
+  .ds-permission-toggle .ds-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .ds-permission-toggle[aria-expanded='true'] .ds-icon {
+    transform: rotate(90deg);
+  }
+  .ds-permission-toggle:focus-visible {
+    outline: 1px solid var(--ds-input-border-focus);
+    outline-offset: -1px;
+  }
+  .ds-permission-label > input:focus-visible,
+  .ds-permission-title-toggle:focus-visible {
+    outline: 1px solid var(--ds-input-border-focus);
+    outline-offset: 2px;
+  }
+  .ds-permission-label {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    min-height: var(--ds-control-sm);
+    padding: 3px 4px;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ds-permission-label.is-split {
+    gap: 2px;
+    cursor: default;
+  }
+  .ds-permission-label:not(.is-split):not([data-disabled]):not([data-required]):not(.ds-permission-label--group):hover {
+    background: var(--hover);
+  }
+  .ds-permission-label[data-disabled]:not([data-required]):not(.is-split) {
+    cursor: not-allowed;
+  }
+  .ds-permission-label[data-disabled] > input {
+    cursor: not-allowed;
+  }
+  .ds-permission-label[data-required] {
+    cursor: default;
+  }
+  .ds-permission-label--group {
+    color: var(--text-2);
+    cursor: default;
+  }
+  .ds-permission-label--leaf {
+    min-height: 26px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .ds-permission-node--nested > .ds-permission-row .ds-permission-name {
+    font-weight: 600;
+  }
+  .ds-permission-label > input {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .ds-permission-label > input:disabled {
+    opacity: 0.85;
+  }
+  .ds-permission-label[data-required] > input {
+    opacity: 1;
+    cursor: default;
+  }
+  .ds-permission-label > .ds-icon,
+  .ds-permission-title-toggle > .ds-icon {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .ds-permission-title-toggle,
+  .account-perm-title-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin: -2px 0;
+    padding: 2px 6px 2px 4px;
+    border: 0;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background 0.12s,
+      color 0.12s;
+  }
+  .ds-permission-title-toggle:hover,
+  .account-perm-title-toggle:hover {
+    background: var(--hover);
+    color: var(--accent);
+  }
+  .ds-permission-title-toggle:hover .account-perm-name,
+  .account-perm-title-toggle:hover .account-perm-name {
+    color: var(--accent);
+  }
+  .ds-permission-name {
+    min-width: 0;
+    line-height: 20px;
+    overflow-wrap: anywhere;
+  }
+  .ds-permission-status {
+    flex-shrink: 0;
+    padding: 0 5px;
+    border-radius: calc(4px * var(--ds-radius-scale));
+    background: var(--hover);
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+  .ds-permission-children {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    margin: 4px 0 2px 24px;
+    padding: 0;
+  }
+  .ds-permission-children[hidden] {
+    display: none;
+  }
+  .ds-permission-children.is-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px 10px;
+    margin: 4px 0 2px 42px;
+    padding: 0;
+  }
+  .ds-permission-children.is-horizontal > .ds-permission-child {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-height: 28px;
+    padding: 3px 6px;
+    border-radius: calc(6px * var(--ds-radius-scale));
+  }
+  .ds-permission-children.is-horizontal > .ds-permission-node--nested {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 auto;
+    max-width: 100%;
+    padding: 0 4px 0 0;
+  }
+  .ds-permission-children.is-horizontal > .ds-permission-node--nested > .ds-permission-row {
+    min-height: 28px;
+  }
+  .ds-permission-children.is-horizontal > .ds-permission-node--nested > .ds-permission-children {
+    margin: 2px 0 0;
+    padding: 0 0 0 44px;
+  }
+  .ds-permission-children.is-inline {
+    flex-direction: row;
+    gap: 8px 18px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .ds-permission-children.is-inline > .ds-permission-child {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .ds-permission-child {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 26px;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    color: var(--text);
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .ds-permission-child:hover:has(input:not(:disabled)) {
+    background: var(--hover);
+  }
+  .ds-permission-child:has(input:disabled) {
+    color: var(--text-2);
+    cursor: not-allowed;
+  }
+  .ds-permission-child > input {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: var(--accent);
+  }
+  .ds-permission-child-name {
+    min-width: 0;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    overflow-wrap: anywhere;
+  }
+  .ds-permission-row > .ds-help-tip,
+  .account-perm-row > .account-help-tip {
+    flex-shrink: 0;
+  }
+
+  /* 原站 .account-perm-* 类名与 data-* 标记的兼容渲染。 */
+  .account-perm-node {
+    min-width: 0;
+    padding-left: 0;
+  }
+  .account-perm-node--nested {
+    padding-left: 0;
+  }
+  .account-perm-node--nested > .account-perm-row > .account-perm-child--group {
+    flex: 1;
+  }
+  .account-perm-node--nested > .account-perm-row .account-perm-child-name {
+    font-weight: 600;
+  }
+  .account-perm-row {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 28px;
+    align-items: center;
+    gap: 4px;
+  }
+  .account-perm-toggle,
+  .account-perm-spacer {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 24px;
+  }
+  .account-perm-toggle {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+  }
+  .account-perm-toggle:hover {
+    background: var(--hover);
+    color: var(--accent);
+  }
+  .account-perm-toggle .ds-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .account-perm-toggle[aria-expanded='true'] .ds-icon {
+    transform: rotate(90deg);
+  }
+  .account-perm-parent {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    min-height: 28px;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .account-perm-group-header {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    min-height: 28px;
+    padding: 3px 4px;
+    color: var(--text-2);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .account-perm-group-header > .ds-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+  .account-perm-child--group {
+    flex: 1;
+  }
+  .account-perm-children:not(.is-horizontal):not(.is-inline) > .account-perm-child--with-help {
+    padding-right: 0;
+  }
+  .account-perm-children:not(.is-horizontal):not(.is-inline)
+    > .account-perm-child--with-help
+    > .account-perm-child-name {
+    flex: 1;
+  }
+  .account-perm-parent.is-split,
+  .account-perm-group-header.is-split,
+  .account-perm-child--group.is-split {
+    gap: 2px;
+    cursor: default;
+  }
+  .account-perm-parent:not(.is-required):not([data-disabled]):not(.is-split):hover {
+    background: var(--hover);
+  }
+  .account-perm-parent.is-required {
+    cursor: default;
+  }
+  .account-perm-parent.is-required input {
+    opacity: 1;
+    cursor: default;
+  }
+  .account-perm-parent[data-disabled]:not(.is-required):not(.is-split),
+  .account-perm-child--group[data-disabled]:not(.is-split) {
+    cursor: not-allowed;
+  }
+  .account-perm-icon,
+  .account-perm-child-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .account-perm-icon {
+    color: var(--accent);
+  }
+  .account-perm-icon .ds-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .account-perm-name {
+    min-width: 0;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    overflow-wrap: anywhere;
+  }
+  .account-perm-required {
+    flex-shrink: 0;
+    padding: 0 5px;
+    border-radius: calc(4px * var(--ds-radius-scale));
+    background: var(--hover);
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+  .account-perm-children {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    margin: 4px 0 2px 24px;
+    padding: 0;
+  }
+  .account-perm-children[hidden] {
+    display: none;
+  }
+  .account-perm-children.is-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px 10px;
+    margin: 4px 0 2px 42px;
+    padding: 0;
+  }
+  .account-perm-children.is-horizontal > .account-perm-child {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-height: 28px;
+    padding: 3px 6px;
+    border-radius: calc(6px * var(--ds-radius-scale));
+  }
+  .account-perm-children.is-horizontal > .account-perm-node--nested {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 auto;
+    max-width: 100%;
+    padding: 0 4px 0 0;
+  }
+  .account-perm-children.is-horizontal > .account-perm-node--nested > .account-perm-row {
+    min-height: 28px;
+  }
+  .account-perm-children.is-horizontal > .account-perm-node--nested > .account-perm-children {
+    margin: 2px 0 0;
+    padding: 0 0 0 44px;
+  }
+  .account-perm-children.is-inline {
+    flex-direction: row;
+    gap: 8px 18px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .account-perm-children.is-inline > .account-perm-child {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .account-perm-child {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 26px;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    color: var(--text);
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .account-perm-child:hover:has(input:not(:disabled)) {
+    background: var(--hover);
+  }
+  .account-perm-child:has(input:disabled) {
+    color: var(--text-2);
+    cursor: not-allowed;
+  }
+  .account-perm-child-icon {
+    color: var(--text-2);
+  }
+  .account-perm-child-icon .ds-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .account-perm-child-name {
+    min-width: 0;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    overflow-wrap: anywhere;
+  }
+  .account-perm-tree input {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .account-perm-tree input:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+  }
+  .account-perm-tree .account-help-tip {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: calc(4px * var(--ds-radius-scale));
+    color: var(--text-2);
+    cursor: help;
+    transition: color 0.15s;
+  }
+  .account-perm-tree .account-help-tip:hover {
+    color: var(--accent);
+  }
+  .account-perm-tree .account-help-tip > .ds-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .account-perm-tree :is(input, button, .account-help-tip):focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 2px;
+  }
+
+  @container ds-workspace (max-width: 600px) {
+    .ds-permission-row,
+    .account-perm-row {
+      flex-wrap: wrap;
+    }
+    .ds-permission-label,
+    .account-perm-parent,
+    .account-perm-group-header {
+      flex: 1 1 160px;
+    }
+    .ds-permission-children,
+    .account-perm-children {
+      margin-left: 12px;
+    }
+    .ds-permission-children.is-horizontal,
+    .account-perm-children.is-horizontal {
+      margin-left: 20px;
+      padding: 0;
+    }
+    .ds-permission-children.is-horizontal > .ds-permission-node--nested > .ds-permission-children,
+    .account-perm-children.is-horizontal > .account-perm-node--nested > .account-perm-children {
+      margin-left: 0;
+      padding-left: 32px;
+    }
+  }
+}

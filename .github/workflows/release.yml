@@ -1,0 +1,37 @@
+name: Release
+
+# 发布 @desk/ui 到 npm。使用 npm 可信发布（OIDC），仓库与 CI 不保存 npm 令牌。
+# 首次发布前需在 npmjs.com 为该包配置可信发布者（本仓库 + release.yml）；配置完成前只手动触发。
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@latest
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      # 有待发布的 changeset 时提交版本 PR；版本 PR 合入后再次触发即发布。
+      - uses: changesets/action@v1
+        with:
+          version: pnpm changeset version
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

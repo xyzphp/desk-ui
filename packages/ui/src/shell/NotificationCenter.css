@@ -1,0 +1,10 @@
+@layer ds {
+  .ds-notification-center { min-width: 0; color: var(--text); font: 13px var(--font); }
+  .ds-notification-center:focus-visible { outline: 1px solid var(--ds-input-border-focus); }
+  .ds-notification-center-fields { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-notification-center-count { margin: var(--ds-space-md) 0; color: var(--text-2); font-size: 12px; }
+  .ds-notification-center-list { display: grid; gap: var(--ds-space-lg); max-height: 480px; overflow: auto; list-style: none; margin: 0; padding: 2px; }
+  .ds-notification-center-item { min-width: 0; }
+  .ds-notification-center-meta { margin-top: var(--ds-space-xs); padding: 0 var(--ds-space-xs); }
+  .ds-notification-center-meta time { color: var(--text-2); font-size: 12px; }
+}

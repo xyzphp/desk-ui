@@ -1,0 +1,35 @@
+/* 来源：files.css .fm-image-viewer-* 与 desktop-notes.css .desktop-note-viewer。 */
+@layer ds {
+  .ds-image-preview {
+    position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none;
+    margin: 0; padding: 0; border: 0; overflow: hidden; box-sizing: border-box;
+    background: var(--ds-preview-bg); color: var(--ds-preview-text); font: 13px var(--font);
+    backdrop-filter: blur(24px);
+  }
+  .ds-image-preview[open] { display: flex; flex-direction: column; }
+  .ds-image-preview::backdrop { background: transparent; }
+  .ds-image-preview-toolbar {
+    display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; flex-wrap: wrap;
+    gap: 12px; padding: 10px 18px; margin: 14px 18px 0;
+    border: 1px solid color-mix(in srgb, var(--ds-preview-text) 12%, transparent);
+    border-radius: var(--radius); background: color-mix(in srgb, var(--ds-preview-text) 8%, transparent);
+  }
+  .ds-image-preview-info { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 2px; }
+  .ds-image-preview-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 600; }
+  .ds-image-preview-meta { color: color-mix(in srgb, var(--ds-preview-text) 65%, transparent); font-size: 12px; }
+  .ds-image-preview-navigation { display: flex; align-items: center; gap: 8px; }
+  .ds-image-preview-actions { display: flex; align-items: center; gap: 8px; }
+  .ds-image-preview-zoom { display: flex; align-items: center; gap: 6px; }
+  .ds-image-preview-count { min-width: 50px; color: color-mix(in srgb, var(--ds-preview-text) 75%, transparent); font-size: 12px; text-align: center; }
+  .ds-image-preview-button { border-color: color-mix(in srgb, var(--ds-preview-text) 15%, transparent); background: color-mix(in srgb, var(--ds-preview-text) 8%, transparent); color: var(--ds-preview-text); font-size: 12px; }
+  .ds-image-preview-button:hover:not(:disabled) { border-color: color-mix(in srgb, var(--ds-preview-text) 30%, transparent); background: color-mix(in srgb, var(--ds-preview-text) 18%, transparent); }
+  .ds-image-preview-button:focus-visible { outline-color: var(--ds-preview-text); }
+  .ds-image-preview-stage { position: relative; display: grid; flex: 1; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; min-height: 0; padding: 18px; }
+  .ds-image-preview-stage[data-zoomable='true'] { overflow: hidden; cursor: grab; touch-action: none; }
+  .ds-image-preview-stage[data-zoomable='true']:active { cursor: grabbing; }
+  .ds-image-preview-canvas { display: grid; max-width: 92vw; max-height: calc(100vh - 120px); place-items: center; transform-origin: center; transition: transform 80ms ease-out; }
+  .ds-image-preview-media { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+  .ds-image-preview-media[hidden] { display: none; }
+  .ds-image-preview-status { text-align: center; font-size: 14px; }
+  .ds-image-preview-status > p { margin: 0 0 12px; }
+}

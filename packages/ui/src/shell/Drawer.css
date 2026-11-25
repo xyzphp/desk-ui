@@ -1,0 +1,24 @@
+@layer ds {
+  .ds-dialog-layer--drawer[open] { display: flex; align-items: stretch; justify-content: flex-end; padding: 0; }
+  .ds-dialog-layer--left[open] { justify-content: flex-start; }
+  .ds-dialog-layer--top[open] { flex-direction: column; justify-content: flex-start; }
+  .ds-dialog-layer--bottom[open] { flex-direction: column; justify-content: flex-end; }
+  .ds-drawer {
+    width: var(--ds-drawer-md); max-width: 100%; height: 100%; max-height: 100%; border-radius: 0;
+    animation: ds-drawer-in .18s ease-out;
+  }
+  .ds-drawer.ds-modal--sm { width: var(--ds-drawer-sm); }
+  .ds-drawer.ds-modal--lg { width: var(--ds-drawer-lg); }
+  .ds-drawer > .ds-modal-content { flex: 1 1 0; }
+  .ds-dialog-layer--left { --ds-drawer-x: -24px; --ds-drawer-y: 0px; }
+  .ds-dialog-layer--right { --ds-drawer-x: 24px; --ds-drawer-y: 0px; }
+  .ds-dialog-layer--top { --ds-drawer-x: 0px; --ds-drawer-y: -24px; }
+  .ds-dialog-layer--bottom { --ds-drawer-x: 0px; --ds-drawer-y: 24px; }
+  .ds-dialog-layer--top > .ds-drawer, .ds-dialog-layer--bottom > .ds-drawer {
+    width: 100%; height: var(--ds-drawer-md); max-height: calc(100dvh - var(--ds-space-xl));
+  }
+  .ds-dialog-layer--top > .ds-modal--sm, .ds-dialog-layer--bottom > .ds-modal--sm { height: var(--ds-drawer-sm); }
+  .ds-dialog-layer--top > .ds-modal--lg, .ds-dialog-layer--bottom > .ds-modal--lg { height: var(--ds-drawer-lg); }
+  @keyframes ds-drawer-in { from { opacity: 0; transform: translate(var(--ds-drawer-x), var(--ds-drawer-y)); } }
+  @media (prefers-reduced-motion: reduce) { .ds-drawer { animation: none; } }
+}

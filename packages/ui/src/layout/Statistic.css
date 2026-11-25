@@ -1,0 +1,17 @@
+@layer ds {
+  .ds-statistic { min-width: 0; margin: 0; font-family: var(--font); }
+  .ds-statistic-label { margin: 0 0 var(--ds-space-sm); color: var(--text-2); font-size: 13px; line-height: 1.5; }
+  .ds-statistic-value { display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--ds-space-xs); margin: 0; color: var(--text); }
+  .ds-statistic-value > strong { min-width: 0; font-size: var(--ds-statistic-value-size); line-height: 1.25; font-weight: 600; overflow-wrap: anywhere; }
+  .ds-statistic-affix { color: var(--text-2); font-size: 13px; }
+  .ds-statistic-value > .ds-skeleton { width: 100%; min-width: 80px; }
+  .ds-statistic-description { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); margin: var(--ds-space-sm) 0 0; color: var(--text-2); font-size: 12px; line-height: 1.5; }
+  .ds-statistic-trend { display: inline-flex; align-items: center; gap: var(--ds-space-xs); }
+  .ds-statistic-trend > .ds-icon { width: 13px; height: 13px; }
+  .ds-statistic-trend.is-success { color: var(--ds-success); }
+  .ds-statistic-trend.is-danger { color: var(--ds-danger); }
+  .ds-stat-card-row { display: flex; align-items: flex-start; gap: var(--ds-space-md); }
+  .ds-stat-card-row > .ds-statistic { flex: 1; }
+  .ds-stat-card-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--ds-radius-sm); background: var(--ds-selection-bg); color: var(--accent); }
+  .ds-stat-card-icon, .ds-stat-card-actions { flex-shrink: 0; }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="800" viewBox="0 0 640 800">
+  <title>海边日落示例图</title>
+  <rect width="640" height="800" fill="#efd1c3"/>
+  <circle cx="320" cy="295" r="110" fill="#f8b769"/>
+  <path d="M0 400q160-30 320 0t320 0v400H0Z" fill="#7698aa"/>
+  <path d="M0 510q160 30 320 0t320 0M0 590q160 30 320 0t320 0M0 670q160 30 320 0t320 0" fill="none" stroke="#c7d5d6" stroke-width="4"/>
+  <path d="M0 730q180-30 340 20t300 0v50H0Z" fill="#e9c9ad"/>
+  <text x="36" y="70" fill="#384f61" font-family="sans-serif" font-size="28">海边日落</text>
+</svg>

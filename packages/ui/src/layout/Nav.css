@@ -1,0 +1,27 @@
+/* 应用内侧边导航（系统设置、账号管理等的左侧菜单）。来源：apps.css 的 .ui / .ui-side / .settings-glyph。 */
+@layer ds {
+  .ds-app { display: flex; height: 100%; min-width: 0; background: var(--bg-panel); color: var(--text); font-size: 13px; }
+  .ds-app-main { display: flex; flex: 1; flex-direction: column; min-width: 0; min-height: 0; container: ds-workspace / inline-size; }
+  .ds-nav { width: 184px; flex-shrink: 0; padding: 16px 8px; overflow: auto; background: var(--bg-sidebar); border-right: 1px solid var(--border); }
+  .ds-nav-title, .ds-nav-label { margin: 10px 8px 6px; padding: 0 2px; color: var(--text-2); font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+  .ds-nav-label { margin-top: 20px; }
+  .ds-nav-item { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 34px; margin: 2px 0; padding: 0 10px; border: 0; border-radius: calc(7px * var(--ds-radius-scale)); background: transparent; color: var(--text); font: inherit; font-size: 13px; text-align: left; cursor: pointer; transition: background .12s; }
+  .ds-nav-item:hover:not([aria-current="page"]) { background: color-mix(in srgb, var(--text) 6%, transparent); }
+  .ds-nav-item:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-nav-item[aria-current="page"] { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); font-weight: 600; }
+  .ds-nav-glyph { --ds-nav-icon-size: 16px; display: inline-grid; flex: 0 0 22px; place-items: center; width: 22px; height: 22px; border-radius: calc(7px * var(--ds-radius-scale)); background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--text-2); }
+  .ds-nav-glyph .ds-icon { width: var(--ds-nav-icon-size); height: var(--ds-nav-icon-size); }
+  .ds-nav-item[aria-current="page"] .ds-nav-glyph { color: var(--accent); }
+  .ds-nav.has-footer { display: flex; flex-direction: column; overflow: hidden; }
+  .ds-nav.has-footer .ds-nav-title { flex: 0 0 auto; }
+  .ds-nav.has-footer .ds-nav-body { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: auto; }
+  .ds-nav-footer { flex: 0 0 auto; padding: 12px 0 0; border-top: 1px solid var(--border); }
+
+  .ds-settings-row { display: grid; gap: 14px; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: calc(10px * var(--ds-radius-scale)); background: var(--bg-win); }
+  .ds-settings-row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; min-width: 0; }
+  .ds-settings-row-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-width: 0; max-width: 100%; }
+  .ds-settings-row-actions:empty { display: none; }
+  @container (max-width: 520px) {
+    .ds-settings-row[data-layout="stacked"] .ds-settings-row-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+}

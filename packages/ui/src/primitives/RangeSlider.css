@@ -1,0 +1,30 @@
+@layer ds {
+  .ds-range-slider { min-width: 0; margin: 0; padding: 0; border: 0; --ds-range-background: transparent; }
+  .ds-range-slider > legend { padding: 0; margin-bottom: var(--ds-space-xs); }
+  .ds-range-slider-track { position: relative; height: 30px; min-width: var(--ds-range-thumb-size); }
+  .ds-range-slider-rail {
+    position: absolute; left: calc(var(--ds-range-thumb-size) / 2); right: calc(var(--ds-range-thumb-size) / 2);
+    height: var(--ds-range-track-height); top: calc(50% - var(--ds-range-track-height) / 2); border-radius: 99px; background: var(--hover);
+  }
+  .ds-range-slider-rail > span {
+    position: absolute; left: var(--ds-range-start); right: calc(100% - var(--ds-range-end)); height: 100%;
+    border-radius: inherit; background: var(--accent);
+  }
+  .ds-range-slider-input { position: absolute; top: calc(50% - var(--ds-range-track-height) / 2); left: 0; pointer-events: none; }
+  .ds-range-slider-input::-webkit-slider-thumb { pointer-events: auto; touch-action: none; }
+  .ds-range-slider-input::-moz-range-thumb { pointer-events: auto; touch-action: none; }
+  .ds-range-slider-input:focus-visible { z-index: 2; outline: none; }
+  .ds-range-slider-input[data-at-end="true"] { z-index: 1; }
+  .ds-range-slider-track:has(input:focus-visible) { outline: 1px solid var(--ds-input-border-focus); outline-offset: 0; border-radius: calc(4px * var(--ds-radius-scale)); }
+  .ds-range-slider:has(input:disabled) { opacity: .45; }
+  .ds-range-slider:has(input:disabled) .ds-range-slider-input { cursor: default; }
+  .ds-range-slider-values { display: flex; justify-content: space-between; color: var(--text-2); font: 12px var(--font-mono); }
+  .ds-range-slider > .ds-field-hint, .ds-range-slider > .ds-field-error { margin-top: var(--ds-space-sm); }
+  @media (forced-colors: active) {
+    .ds-range-slider-rail { border: 1px solid CanvasText; }
+    .ds-range-slider-rail > span { background: Highlight; }
+    .ds-range-slider-input { appearance: none; }
+    .ds-range-slider-input::-webkit-slider-thumb { border-color: ButtonText; background: ButtonFace; }
+    .ds-range-slider-input::-moz-range-thumb { border-color: ButtonText; background: ButtonFace; }
+  }
+}

@@ -1,0 +1,7 @@
+@layer ds {
+  .ds-checkbox-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-checkbox-group > legend { padding: 0; margin-bottom: var(--ds-space-sm); }
+  .ds-checkbox-options { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm) var(--ds-space-lg); }
+  .ds-checkbox-options[data-direction="vertical"] { flex-direction: column; align-items: start; }
+  .ds-checkbox-group > .ds-field-hint, .ds-checkbox-group > .ds-field-error { margin-top: var(--ds-space-sm); }
+}

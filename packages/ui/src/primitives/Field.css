@@ -1,0 +1,52 @@
+/* 来源：workspace-ui.css 的 .workspace-field / .workspace-filters label，apps.css 的 .settings-select-wrap。 */
+@layer ds {
+  .ds-field-group { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .ds-field-label { color: var(--text-2); font-size: 12px; }
+  .ds-field-hint, .ds-field-error { margin: 0; font-size: 12px; line-height: 1.5; }
+  .ds-field-hint { color: var(--text-2); }
+  .ds-field-error { color: var(--ds-danger); }
+
+  .ds-field {
+    display: block; width: 100%; min-width: 0; min-height: var(--ds-field-height);
+    padding: 6px 9px; border: 1px solid var(--border); border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel); color: var(--text);
+    font: inherit; font-size: 13px; color-scheme: inherit; transition: border-color .15s;
+  }
+  .ds-field::placeholder { color: var(--text-2); opacity: .72; }
+  .ds-field:where(:hover):where(:not(:disabled)):where(:not([readonly])) { border-color: var(--ds-input-border-hover); }
+  .ds-field:focus, .ds-field:focus-visible { outline: none; box-shadow: none; border-color: var(--ds-input-border-focus); }
+  .ds-field:disabled { opacity: .65; background: var(--hover); cursor: not-allowed; }
+  .ds-field[readonly] { background: var(--bg-win); color: var(--text-2); }
+  .ds-field[aria-invalid="true"] { border-color: color-mix(in srgb, var(--ds-danger) 55%, var(--border)); }
+  textarea.ds-field { min-height: 72px; line-height: 1.6; resize: vertical; }
+
+  .ds-select { position: relative; min-width: 0; color: var(--text); }
+  .ds-select-native { position: absolute; width: 1px; height: 1px; margin: 0; padding: 0; border: 0; opacity: 0; clip-path: inset(50%); overflow: hidden; pointer-events: none; }
+  .ds-select > .ds-field-error { margin-top: 6px; }
+  .ds-select-options { max-height: 264px; overflow: auto; overscroll-behavior: contain; }
+  .ds-select-options.is-inline { max-height: calc(var(--ds-select-rows, 4) * 34px + 10px); padding: 5px; border: 1px solid var(--border); border-radius: var(--ds-radius-sm); background: var(--bg-panel); }
+  .ds-select-options.is-inline:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-select-options.is-inline[aria-invalid="true"] { border-color: var(--ds-danger); }
+  .ds-select-group { padding: 8px 10px 5px; color: var(--text-2); font-size: 12px; }
+  .ds-select-empty { padding: 18px 10px; color: var(--text-2); font-size: 12px; text-align: center; }
+
+  /* workspace-ui.css 的 .workspace-range，保留 6px 轨道与 18px 滑块。 */
+  .ds-range { display: flex; align-items: center; min-width: 0; padding: 12px 0; border-radius: calc(4px * var(--ds-radius-scale)); }
+  .ds-range-input {
+    appearance: none; width: 100%; height: var(--ds-range-track-height); margin: 0; padding: 0; border: 0; border-radius: 99px;
+    background: var(--ds-range-background, linear-gradient(to right, var(--accent) var(--ds-range-fill), var(--hover) var(--ds-range-fill)));
+    cursor: pointer;
+  }
+  .ds-range-input::-webkit-slider-thumb {
+    appearance: none; box-sizing: border-box; width: var(--ds-range-thumb-size); height: var(--ds-range-thumb-size);
+    border: 1px solid var(--border); border-radius: 50%; background: var(--bg-panel);
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--text) 18%, transparent);
+  }
+  .ds-range-input::-moz-range-thumb { width: 16px; height: 16px; border: 1px solid var(--border); border-radius: 50%; background: var(--bg-panel); }
+  .ds-range:has(> input:focus-visible) { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-range:has(> input:disabled) { opacity: .45; }
+  .ds-range > input:disabled { cursor: default; }
+  @media (forced-colors: active) { .ds-range > input { appearance: auto; background: Canvas; } }
+  @media (forced-colors: active) { .ds-field:focus { outline: 1px solid Highlight; outline-offset: -1px; } }
+  @media (prefers-reduced-motion: reduce) { .ds-field { transition: none; } }
+}

@@ -1,0 +1,40 @@
+/* 选择面板共用层次与状态，借鉴 Naive UI 的轻边框和柔和选中；颜色继续使用桌面令牌。 */
+@layer ds {
+  .ds-picker-popover { display: flex; flex-direction: column; padding: 0; user-select: none; }
+  .ds-picker-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--border); }
+  .ds-picker-footer > :first-child { margin-right: auto; }
+  .ds-picker-surface { box-sizing: border-box; display: flex; align-items: center; min-width: 0; min-height: var(--ds-picker-surface-height, var(--ds-field-height)); border: var(--ds-picker-border-width, 1px) solid var(--border); border-radius: var(--ds-radius-sm); background: var(--ds-picker-surface-bg, var(--bg-panel)); color: var(--text); transition: border-color .15s; }
+  .ds-picker-surface:where(:hover):not(.is-disabled):not(.is-readonly) { border-color: var(--ds-input-border-hover); }
+  .ds-picker-surface:where(:focus-within, .is-open) { border-color: var(--ds-input-border-focus); box-shadow: none; }
+  .ds-picker-surface:has([aria-invalid="true"]) { border-color: var(--ds-danger); }
+  .ds-picker-surface:has([aria-invalid="true"]):focus-within { box-shadow: none; }
+  .ds-picker-surface.is-disabled, .ds-picker-surface:disabled { background: var(--bg-win); color: var(--text-2); opacity: .55; cursor: not-allowed; }
+  .ds-picker-surface.is-readonly { background: var(--bg-win); color: var(--text-2); }
+  .ds-picker-tool { display: inline-flex; flex: 0 0 28px; align-items: center; justify-content: center; width: 28px; height: 28px; margin: 2px; padding: 0; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--text-2); font: inherit; cursor: pointer; }
+  .ds-picker-tool:where(:hover):not(:disabled) { background: var(--hover); color: var(--text); }
+  .ds-picker-tool:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-picker-tool:disabled { opacity: .45; cursor: default; }
+  .ds-picker-tool > .ds-icon { width: 15px; height: 15px; }
+  .ds-choice-select { width: 100%; padding: 0 10px; gap: 10px; font: inherit; font-size: var(--ds-choice-select-font-size, 13px); text-align: left; cursor: pointer; }
+  .ds-choice-select:focus, .ds-choice-select:focus-visible { outline: none; border-color: var(--ds-input-border-focus); }
+  .ds-choice-select[aria-invalid="true"] { border-color: var(--ds-danger); }
+  .ds-choice-select-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ds-choice-select > .ds-icon { width: 14px; height: 14px; color: var(--text-2); transition: transform .15s; }
+  .ds-choice-select.is-open > .ds-icon { transform: rotate(180deg); }
+  .ds-choice-menu { min-width: min(160px, calc(100vw - 16px)); max-width: calc(100vw - 16px); padding: 5px; }
+  .ds-choice-option { box-sizing: border-box; display: flex; align-items: center; gap: 16px; width: 100%; min-height: 34px; padding: 7px 10px; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--text); font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+  .ds-choice-option > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .ds-choice-option > .ds-icon { width: 14px; height: 14px; visibility: hidden; }
+  .ds-choice-option:where(:hover, :focus-visible):not(:disabled) { outline: none; background: var(--hover); }
+  .ds-choice-option[aria-selected="true"] { background: var(--ds-selection-bg); color: var(--accent); font-weight: 500; }
+  .ds-choice-option[aria-selected="true"] > .ds-icon { visibility: visible; }
+  .ds-choice-option:focus-visible { outline: none; box-shadow: inset 2px 0 0 var(--ds-input-border-focus); }
+  .ds-choice-option:disabled { opacity: .4; cursor: not-allowed; }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-picker-surface, .ds-choice-select > .ds-icon { transition: none; }
+  }
+  @media (forced-colors: active) {
+    .ds-picker-surface:focus-within { outline: 2px solid Highlight; }
+    .ds-choice-option[aria-selected="true"] { border: 1px solid Highlight; }
+  }
+}

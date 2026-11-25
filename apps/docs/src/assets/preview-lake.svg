@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="480" viewBox="0 0 840 480">
+  <title>山间湖泊示例图</title>
+  <rect width="840" height="480" fill="#edf4fb"/>
+  <circle cx="660" cy="108" r="46" fill="#ffd77a"/>
+  <path d="M0 320 220 100 410 310 570 170 840 330V480H0Z" fill="#8cb4d2"/>
+  <path d="m120 300 100-200 190 210 160-140 180 170Z" fill="#b6d0e3"/>
+  <path d="M0 330q210-40 420 0t420 0v150H0Z" fill="#699eab"/>
+  <path d="M0 400q210 25 420 0t420 0" fill="none" stroke="#d9eef0" stroke-width="3"/>
+  <text x="42" y="435" fill="#fff" font-family="sans-serif" font-size="24">山间湖泊</text>
+</svg>

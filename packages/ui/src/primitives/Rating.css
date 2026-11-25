@@ -1,0 +1,19 @@
+@layer ds {
+  .ds-rating { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-rating > legend { padding: 0; margin-bottom: var(--ds-space-sm); }
+  .ds-rating-options { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-xs); }
+  .ds-rating-option {
+    position: relative; display: inline-grid; place-items: center; box-sizing: border-box;
+    width: var(--ds-control-md); height: var(--ds-control-md); border: 1px solid transparent;
+    border-radius: var(--ds-radius-sm); color: var(--text-2); cursor: pointer;
+  }
+  .ds-rating-option > .ds-icon { width: 22px; height: 22px; }
+  .ds-rating-option[data-filled="true"] { color: var(--accent); }
+  .ds-rating-option[data-filled="true"] > .ds-icon { fill: color-mix(in srgb, var(--accent) 22%, transparent); }
+  .ds-rating-option:has(input:checked) { background: var(--ds-selection-bg); border-color: var(--ds-selection-border); }
+  .ds-rating-option:has(input:focus-visible) { outline: 1px solid var(--ds-input-border-focus); outline-offset: 1px; }
+  .ds-rating-option:where(:hover):not(:has(input:checked, input:disabled)) { background: var(--hover); }
+  .ds-rating[aria-readonly="true"] .ds-rating-option { cursor: default; }
+  .ds-rating-option:has(input:disabled) { opacity: .45; cursor: not-allowed; }
+  .ds-rating > .ds-field-hint, .ds-rating > .ds-field-error { margin-top: var(--ds-space-sm); }
+}

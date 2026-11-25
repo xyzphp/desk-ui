@@ -1,0 +1,17 @@
+@layer ds {
+  .ds-launchpad { display: grid; gap: var(--ds-space-lg); min-width: 0; }
+  .ds-launchpad-grid {
+    display: grid; grid-template-columns: repeat(var(--ds-launchpad-columns), minmax(0, 1fr)); align-items: start;
+    gap: var(--ds-space-sm); padding: 0; margin: 0; list-style: none;
+  }
+  .ds-launchpad-grid > li { min-width: 0; }
+  .ds-launchpad-item {
+    display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-md); box-sizing: border-box; width: 100%; min-width: 0;
+    padding: var(--ds-space-md) var(--ds-space-xs); border: 1px solid transparent; border-radius: var(--ds-radius-md);
+    background: transparent; color: var(--text); font: 13px/1.5 var(--font); text-align: center; cursor: pointer;
+  }
+  .ds-launchpad-item:where(:hover):not(:disabled) { background: var(--hover); }
+  .ds-launchpad-item:focus-visible { outline: 1px solid var(--ds-input-border-focus); border-color: var(--ds-selection-border); }
+  .ds-launchpad-item:disabled { opacity: .45; cursor: default; }
+  .ds-launchpad-item > span { max-width: 100%; overflow-wrap: anywhere; }
+}

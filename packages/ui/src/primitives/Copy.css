@@ -1,0 +1,22 @@
+@layer ds {
+  .ds-copy-action { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 4px; max-width: 100%; }
+  .ds-copy-feedback { color: var(--text-2); font-size: 12px; line-height: 1.5; }
+  .ds-copy-feedback:empty { height: 0; overflow: hidden; }
+  .ds-copy-action:has(.ds-copy-feedback:empty) { gap: 0; }
+  .ds-copy-feedback[role="alert"] { color: var(--ds-danger); }
+  .ds-copy-field { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; min-width: 0; }
+  .ds-copy-field > .ds-field { flex: 1 1 160px; width: 0; }
+  .ds-copy-field > .ds-copy-action { flex-shrink: 0; }
+  .ds-code-block { min-width: 0; width: 100%; margin: 0; border: 1px solid var(--border); border-radius: var(--ds-radius-md); overflow: hidden; }
+  .ds-code-head { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg-panel); color: var(--text); font-size: 13px; }
+  .ds-code-head > :first-child { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 500; }
+  .ds-code-language { color: var(--text-2); font-size: 12px; }
+  .ds-code-content {
+    max-height: 320px; margin: 0; padding: 14px; overflow: auto; border-top: 1px solid var(--border);
+    background: var(--bg-win); color: var(--text); font: 13px/1.7 var(--font-mono, ui-monospace, monospace);
+    white-space: pre; tab-size: 2; user-select: text;
+  }
+  .ds-code-content > code { font: inherit; }
+  .ds-code-content:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-code-block.is-wrapped .ds-code-content { white-space: pre-wrap; overflow-wrap: anywhere; }
+}

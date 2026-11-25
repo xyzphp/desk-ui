@@ -1,0 +1,17 @@
+@layer ds {
+  .ds-breadcrumb { min-width: 0; color: var(--text-2); font: 13px var(--font); }
+  .ds-breadcrumb-list, .ds-breadcrumb-overflow > ol { list-style: none; padding: 0; margin: 0; }
+  .ds-breadcrumb-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-xs); }
+  .ds-breadcrumb-list > li { display: inline-flex; align-items: center; gap: var(--ds-space-xs); min-width: 0; max-width: 100%; }
+  .ds-breadcrumb-list > li > .ds-icon { flex-shrink: 0; width: 13px; height: 13px; color: var(--text-2); }
+  .ds-breadcrumb-list:dir(rtl) .ds-icon { transform: rotate(180deg); }
+  .ds-breadcrumb-current { color: var(--text); font-weight: 500; overflow-wrap: anywhere; }
+  .ds-breadcrumb-button { border: 0; border-radius: calc(5px * var(--ds-radius-scale)); padding: 4px 6px; background: transparent; color: inherit; font: inherit; cursor: pointer; text-align: start; }
+  .ds-breadcrumb-button:hover { background: var(--hover); color: var(--accent); }
+  .ds-breadcrumb-button:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
+  .ds-breadcrumb [aria-disabled="true"] { opacity: .5; }
+  .ds-breadcrumb-overflow { min-width: min(180px, calc(100vw - 16px)); padding: 6px; }
+  .ds-breadcrumb-overflow > ol { display: flex; flex-direction: column; gap: var(--ds-space-xs); }
+  .ds-breadcrumb-overflow > ol > li > * { display: block; padding: 7px 10px; overflow-wrap: anywhere; }
+  .ds-breadcrumb-overflow .ds-breadcrumb-button { width: 100%; }
+}

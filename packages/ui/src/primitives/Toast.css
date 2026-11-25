@@ -1,0 +1,29 @@
+@layer ds {
+  .ds-toast-viewport {
+    position: fixed; top: calc(var(--menubar-h, 0px) + 12px); right: 12px; z-index: 9800;
+    display: flex; flex-direction: column; gap: 10px; width: 340px; max-width: calc(100% - 24px);
+    max-height: calc(100% - 24px); overflow: auto; pointer-events: none;
+  }
+  .ds-toast {
+    position: relative; display: flex; flex-shrink: 0; align-items: flex-start; gap: 10px; padding: 14px;
+    border: 1px solid var(--border); border-radius: calc(12px * var(--ds-radius-scale)); background: var(--bg-glass-strong);
+    color: var(--text); box-shadow: var(--ds-picker-shadow); font: 13px var(--font); pointer-events: auto;
+    animation: ds-slide-in .2s ease-out;
+  }
+  .ds-toast > .ds-icon { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; color: var(--accent); }
+  .ds-toast--success > .ds-icon { color: var(--ds-success); }
+  .ds-toast--warning > .ds-icon { color: var(--ds-warning); }
+  .ds-toast--error > .ds-icon { color: var(--ds-danger); }
+  .ds-toast-content { flex: 1; min-width: 0; line-height: 1.5; overflow-wrap: anywhere; }
+  .ds-toast-content > strong { font-size: 13px; }
+  .ds-toast-content > p { margin: 4px 0 0; color: var(--text-2); font-size: 12px; white-space: pre-wrap; }
+  .ds-toast-activate { position: absolute; inset: 0; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
+  .ds-toast-activate:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-toast-close {
+    position: relative; z-index: 1; display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px;
+    margin: -2px -2px 0 0; padding: 4px; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--text-2); cursor: pointer;
+  }
+  .ds-toast-close:hover { background: var(--hover); }
+  .ds-toast-close:focus-visible { outline: 2px solid var(--ds-focus-ring); }
+  @media (prefers-reduced-motion: reduce) { .ds-toast { animation: none; } }
+}

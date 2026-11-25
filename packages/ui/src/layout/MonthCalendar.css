@@ -1,0 +1,34 @@
+@layer ds {
+  .ds-month-calendar { min-width: 0; color: var(--text); font: 13px var(--font); }
+  .ds-month-calendar-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-md); }
+  .ds-month-calendar-head > h3 { margin: 0; font-size: 15px; font-weight: 600; }
+  .ds-month-calendar-actions { display: flex; align-items: center; gap: var(--ds-space-xs); }
+  .ds-month-calendar-scroll { margin-top: var(--ds-space-md); max-width: 100%; overflow: auto; }
+  .ds-month-calendar-table { width: 100%; min-width: 560px; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+  .ds-month-calendar-table th { padding: var(--ds-space-sm); color: var(--text-2); font-size: 12px; font-weight: 500; text-align: left; }
+  .ds-month-calendar-table td { vertical-align: top; height: 100px; padding: var(--ds-space-xs); border-top: 1px solid var(--border); }
+  .ds-month-calendar-table td[data-outside="true"] { background: var(--bg-win); }
+  .ds-month-date {
+    display: grid; place-items: center; width: var(--ds-control-sm); height: var(--ds-control-sm); margin-bottom: var(--ds-space-xs);
+    border: 1px solid transparent; border-radius: var(--ds-radius-sm); background: transparent; color: var(--text); font: inherit; cursor: pointer;
+  }
+  .ds-month-date:where(:hover):not(:disabled) { background: var(--hover); }
+  .ds-month-date[aria-current="date"] { color: var(--accent); font-weight: 600; }
+  .ds-month-date[aria-pressed="true"] { background: var(--ds-selection-bg); border-color: var(--ds-selection-border); color: var(--accent); }
+  .ds-month-date:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 1px; }
+  .ds-month-date:disabled { color: var(--text-2); opacity: .45; cursor: default; }
+  .ds-month-events { display: grid; gap: var(--ds-space-xs); padding: 0; margin: 0; list-style: none; }
+  .ds-month-events > li { min-width: 0; }
+  .ds-month-event {
+    display: block; box-sizing: border-box; width: 100%; padding: 3px 5px; border: 0; border-left: 2px solid var(--ds-display-color);
+    border-radius: calc(3px * var(--ds-radius-scale)); background: var(--bg-win); color: var(--text); font: 12px/1.5 var(--font); text-align: left;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  button.ds-month-event { cursor: pointer; }
+  button.ds-month-event:where(:hover):not(:disabled) { background: var(--hover); }
+  button.ds-month-event:focus-visible, .ds-month-event-more > summary:focus-visible { outline: 1px solid var(--ds-input-border-focus); }
+  button.ds-month-event:disabled { opacity: .45; cursor: default; }
+  .ds-month-event-more { margin-top: var(--ds-space-xs); }
+  .ds-month-event-more > summary { padding: 3px 0; color: var(--text-2); font-size: 12px; cursor: pointer; }
+  .ds-month-event-more[open] > summary { margin-bottom: var(--ds-space-xs); }
+}

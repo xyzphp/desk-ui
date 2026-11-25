@@ -1,0 +1,69 @@
+@layer ds {
+  .ds-range-combo {
+    display: grid;
+    grid-template-columns: minmax(80px, max-content) minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 14px;
+    min-width: 0;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .ds-range-combo > legend {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .ds-range-combo-controls {
+    display: flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .ds-range-combo-slider {
+    flex: 1 1 auto;
+    min-width: 36px;
+  }
+  .ds-range-combo-value {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .ds-range-combo-number {
+    width: 80px;
+  }
+  .ds-range-combo-number .ds-number-entry {
+    text-align: right;
+  }
+  .ds-range-combo-suffix {
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-range-combo > .ds-field-hint,
+  .ds-range-combo > .ds-field-error {
+    grid-column: 2;
+    margin: 0;
+  }
+  @container ds-workspace (max-width: 400px) {
+    .ds-range-combo {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 6px;
+    }
+    .ds-range-combo > legend,
+    .ds-range-combo-controls,
+    .ds-range-combo > .ds-field-hint,
+    .ds-range-combo > .ds-field-error {
+      grid-column: 1;
+    }
+    .ds-range-combo-controls {
+      grid-row: auto;
+    }
+  }
+}

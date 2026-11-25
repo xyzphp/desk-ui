@@ -1,0 +1,7 @@
+@layer ds {
+  .ds-kbd {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 20px; min-height: 23px; box-sizing: border-box;
+    padding: 1px 6px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: calc(5px * var(--ds-radius-scale));
+    background: var(--bg-win); color: var(--text-2); font: 12px var(--font-mono); line-height: 1.4; vertical-align: baseline;
+  }
+}

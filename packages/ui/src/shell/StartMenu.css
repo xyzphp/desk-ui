@@ -1,0 +1,231 @@
+/* Windows 开始菜单：开始按钮（任务栏 Dock 的第一项）与参考 Windows 11 的开始菜单面板。
+ * 面板用顶层 popover + 固定定位贴在任务栏上方，高度取自 Desktop 的 --dock-space。 */
+@layer ds {
+  .ds-start-button {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: var(--dock-item, 44px);
+    height: var(--dock-item, 44px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: calc(6px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--accent);
+    cursor: default;
+    transition: background 0.12s;
+  }
+  .ds-start-button:hover,
+  .ds-start-button.is-active {
+    background: var(--hover);
+  }
+  .ds-start-button:active svg {
+    transform: scale(0.88);
+  }
+  .ds-start-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  /* 参考 Windows 11：按任务栏高度固定在任务栏上方 12px，居中时在屏幕水平中部，靠左时贴左侧 12px；亚克力毛玻璃底。 */
+  .ds-start-menu {
+    position: fixed;
+    inset: auto 0 calc(var(--dock-space, 56px) + 12px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: min(720px, calc(100vw - 24px));
+    /* 高度随内容自适应，超过上限后应用列表出现滚动条，避免应用少时大片留白。 */
+    height: auto;
+    max-height: min(560px, calc(100vh - var(--dock-space, 56px) - 36px));
+    margin: 0 auto;
+    padding: 28px 28px 0;
+    border: 1px solid var(--ds-shell-glass-border, color-mix(in srgb, var(--text) 14%, transparent));
+    border-radius: var(--ds-shell-panel-radius, calc(8px * var(--ds-radius-scale)));
+    background: var(--ds-shell-glass-bg-strong, color-mix(in srgb, var(--bg-win) 62%, transparent));
+    color: var(--text);
+    font-size: 13px;
+    backdrop-filter: var(--ds-shell-glass-backdrop, blur(56px) saturate(190%));
+    -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(56px) saturate(190%));
+    box-shadow: var(
+      --ds-shell-glass-shadow,
+      0 24px 64px rgb(0 0 0 / calc(0.32 * var(--ds-shadow-strength))),
+      0 2px 8px rgb(0 0 0 / calc(0.14 * var(--ds-shadow-strength))),
+      inset 0 1px 0 color-mix(in srgb, white 22%, transparent)
+    );
+    overflow: hidden;
+    animation: ds-start-in 0.16s ease-out;
+  }
+  .ds-start-menu::before {
+    content: var(--ds-shell-glass-rim-content, none);
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: var(--ds-shell-glass-rim, none);
+    -webkit-mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
+    -webkit-mask-composite: xor;
+    mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .ds-start-menu[data-align='left'] {
+    inset-inline: 12px auto;
+    margin: 0;
+  }
+  @keyframes ds-start-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  .ds-start-search {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .ds-start-menu .ds-start-search {
+    border-color: var(--ds-shell-glass-border, var(--border));
+    background: var(--ds-shell-glass-chip-bg, color-mix(in srgb, var(--bg-panel) 70%, transparent));
+    box-shadow: var(--ds-shell-glass-shadow-sm, none);
+  }
+  .ds-start-menu .ds-start-search:focus-within {
+    border-color: var(--ds-input-border-focus);
+  }
+  .ds-start-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 120px;
+    margin: 0 -10px;
+    padding: 0 10px 12px;
+    overflow: hidden auto;
+  }
+  .ds-start-heading {
+    flex: 0 0 auto;
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .ds-start-grid {
+    display: grid;
+    flex: 0 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 6px 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ds-start-grid[data-view='list'] {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 2px 8px;
+  }
+  .ds-start-grid[data-view='grid'] .ds-start-app {
+    --ds-app-icon-size: 48px;
+  }
+  .ds-start-grid[data-view='list'] .ds-start-app {
+    --ds-app-icon-size: 28px;
+  }
+  .ds-start-app:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .ds-start-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 96px;
+    padding: 14px 4px 8px;
+    border: 0;
+    border-radius: calc(6px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+    cursor: default;
+  }
+  .ds-start-grid[data-view='list'] .ds-start-app {
+    flex-direction: row;
+    gap: 14px;
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: left;
+  }
+  .ds-start-app > span {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow-wrap: anywhere;
+  }
+  .ds-start-app:hover {
+    background: var(--ds-shell-item-hover, color-mix(in srgb, var(--text) 8%, transparent));
+  }
+  .ds-start-empty {
+    margin: 24px 0;
+    color: var(--text-2);
+    font-size: 13px;
+    text-align: center;
+  }
+  .ds-start-footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 -28px;
+    padding: 12px 28px;
+    border-top: 1px solid var(--ds-shell-glass-border, color-mix(in srgb, var(--text) 10%, transparent));
+    background: var(--ds-shell-glass-bg-soft, color-mix(in srgb, var(--bg-win) 55%, transparent));
+  }
+  .ds-start-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ds-start-user > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ds-start-power {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-start-button {
+      transition: none;
+    }
+    .ds-start-menu {
+      animation: none;
+    }
+  }
+  @media (forced-colors: active) {
+    .ds-start-button.is-active,
+    .ds-start-app:hover {
+      outline: 1px solid Highlight;
+    }
+    .ds-start-menu,
+    .ds-start-menu .ds-start-search,
+    .ds-start-footer {
+      background: Canvas;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+    }
+    .ds-start-menu::before {
+      display: none;
+    }
+  }
+}

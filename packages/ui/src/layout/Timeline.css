@@ -1,0 +1,14 @@
+@layer ds {
+  .ds-timeline { list-style: none; margin: 0; padding: 0; min-width: 0; color: var(--text); font: 13px var(--font); }
+  .ds-timeline-item { position: relative; display: flex; align-items: start; gap: var(--ds-space-md); min-width: 0; padding-bottom: var(--ds-space-xl); }
+  .ds-timeline-item:not(:last-child)::before { content: ''; position: absolute; width: 1px; top: 22px; bottom: 0; left: 11px; background: var(--border); }
+  .ds-timeline-item:last-child { padding-bottom: 0; }
+  .ds-timeline-mark { position: relative; display: grid; flex: 0 0 23px; width: 23px; height: 23px; place-items: center; color: var(--ds-display-color); }
+  .ds-timeline-mark > .ds-icon { width: 17px; height: 17px; }
+  .ds-timeline-dot { width: 9px; height: 9px; border: 2px solid var(--ds-display-color); border-radius: 50%; box-sizing: border-box; }
+  .ds-timeline-content { flex: 1; min-width: 0; }
+  .ds-timeline-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ds-space-sm) var(--ds-space-lg); }
+  .ds-timeline-heading > strong { font-size: 13px; line-height: 23px; font-weight: 600; overflow-wrap: anywhere; }
+  .ds-timeline-heading > time { color: var(--text-2); font-size: 12px; }
+  .ds-timeline-body { margin-top: var(--ds-space-sm); line-height: 1.7; overflow-wrap: anywhere; }
+}

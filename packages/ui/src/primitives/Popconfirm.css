@@ -1,0 +1,9 @@
+@layer ds {
+  .ds-popconfirm { width: 300px; padding: var(--ds-space-lg); background: var(--bg-panel); }
+  .ds-popconfirm-heading { display: flex; align-items: start; gap: var(--ds-space-sm); }
+  .ds-popconfirm-heading > .ds-icon { margin-top: 2px; color: var(--accent); }
+  .ds-popconfirm-heading > h3 { margin: 0; font: 600 13px var(--font); line-height: 1.5; overflow-wrap: anywhere; }
+  .ds-popconfirm-description { margin-top: var(--ds-space-sm); color: var(--text-2); font-size: 13px; overflow-wrap: anywhere; }
+  .ds-popconfirm-error { margin-top: var(--ds-space-sm); color: var(--ds-danger); font-size: 12px; }
+  .ds-popconfirm-actions { display: flex; justify-content: flex-end; gap: var(--ds-space-sm); margin-top: var(--ds-space-lg); }
+}

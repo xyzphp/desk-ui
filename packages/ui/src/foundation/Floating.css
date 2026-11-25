@@ -1,0 +1,10 @@
+@layer ds {
+  .ds-anchor-layer {
+    position: fixed; inset: auto; z-index: 9700; margin: 0; box-sizing: border-box;
+    width: max-content; min-width: 0; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px);
+    padding: 12px; border: 1px solid var(--border); border-radius: var(--ds-radius-md);
+    background: var(--bg-panel); color: var(--text); box-shadow: var(--ds-picker-shadow);
+    overflow: auto; visibility: hidden; font: 13px var(--font); text-align: left;
+  }
+  .ds-anchor-layer:focus { outline: none; }
+}

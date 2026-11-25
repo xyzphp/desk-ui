@@ -1,0 +1,35 @@
+@layer ds {
+  .ds-radio-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-radio-group > legend { margin-bottom: 8px; padding: 0; }
+  .ds-radio-options { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+  .ds-radio-options[data-direction="vertical"] { flex-direction: column; align-items: flex-start; }
+  .ds-radio-group > .ds-field-hint, .ds-radio-group > .ds-field-error { margin-top: 8px; }
+  .ds-radio { display: inline-flex; align-items: center; gap: 8px; color: var(--text); font-size: 13px; cursor: pointer; }
+  .ds-radio > input {
+    appearance: none; flex-shrink: 0; display: grid; place-items: center; width: 16px; height: 16px; margin: 0;
+    border: 1px solid var(--ds-input-border-hover); border-radius: 50%; background: var(--bg-panel); cursor: inherit;
+  }
+  .ds-radio > input::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transform: scale(0); }
+  .ds-radio > input:checked { border-color: var(--accent); background: var(--ds-selection-bg); }
+  .ds-radio > input:checked::after { transform: scale(1); }
+  .ds-radio > input:checked + span { color: var(--accent); }
+  .ds-radio > input:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 3px; }
+  .ds-radio:has(> input:disabled) { opacity: .45; cursor: default; }
+  .ds-radio > span { min-width: 0; overflow-wrap: anywhere; }
+  .ds-number-input, .ds-password-input { width: 100%; }
+  .ds-number-input:has(input:disabled), .ds-password-input:has(input:disabled) {
+    background: var(--bg-win); color: var(--text-2); opacity: .55;
+  }
+  .ds-number-entry, .ds-password-entry {
+    flex: 1; min-width: 0; width: 100%; min-height: calc(var(--ds-field-height) - 2px); padding: 6px 9px;
+    border: 0; border-radius: inherit; background: transparent; color: inherit; font: 13px var(--font);
+  }
+  .ds-number-entry { appearance: textfield; }
+  .ds-number-entry::-webkit-inner-spin-button, .ds-number-entry::-webkit-outer-spin-button { appearance: none; margin: 0; }
+  .ds-number-actions { display: flex; align-items: center; flex-shrink: 0; }
+  .ds-number-input:has(input:user-invalid), .ds-password-input:has(input:user-invalid) { border-color: var(--ds-danger); }
+  @media (forced-colors: active) {
+    .ds-radio > input { appearance: auto; }
+    .ds-radio > input::after { display: none; }
+  }
+}

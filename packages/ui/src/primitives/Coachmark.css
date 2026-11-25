@@ -1,0 +1,118 @@
+@layer ds {
+  /* 气泡沿用公共锚点浮层的底板；箭头需要伸出边框，所以不裁剪溢出。 */
+  .ds-coachmark {
+    width: 300px;
+    padding: var(--ds-space-lg);
+    overflow: visible;
+    background: var(--bg-panel);
+    animation: ds-coachmark-in 0.16s ease-out;
+  }
+  .ds-coachmark::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    transform: rotate(45deg);
+    display: none;
+  }
+  .ds-coachmark[data-side='bottom']::before {
+    display: block;
+    top: -6px;
+    left: calc(var(--ds-coachmark-arrow, 50%) - 6px);
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .ds-coachmark[data-side='top']::before {
+    display: block;
+    bottom: -6px;
+    left: calc(var(--ds-coachmark-arrow, 50%) - 6px);
+    border-left: 0;
+    border-top: 0;
+  }
+  .ds-coachmark[data-side='right']::before {
+    display: block;
+    left: -6px;
+    top: calc(var(--ds-coachmark-arrow, 50%) - 6px);
+    border-top: 0;
+    border-right: 0;
+  }
+  .ds-coachmark[data-side='left']::before {
+    display: block;
+    right: -6px;
+    top: calc(var(--ds-coachmark-arrow, 50%) - 6px);
+    border-bottom: 0;
+    border-left: 0;
+  }
+  .ds-coachmark-head {
+    display: flex;
+    align-items: start;
+    gap: var(--ds-space-sm);
+  }
+  .ds-coachmark-head > h3 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font: 600 14px var(--font);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .ds-coachmark-close {
+    flex: none;
+    margin: -4px -6px 0 0;
+  }
+  .ds-coachmark-body {
+    margin-top: var(--ds-space-xs);
+    color: var(--text-2);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+  .ds-coachmark-foot {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-sm);
+    margin-top: var(--ds-space-lg);
+  }
+  .ds-coachmark-meta {
+    color: var(--text-2);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-coachmark-actions {
+    display: flex;
+    gap: var(--ds-space-sm);
+    margin-left: auto;
+  }
+
+  /* 聚光：一个跟随目标的透明框，用超大外投影压暗其余区域；不拦截指针。 */
+  .ds-coachmark-spot {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--ds-radius-md);
+    background: transparent;
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 0 0 100vmax var(--ds-dialog-overlay);
+    pointer-events: none;
+    overflow: visible;
+  }
+  .ds-coachmark-spot[data-empty='true'] {
+    box-shadow: 0 0 0 100vmax var(--ds-dialog-overlay);
+  }
+
+  @keyframes ds-coachmark-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-coachmark {
+      animation: none;
+    }
+  }
+}

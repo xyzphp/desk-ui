@@ -1,0 +1,20 @@
+@layer ds {
+  .ds-chip { max-width: 100%; gap: var(--ds-space-xs); }
+  .ds-chip-text { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+  .ds-chip-remove {
+    display: grid; place-items: center; flex-shrink: 0; width: 18px; height: 18px; padding: 2px;
+    border: 0; border-radius: calc(4px * var(--ds-radius-scale)); background: transparent; color: inherit; cursor: pointer;
+  }
+  .ds-chip-remove > .ds-icon { width: 12px; height: 12px; }
+  .ds-chip-remove:where(:hover):not(:disabled) { background: var(--hover); }
+  .ds-chip-remove:focus-visible { outline: 1px solid var(--ds-input-border-focus); }
+  .ds-chip-remove:disabled { opacity: .5; cursor: default; }
+  .ds-tag-input { min-width: 0; display: flex; flex-direction: column; gap: var(--ds-space-xs); }
+  .ds-tag-input-surface { flex-wrap: wrap; align-items: center; gap: var(--ds-space-xs); padding: 4px 6px; }
+  .ds-tag-input-surface:has(> input:disabled) { background: var(--bg-win); opacity: .55; }
+  .ds-tag-input-entry {
+    flex: 1 1 100px; width: 0; min-width: min(100%, 80px); min-height: 24px; padding: 2px 3px;
+    border: 0; background: transparent; color: var(--text); font: 13px var(--font);
+  }
+  .ds-tag-input-entry::placeholder { color: var(--text-2); opacity: .7; }
+}

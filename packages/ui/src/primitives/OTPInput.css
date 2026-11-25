@@ -1,0 +1,22 @@
+@layer ds {
+  .ds-otp { min-width: 0; }
+  .ds-otp-control {
+    position: relative; display: grid; grid-template-columns: repeat(var(--ds-otp-length), minmax(0, 1fr)); gap: var(--ds-space-sm);
+    width: min(100%, calc(var(--ds-otp-length) * 34px + (var(--ds-otp-length) - 1) * var(--ds-space-sm)));
+  }
+  .ds-otp-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: text; }
+  .ds-otp-cell {
+    display: grid; place-items: center; box-sizing: border-box; min-width: 0; height: 40px;
+    border: 1px solid var(--border); border-radius: var(--ds-radius-sm); background: var(--bg-panel);
+    color: var(--text); font: 16px var(--font-mono); pointer-events: none;
+  }
+  .ds-otp-control:has(input:focus-visible) .ds-otp-cell[data-active="true"] { border-color: var(--ds-input-border-focus); }
+  .ds-otp-control:has(input[aria-invalid="true"]) .ds-otp-cell { border-color: var(--ds-danger); }
+  .ds-otp-control:has(input[readonly]) .ds-otp-cell { background: var(--bg-win); color: var(--text-2); }
+  .ds-otp-control:has(input:disabled) { opacity: .55; }
+  .ds-otp-input:disabled { cursor: not-allowed; }
+  .ds-otp > .ds-field-error { margin-top: var(--ds-space-sm); }
+  @media (forced-colors: active) {
+    .ds-otp-control:has(input:focus-visible) .ds-otp-cell[data-active="true"] { outline: 1px solid Highlight; }
+  }
+}

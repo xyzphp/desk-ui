@@ -1,0 +1,54 @@
+@layer ds {
+  .ds-language-switcher {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .ds-language-switcher.ds-menubar-item {
+    padding: 0 6px;
+  }
+  /* 无边框短码文字，尺寸与菜单栏上的图标按钮协调。 */
+  .ds-language-switcher-code {
+    display: inline-grid;
+    box-sizing: border-box;
+    min-width: 20px;
+    height: 18px;
+    padding: 0 3px;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .ds-language-switcher:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .ds-language-switcher--plain {
+    height: var(--ds-control-sm);
+    padding: 0 6px;
+    border-radius: calc(6px * var(--ds-radius-scale));
+  }
+  .ds-language-switcher--plain:where(:hover, .is-active) {
+    background: var(--hover);
+  }
+  .ds-language-option {
+    justify-content: space-between;
+    min-width: 148px;
+  }
+  .ds-language-option-check {
+    display: inline-grid;
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    place-items: center;
+  }
+}

@@ -1,0 +1,18 @@
+@layer ds {
+  .ds-dock-window-preview { padding: var(--ds-space-md); max-width: min(760px, calc(100vw - 24px)); }
+  .ds-dock-item[aria-disabled="true"] { opacity: .45; cursor: default; }
+  .ds-dock-sort-panel { position: absolute; inset-inline: var(--ds-space-lg); bottom: 90px; max-height: 60%; overflow: auto;
+    padding: var(--ds-space-lg); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong));
+    backdrop-filter: var(--ds-shell-glass-backdrop, none); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, none);
+    color: var(--text); border: 1px solid var(--ds-shell-glass-border, var(--border));
+    border-radius: var(--ds-shell-panel-radius, var(--radius)); box-shadow: var(--ds-shell-glass-shadow, var(--ds-picker-shadow)); z-index: 10002; }
+  @media (forced-colors: active) {
+    .ds-dock-sort-panel {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+    }
+  }
+  .ds-dock-sort-heading { display: flex; justify-content: space-between; align-items: center; gap: var(--ds-space-md);
+    margin-bottom: var(--ds-space-md); font-size: 13px; }
+}

@@ -1,0 +1,272 @@
+/* 设计令牌：颜色、圆角、间距、字号、阴影与焦点；深浅色与高对比度在此切换。 */
+@layer ds;
+
+:root {
+  --ds-accent-blue: #0a84ff;
+  --ds-accent-purple: #bf5af2;
+  --ds-accent-pink: #ff375f;
+  --ds-accent-orange: #ff9f0a;
+  --ds-accent-green: #30d158;
+  --ds-accent-cyan: #64d2ff;
+  --ds-accent-gray: #8e8e93;
+  --accent: var(--ds-accent-blue);
+  --font: var(
+    --system-font,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'PingFang SC',
+    'Microsoft YaHei',
+    sans-serif
+  );
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'PingFang SC', 'Microsoft YaHei', monospace;
+  /* 皮肤可调的两个比例：圆角与投影强度。所有圆角 / 投影都乘以它们，默认 1 即内置取值；皮肤只改这两个数，不逐条覆盖。 */
+  --ds-radius-scale: 1;
+  --ds-shadow-strength: 1;
+  --ds-drag-ghost-opacity: .88;
+  --ds-drag-source-opacity: .45;
+  --radius: calc(12px * var(--ds-radius-scale));
+  --focus-outline: color-mix(in srgb, var(--accent) 76%, white);
+  --focus-glow: color-mix(in srgb, var(--accent) 20%, transparent);
+
+  /* 组件库补充的语义令牌，取值来自 workspace-ui.css 与 apps.css 中的状态色。 */
+  --ds-success: #198455;
+  --ds-chart-blue: #2879d5;
+  --ds-chart-green: #26865f;
+  --ds-workflow-complete: #22a06b;
+  --ds-warning: #ae781d;
+  --ds-danger: #d0444a;
+  /* 迁移站从原站 CSS 沿用的固定色值：文件图标 / 状态标签 / 危险与成功文字 / 预览棋盘格。保持原站取值，避免迁移后视觉漂移。 */
+  --ds-file-icon: #8e9bb1;
+  --ds-file-folder: #55b5f9;
+  --ds-danger-soft: #e34848;
+  --ds-danger-bright: #ff453a;
+  --ds-danger-text: #b42318;
+  --ds-success-text: #1e7e34;
+  --ds-tone-blue: #3b82f6;
+  --ds-tone-blue-text: #2563eb;
+  --ds-tone-blue-light: #60a5fa;
+  --ds-tone-green: #10b981;
+  --ds-tone-green-text: #059669;
+  --ds-tone-green-light: #34d399;
+  --ds-tone-red: #ef4444;
+  --ds-tone-amber: #d38a2d;
+  --ds-tone-amber-text: #a9650b;
+  --ds-tone-amber-text-soft: #c38320;
+  --ds-tone-gray: #8c939e;
+  --ds-checker-dark: #222;
+  --ds-checker-darker: #181818;
+  --ds-message-own-color: #95ec69;
+  --ds-message-own-text: #172819;
+  /* 原站个人令牌与客户端代码配置固定使用深色代码衬底。 */
+  --ds-code-block-bg: #152438;
+  /* 二维码固定白底黑块，任何主题下都保证扫码对比度。 */
+  --ds-qr-light: #fff;
+  --ds-qr-dark: #000;
+  --ds-code-block-text: #e4edf8;
+  --ds-code-block-thumb: #64758a;
+  --ds-code-block-thumb-hover: #8e9bae;
+  --ds-control-sm: 28px;
+  --ds-control-md: 32px;
+  --ds-field-height: 34px;
+  --ds-space-none: 0px;
+  --ds-space-xs: 4px;
+  --ds-space-sm: 8px;
+  --ds-space-md: 12px;
+  --ds-space-lg: 16px;
+  --ds-space-xl: 24px;
+  --ds-space-xxl: 32px;
+  --ds-resize-hit-size: 8px;
+  --ds-statistic-value-size: 28px;
+  --ds-drawer-sm: 320px;
+  --ds-drawer-md: 420px;
+  --ds-drawer-lg: 640px;
+  --ds-radius-sm: calc(7px * var(--ds-radius-scale));
+  --ds-radius-md: calc(9px * var(--ds-radius-scale));
+  /* apps.css 的 .settings-switch：保留轨道、滑块尺寸与白色滑块。 */
+  --ds-switch-width: 32px;
+  --ds-switch-height: 20px;
+  --ds-switch-thumb-size: 16px;
+  --ds-switch-thumb: #fff;
+  --ds-switch-thumb-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  --ds-range-track-height: 6px;
+  --ds-range-thumb-size: 18px;
+  /* files.css 的 .fm-image-viewer-layer：图片预览固定使用深色衬底。 */
+  --ds-preview-bg: rgba(10, 14, 22, 0.88);
+  --ds-preview-text: #fff;
+  --ds-crop-grid: rgba(255, 255, 255, 0.2);
+  /* 系统弹窗的遮罩与危险动作。 */
+  --ds-dialog-overlay: rgba(0, 0, 0, 0.18);
+  --ds-dialog-danger: #ff3b30;
+  --ds-dialog-on-action: #fff;
+  --ds-widget-shadow: 0 8px 26px rgb(0 0 0 / calc(0.16 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  --ds-drag-shadow: 0 16px 32px rgb(0 0 0 / calc(0.25 * var(--ds-shadow-strength)));
+  /* apps.css 的 .custom-app-widget-logo / 指标条 / 错误状态。 */
+  --ds-widget-logo-base: #fff;
+  --ds-widget-logo-border: rgba(0, 0, 0, 0.07);
+  --ds-widget-metric-success: #1aa785;
+  --ds-widget-metric-warning: #ff9f0a;
+  --ds-widget-metric-critical: #ff453a;
+  --ds-widget-state-error: #d43731;
+  /* 应用图形默认原色，与原站 .app-ico 一致；需要压暗时由 brightness 属性单独调节。 */
+  --ds-app-icon-brightness: 1;
+  /* 固定平台色与壁纸素材集中管理；不跟随主题重新配色。 */
+  --ds-wallpaper-sequoia:
+    radial-gradient(ellipse at 20% 80%, #ff6b6b 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, #4facfe 0%, transparent 55%),
+    radial-gradient(ellipse at 60% 70%, #a18cd1 0%, transparent 50%),
+    linear-gradient(135deg, #1e3c72, #2a5298 40%, #f093fb);
+  --ds-wallpaper-sonoma:
+    radial-gradient(circle at 30% 30%, #f6d365 0%, transparent 45%),
+    radial-gradient(circle at 75% 65%, #fda085 0%, transparent 50%), linear-gradient(160deg, #43cea2, #185a9d);
+  --ds-wallpaper-aurora:
+    radial-gradient(ellipse at 50% 0%, #00f5a0 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, #7f00ff 0%, transparent 55%), linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  --ds-wallpaper-dusk:
+    radial-gradient(circle at 70% 30%, #ff9a9e 0%, transparent 50%),
+    radial-gradient(circle at 20% 70%, #fad0c4 0%, transparent 50%), linear-gradient(135deg, #654ea3, #eaafc8);
+  /* 动态壁纸的流动光斑：取自各预设壁纸自身的主色。 */
+  --ds-wallpaper-sequoia-glow-a: #ff6b6b;
+  --ds-wallpaper-sequoia-glow-b: #4facfe;
+  --ds-wallpaper-sequoia-glow-c: #f093fb;
+  --ds-wallpaper-sonoma-glow-a: #f6d365;
+  --ds-wallpaper-sonoma-glow-b: #43cea2;
+  --ds-wallpaper-sonoma-glow-c: #fda085;
+  --ds-wallpaper-aurora-glow-a: #7f00ff;
+  --ds-wallpaper-aurora-glow-b: #00f5a0;
+  --ds-wallpaper-aurora-glow-c: #2c9fc9;
+  --ds-wallpaper-dusk-glow-a: #fad0c4;
+  --ds-wallpaper-dusk-glow-b: #ff9a9e;
+  --ds-wallpaper-dusk-glow-c: #8f6fd6;
+  /* 动态壁纸的细颗粒噪点：静态 SVG 分形噪声贴图，叠加模式消除渐变色带断层。 */
+  --ds-wallpaper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --ds-wallpaper-grain-opacity: .09;
+  --ds-on-accent: #fff;
+  --ds-shade: #000;
+  --ds-desktop-foreground: #fff;
+  --ds-icon-image-bg: #fff;
+  --ds-window-close: #ff5f57;
+  --ds-window-minimize: #febc2e;
+  --ds-window-maximize: #28c840;
+  --ds-window-close-hover: #d92e2e;
+  --ds-theme-swatch-light: linear-gradient(135deg, #fff, #e5e5ea);
+  --ds-theme-swatch-dark: linear-gradient(135deg, #3a3a3c, #1c1c1e);
+  --ds-theme-swatch-auto: linear-gradient(135deg, #fff 50%, #1c1c1e 50%);
+}
+
+/* 派生状态在主题边界重新计算，避免嵌套深色面板继承外层浅色的选中底色。 */
+:root,
+[data-theme] {
+  --ds-focus-ring: color-mix(in srgb, var(--text) 28%, transparent);
+  --ds-selection-bg: color-mix(in srgb, var(--accent) 10%, var(--bg-panel));
+  --ds-selection-border: color-mix(in srgb, var(--accent) 35%, var(--border));
+  --ds-input-border-hover: color-mix(in srgb, var(--text) 22%, var(--border));
+  --ds-input-border-focus: color-mix(in srgb, var(--text) 45%, var(--border));
+  --ds-picker-shadow:
+    0 3px 6px -4px color-mix(in srgb, var(--text) calc(12% * var(--ds-shadow-strength)), transparent),
+    0 6px 16px color-mix(in srgb, var(--text) calc(8% * var(--ds-shadow-strength)), transparent);
+}
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --bg-glass: rgba(255, 255, 255, 0.62);
+  --bg-glass-strong: rgba(246, 246, 248, 0.86);
+  /* 液态玻璃：高透纯色玻璃底 + 清晰低雾高饱和 backdrop-filter + 斜向菲涅耳高光环与厚玻璃内发光；
+   * 纯色底板与不越界外阴影（上方扩散 <= 11px）减少 Windows Chromium 局部交换对相邻卡片的横切重绘。 */
+  --ds-liquid-glass-bg: rgba(255, 255, 255, 0.28);
+  --ds-liquid-glass-bg-strong: rgba(255, 255, 255, 0.38);
+  --ds-liquid-glass-card: rgba(255, 255, 255, 0.62);
+  --ds-liquid-glass-bg-soft: rgba(255, 255, 255, 0.2);
+  --ds-liquid-glass-chip-bg: rgba(255, 255, 255, 0.36);
+  --ds-liquid-glass-border: rgba(255, 255, 255, 0.5);
+  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.86);
+  --ds-liquid-glass-rim-mask: linear-gradient(#fff 0 0);
+  --ds-liquid-glass-rim: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.22) 28%,
+    rgba(255, 255, 255, 0.04) 54%,
+    rgba(255, 255, 255, 0.78) 100%
+  );
+  --ds-liquid-glass-filter: blur(14px) saturate(210%);
+  --ds-liquid-glass-filter-soft: blur(10px) saturate(195%);
+  --ds-liquid-glass-shadow:
+    0 10px 14px rgb(0 0 0 / calc(0.14 * var(--ds-shadow-strength))),
+    0 0 0 0.5px rgba(255, 255, 255, 0.44),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.94),
+    inset 1.5px 0 1px rgba(255, 255, 255, 0.58),
+    inset 0 -1.5px 1px rgba(255, 255, 255, 0.48),
+    inset -1px 0 1px rgba(255, 255, 255, 0.28),
+    inset 0 0 22px rgba(255, 255, 255, 0.24);
+  --ds-liquid-glass-shadow-sm:
+    0 6px 10px rgb(0 0 0 / calc(0.09 * var(--ds-shadow-strength))),
+    0 0 0 0.5px rgba(255, 255, 255, 0.38),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+    inset 1px 0 1px rgba(255, 255, 255, 0.48),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.38),
+    inset 0 0 16px rgba(255, 255, 255, 0.18);
+  --bg-win: #f5f5f7;
+  --bg-panel: #ffffff;
+  --ds-note-yellow: #fff5cd;
+  --ds-note-blue: #e8f0ff;
+  --ds-note-green: #e6f5e7;
+  --ds-note-pink: #fce6ef;
+  --ds-note-white: #fffdfa;
+  --bg-sidebar: rgba(236, 236, 240, 0.8);
+  --text: #1d1d1f;
+  --text-2: #6e6e73;
+  --border: rgba(0, 0, 0, 0.1);
+  --hover: rgba(0, 0, 0, 0.06);
+  --shadow: 0 20px 60px rgb(0 0 0 / calc(0.25 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-glass: rgba(40, 40, 46, 0.55);
+  --bg-glass-strong: rgba(36, 36, 40, 0.88);
+  --ds-liquid-glass-bg: rgba(20, 24, 36, 0.32);
+  --ds-liquid-glass-bg-strong: rgba(24, 28, 40, 0.44);
+  --ds-liquid-glass-card: rgba(34, 38, 50, 0.58);
+  --ds-liquid-glass-bg-soft: rgba(24, 28, 40, 0.22);
+  --ds-liquid-glass-chip-bg: rgba(255, 255, 255, 0.13);
+  --ds-liquid-glass-border: rgba(255, 255, 255, 0.24);
+  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.46);
+  --ds-liquid-glass-rim: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(255, 255, 255, 0.14) 28%,
+    rgba(255, 255, 255, 0.03) 54%,
+    rgba(255, 255, 255, 0.44) 100%
+  );
+  --ds-liquid-glass-filter: blur(14px) saturate(195%);
+  --ds-liquid-glass-filter-soft: blur(10px) saturate(185%);
+  --ds-liquid-glass-shadow:
+    0 10px 14px rgb(0 0 0 / calc(0.32 * var(--ds-shadow-strength))),
+    0 0 0 0.5px rgba(255, 255, 255, 0.16),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+    inset 1.5px 0 1px rgba(255, 255, 255, 0.26),
+    inset 0 -1.5px 1px rgba(255, 255, 255, 0.2),
+    inset -1px 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 24px rgba(255, 255, 255, 0.09);
+  --ds-liquid-glass-shadow-sm:
+    0 6px 10px rgb(0 0 0 / calc(0.24 * var(--ds-shadow-strength))),
+    0 0 0 0.5px rgba(255, 255, 255, 0.14),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.42),
+    inset 1px 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 16px rgba(255, 255, 255, 0.07);
+  --bg-win: #1e1e20;
+  --bg-panel: #2a2a2d;
+  --ds-note-yellow: #49402c;
+  --ds-note-blue: #28394b;
+  --ds-note-green: #2d4135;
+  --ds-note-pink: #49323e;
+  --ds-note-white: #35313d;
+  --bg-sidebar: rgba(44, 44, 48, 0.8);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --border: rgba(255, 255, 255, 0.1);
+  --hover: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 60px rgb(0 0 0 / calc(0.6 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(255, 255, 255, 0.15);
+}

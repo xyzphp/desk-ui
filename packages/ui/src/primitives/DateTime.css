@@ -1,0 +1,578 @@
+/* 来源：workspace-field、workspace-input-range；选择面板按用户要求结合 Naive UI 的层次与状态。 */
+@layer ds {
+  .ds-temporal-control {
+    width: 100%;
+  }
+  .ds-temporal-entry {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  .ds-temporal-input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: calc(var(--ds-field-height) - 2px);
+    padding: 6px 10px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 13px;
+    color-scheme: inherit;
+  }
+  .ds-temporal-input:focus {
+    outline: none;
+  }
+  .ds-temporal-input::-webkit-calendar-picker-indicator,
+  .ds-temporal-input::-webkit-inner-spin-button {
+    display: none;
+  }
+  .ds-temporal-input::-webkit-datetime-edit,
+  .ds-temporal-input::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  .ds-temporal-input::-webkit-datetime-edit-day-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-month-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-year-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-hour-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-minute-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-second-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-millisecond-field:focus,
+  .ds-temporal-input::-webkit-datetime-edit-ampm-field:focus {
+    outline: none;
+    border-radius: calc(3px * var(--ds-radius-scale));
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+  }
+  .ds-temporal-input::selection {
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+  }
+  .ds-temporal-input:disabled {
+    cursor: not-allowed;
+  }
+  .ds-temporal-entry.is-empty:not(:focus-within) > input {
+    color: transparent;
+  }
+  .ds-temporal-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    overflow: hidden;
+    color: var(--text-2);
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .ds-temporal-entry:focus-within > .ds-temporal-placeholder {
+    display: none;
+  }
+  .ds-picker-clear {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ds-temporal-control:where(:hover, :focus-within) > .ds-picker-clear {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .ds-range-picker {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 6px;
+  }
+  .ds-range-picker-fields {
+    --ds-picker-border-width: 0px;
+    --ds-picker-surface-bg: transparent;
+    --ds-picker-surface-height: calc(var(--ds-field-height) - 2px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel);
+    transition: border-color 0.15s;
+  }
+  .ds-range-picker-fields:where(:hover):not(.is-disabled):not(.is-readonly) {
+    border-color: var(--ds-input-border-hover);
+  }
+  .ds-range-picker-fields:focus-within {
+    border-color: var(--ds-input-border-focus);
+  }
+  .ds-range-picker-endpoint {
+    display: flex;
+    min-width: 0;
+    border-radius: inherit;
+  }
+  .ds-range-picker-endpoint:focus-within {
+    background: color-mix(in srgb, var(--accent) 4%, transparent);
+  }
+  .ds-range-picker-endpoint > input {
+    appearance: textfield;
+    width: 100%;
+    min-width: 0;
+    min-height: calc(var(--ds-field-height) - 2px);
+    padding: 6px 10px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+  }
+  .ds-range-picker-endpoint > input::-webkit-inner-spin-button,
+  .ds-range-picker-endpoint > input::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  .ds-range-picker-endpoint > input::selection {
+    background: var(--ds-selection-bg);
+    color: var(--text);
+  }
+  .ds-range-picker-endpoint > input::placeholder {
+    color: var(--text-2);
+    opacity: 0.7;
+  }
+  .ds-range-picker-fields.is-invalid {
+    border-color: var(--ds-danger);
+  }
+  .ds-range-picker-fields.is-invalid:focus-within {
+    border-color: var(--ds-danger);
+  }
+  .ds-range-picker-fields.is-disabled,
+  .ds-range-picker-fields.is-readonly {
+    background: var(--bg-win);
+  }
+  .ds-range-picker-fields.is-disabled {
+    opacity: 0.55;
+  }
+  .ds-range-picker-separator {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    padding-inline: 8px;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-date-range-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 6px;
+  }
+  .ds-date-range-field-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .ds-date-range-field-stack.has-outside-labels {
+    gap: 3px;
+  }
+  .ds-date-range-field-endpoint-labels {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) 32px;
+    align-items: center;
+    width: 100%;
+    padding-inline: 10px;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-date-range-field-endpoint-labels > span:first-of-type {
+    width: 20px;
+  }
+  .ds-date-range-field-endpoint-labels > span:last-of-type {
+    width: 32px;
+  }
+  /* Naive UI 风格：两端共用一条带边框的输入面，中间箭头分隔，末尾一个日历触发器。 */
+  .ds-date-range-field-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    border: var(--ds-date-range-border-width, 1px) solid var(--border);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-date-range-bg, var(--bg-panel));
+    transition: border-color 0.15s;
+  }
+  .ds-date-range-field-row:not(.is-disabled, .is-readonly):where(:hover) {
+    border-color: var(--ds-input-border-hover);
+    cursor: pointer;
+  }
+  .ds-date-range-field-row.is-disabled,
+  .ds-date-range-field-row.is-readonly {
+    background: var(--ds-date-range-bg, var(--bg-win));
+  }
+  .ds-date-range-field-row.is-disabled {
+    opacity: 0.55;
+  }
+  .ds-date-range-field-row:focus-within {
+    border-color: var(--ds-input-border-focus);
+  }
+  .ds-date-range-field-row.is-invalid,
+  .ds-date-range-field-row.is-invalid:focus-within {
+    border-color: var(--ds-danger);
+  }
+  .ds-date-range-field-endpoint {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    min-height: calc(var(--ds-field-height) - 2px);
+    padding-left: 10px;
+  }
+  .ds-date-range-field-label {
+    flex: none;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-date-range-field-endpoint .ds-temporal-control {
+    width: auto;
+    --ds-picker-border-width: 0px;
+    --ds-picker-surface-bg: transparent;
+    --ds-picker-surface-height: calc(var(--ds-field-height) - 2px);
+  }
+  .ds-date-range-field-endpoint .ds-temporal-control > .ds-picker-tool {
+    display: none;
+  }
+  .ds-date-range-field-endpoint .ds-temporal-entry {
+    width: 124px;
+  }
+  .ds-date-range-field-value {
+    min-width: 0;
+    min-height: calc(var(--ds-field-height) - 2px);
+    padding: 6px 10px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .ds-date-range-field-value:where(:hover, :focus-visible):not(:disabled) {
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+  .ds-date-range-field-value:focus-visible {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
+  .ds-date-range-field-value:disabled {
+    color: var(--text-2);
+    cursor: not-allowed;
+  }
+  .ds-date-range-separator {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    padding: 0 2px;
+    color: var(--text-2);
+  }
+  .ds-date-range-trigger {
+    flex: none;
+    margin-inline-start: auto;
+  }
+  /* 双月面板：两份日历并排共享同一级联状态（仿 Naive UI 日期时间范围）。 */
+  .ds-picker-panel-body[data-twin='true'] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(592px, calc(100vw - 18px));
+  }
+  .ds-picker-panel-body[data-twin='true'] > .ds-picker-calendar {
+    width: auto;
+    min-width: 0;
+  }
+  .ds-picker-panel-body[data-twin='true'] > .ds-picker-calendar + .ds-picker-calendar {
+    border-inline-start: 1px solid var(--border);
+  }
+  .ds-picker-panel-body {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: calc(100vw - 16px);
+  }
+  .ds-picker-calendar {
+    width: 296px;
+    max-width: calc(100vw - 18px);
+    padding: 8px 12px 12px;
+  }
+  .ds-picker-calendar-head {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+  .ds-picker-calendar-head > .ds-picker-tool {
+    flex-basis: 24px;
+    width: 24px;
+    margin: 0;
+  }
+  .ds-picker-calendar-title {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+  }
+  .ds-picker-calendar-title > button {
+    padding: 5px 3px;
+    border: 0;
+    border-radius: calc(4px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .ds-picker-calendar-title > button:where(:hover) {
+    background: var(--hover);
+  }
+  .ds-picker-calendar-title > button:focus-visible {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
+  .ds-picker-week {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0;
+    margin: 2px 0;
+  }
+  .ds-picker-week > [role='columnheader'] {
+    display: grid;
+    place-items: center;
+    height: 28px;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-picker-day {
+    position: relative;
+    height: 34px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .ds-picker-day:where(:hover):not(:disabled) {
+    background: var(--hover);
+  }
+  .ds-picker-day[data-muted='true'] {
+    color: var(--text-2);
+    opacity: 0.55;
+  }
+  .ds-picker-day[data-in-range='true'] {
+    border-radius: 0;
+    background: var(--ds-selection-bg);
+  }
+  .ds-picker-day[data-preview='true'] {
+    border-radius: 0;
+    background: color-mix(in srgb, var(--ds-selection-bg) 50%, transparent);
+  }
+  .ds-picker-day[data-range-end='true'],
+  .ds-picker-day[aria-selected='true'] {
+    border-color: var(--ds-selection-border);
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+    font-weight: 600;
+    opacity: 1;
+  }
+  .ds-picker-day[aria-current='date']::after {
+    position: absolute;
+    bottom: 3px;
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    content: '';
+  }
+  .ds-picker-day:disabled {
+    color: var(--text-2);
+    opacity: 0.28;
+    cursor: not-allowed;
+  }
+  .ds-picker-day:focus-visible {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
+  .ds-picker-calendar-choices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    min-height: 244px;
+  }
+  .ds-picker-calendar-choices > button {
+    padding: 6px;
+    border: 1px solid transparent;
+    border-radius: calc(5px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .ds-picker-calendar-choices > button:where(:hover) {
+    background: var(--hover);
+  }
+  .ds-picker-calendar-choices > button[aria-pressed='true'] {
+    border-color: var(--ds-selection-border);
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+  }
+  .ds-picker-calendar-choices > button:focus-visible {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
+  .ds-picker-time {
+    display: flex;
+    align-self: stretch;
+    min-width: 176px;
+    padding: 8px;
+    gap: 4px;
+  }
+  .ds-picker-panel-body[data-with-time='true'] > .ds-picker-time {
+    border-left: 1px solid var(--border);
+  }
+  .ds-picker-time-column {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 48px;
+  }
+  .ds-picker-time-heading {
+    display: grid;
+    place-items: center;
+    height: 32px;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+  .ds-picker-time-options {
+    position: relative;
+    height: var(--ds-picker-time-height, 236px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 3px;
+  }
+  .ds-picker-time-options > button {
+    display: block;
+    width: 100%;
+    height: 32px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: calc(4px * var(--ds-radius-scale));
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .ds-picker-time-options > button:where(:hover) {
+    background: var(--hover);
+  }
+  .ds-picker-time-options > button[aria-selected='true'] {
+    background: var(--ds-selection-bg);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .ds-picker-time-options > button:focus-visible {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
+  .ds-picker-range-times {
+    --ds-picker-time-height: 112px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--border);
+  }
+  .ds-picker-range-time {
+    min-width: 0;
+    padding: 8px 12px;
+  }
+  .ds-picker-range-time + .ds-picker-range-time {
+    border-inline-start: 1px solid var(--border);
+  }
+  .ds-picker-range-time-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 8px;
+    color: var(--text-2);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-picker-range-time-head > .ds-picker-tool {
+    margin: 0;
+  }
+  .ds-picker-range-time > .ds-picker-time {
+    min-width: 0;
+    padding: 0;
+  }
+  .ds-picker-range-time .ds-picker-time-column {
+    min-width: 0;
+  }
+  .ds-picker-panel-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-2);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 560px) {
+    .ds-picker-panel-body[data-twin='true'],
+    .ds-picker-range-times {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ds-picker-panel-body[data-twin='true'] {
+      width: min(296px, calc(100vw - 18px));
+    }
+    .ds-picker-panel-body[data-twin='true'] > .ds-picker-calendar + .ds-picker-calendar,
+    .ds-picker-range-time + .ds-picker-range-time {
+      border-inline-start: 0;
+      border-top: 1px solid var(--border);
+    }
+  }
+  @container ds-workspace (max-width: 600px) {
+    .ds-range-picker-fields {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ds-range-picker-separator {
+      justify-content: center;
+      height: 20px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-range-picker-fields {
+      transition: none;
+    }
+  }
+  @media (forced-colors: active) {
+    .ds-picker-day[aria-selected='true'],
+    .ds-picker-time-options > button[aria-selected='true'] {
+      border-color: Highlight;
+    }
+  }
+}

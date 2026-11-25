@@ -1,0 +1,27 @@
+@layer ds {
+  .ds-sortable { width: 100%; min-width: 0; }
+  .ds-sortable-row {
+    position: relative; display: flex; align-items: center; gap: var(--ds-space-sm); padding: var(--ds-space-sm);
+    border: 1px solid var(--border); border-radius: var(--ds-radius-sm); background: var(--bg-panel); color: var(--text); font-size: 13px;
+  }
+  .ds-sortable-row + .ds-sortable-row { margin-top: var(--ds-space-sm); }
+  .ds-sortable-row.is-dragging { border-color: var(--ds-selection-border); background: var(--ds-selection-bg); }
+  /* 指针 / HTML5 拖动时原位只留淡化的占位（同原站 .is-dragging { opacity: .45 }），影子或浏览器拖动图像跟随指针。 */
+  .ds-sortable-row.is-drag-source { opacity: var(--ds-drag-source-opacity); }
+  .ds-sortable-row.is-before::before, .ds-sortable-row.is-after::after { content: ''; position: absolute; background: var(--accent); }
+  .ds-sortable-row.is-before::before { height: 2px; top: -5px; left: 0; right: 0; }
+  .ds-sortable-row.is-after::after { height: 2px; bottom: -5px; left: 0; right: 0; }
+  .ds-sortable-row[data-sort-handle]:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .ds-sortable-row[aria-disabled="true"] { background: var(--bg-win); color: var(--text-2); }
+  .ds-sortable-handle { touch-action: none; cursor: grab; }
+  .ds-sortable-handle[aria-pressed="true"] { cursor: grabbing; }
+  .ds-sortable-content { display: flex; flex: 1; flex-direction: column; gap: var(--ds-space-xs); min-width: 0; overflow-wrap: anywhere; }
+  .ds-sortable-content > strong { font-size: 13px; font-weight: 500; }
+  .ds-sortable-content > span { color: var(--text-2); font-size: 12px; }
+  .ds-sortable-actions { display: flex; flex-shrink: 0; gap: var(--ds-space-xs); }
+  .ds-sortable-empty { padding: var(--ds-space-md); color: var(--text-2); font-size: 13px; }
+  .ds-sortable--horizontal { display: flex; flex-wrap: wrap; gap: var(--ds-space-md); }
+  .ds-sortable--horizontal > .ds-sortable-row { flex: 1 1 180px; margin: 0; }
+  .ds-sortable--horizontal > .is-before::before { width: 2px; height: auto; top: 0; bottom: 0; left: -7px; right: auto; }
+  .ds-sortable--horizontal > .is-after::after { width: 2px; height: auto; top: 0; bottom: 0; right: -7px; left: auto; }
+}

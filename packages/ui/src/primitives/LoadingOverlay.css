@@ -1,0 +1,11 @@
+@layer ds {
+  .ds-loading-overlay { position: relative; min-width: 0; border-radius: inherit; }
+  .ds-loading-overlay[aria-busy="true"] { min-height: calc(var(--ds-space-xxl) * 3); }
+  .ds-loading-overlay:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 2px; }
+  .ds-loading-fields { margin: 0; padding: 0; min-width: 0; border: 0; }
+  .ds-loading-veil {
+    position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: var(--ds-space-md); border-radius: inherit; background: color-mix(in srgb, var(--bg-panel) 88%, transparent);
+    color: var(--text-2); font: 13px var(--font); cursor: progress;
+  }
+}

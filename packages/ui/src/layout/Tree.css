@@ -1,0 +1,26 @@
+@layer ds {
+  .ds-tree { width: 100%; min-width: 0; overflow: auto; color: var(--text); font: 13px var(--font); }
+  .ds-tree-item { outline: none; }
+  .ds-tree-row {
+    display: flex; align-items: center; gap: var(--ds-space-sm); min-height: var(--ds-control-md);
+    margin: 2px 0; padding: 4px 8px; border-radius: var(--ds-radius-sm); cursor: pointer;
+  }
+  .ds-tree-item[aria-selected="true"] > .ds-tree-row { background: var(--ds-selection-bg); color: var(--accent); }
+  .ds-tree-item:not([aria-selected="true"]):not([aria-disabled="true"]) > .ds-tree-row:hover { background: var(--hover); }
+  .ds-tree-item:focus-visible > .ds-tree-row { outline: 2px solid var(--ds-focus-ring); outline-offset: -2px; }
+  .ds-tree-item[aria-disabled="true"] > .ds-tree-row { opacity: .5; cursor: not-allowed; }
+  .ds-tree-group { padding-left: var(--ds-space-xl); }
+  .ds-tree-label { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .ds-tree-check { color: var(--accent); }
+  .ds-tree-toggle, .ds-tree-spacer { flex: 0 0 20px; width: 20px; height: 24px; }
+  .ds-tree-toggle {
+    display: grid; place-items: center; padding: 0; border: 0; border-radius: calc(4px * var(--ds-radius-scale));
+    background: transparent; color: inherit; cursor: pointer;
+  }
+  .ds-tree-toggle:disabled { cursor: not-allowed; }
+  .ds-tree-toggle:hover:not(:disabled) { background: var(--hover); }
+  .ds-tree-empty { padding: var(--ds-space-md); color: var(--text-2); }
+  @media (forced-colors: active) {
+    .ds-tree-item[aria-selected="true"] > .ds-tree-row { outline: 1px solid Highlight; }
+  }
+}

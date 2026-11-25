@@ -1,0 +1,29 @@
+/* 来源：workspace-ui.css .workspace-composer，chat.css 与 AI 工具共用输入区。 */
+@layer ds {
+  .ds-message-composer { container: ds-composer / inline-size; display: flex; flex-direction: column; min-width: 0; gap: 8px; }
+  .ds-message-composer-surface {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px 10px;
+    min-width: 0; padding: 6px 9px; border: 1px solid var(--border); border-radius: var(--ds-radius-sm);
+    background: var(--bg-panel); color: var(--text); font-size: 12px;
+  }
+  .ds-message-composer-surface:focus-within { border-color: var(--ds-input-border-focus); }
+  .ds-message-composer-surface:has([aria-invalid="true"]) { border-color: var(--ds-danger); }
+  .ds-message-composer-surface.is-disabled { opacity: .5; }
+  .ds-message-composer-input {
+    grid-column: 1 / -1; width: 100%; min-width: 0; min-height: 32px; max-height: 96px;
+    padding: 5px 0; border: 0; border-radius: 0; background: transparent; color: inherit;
+    font: inherit; line-height: 1.6; resize: none; overflow-y: auto;
+  }
+  .ds-message-composer-input:focus, .ds-message-composer-input:focus-visible { outline: none; box-shadow: none; border-color: transparent; }
+  .ds-message-composer-input::placeholder { color: var(--text-2); opacity: .72; }
+  .ds-message-composer-input:disabled { cursor: not-allowed; }
+  .ds-message-composer-tools, .ds-message-composer-attachments { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .ds-message-composer-attachments { grid-column: 1 / -1; }
+  .ds-message-composer-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+  .ds-message-composer-actions { display: flex; grid-column: 2; justify-self: end; flex-wrap: wrap; min-width: 0; gap: 6px; }
+  .ds-message-composer-status { color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
+  @container ds-composer (max-width: 380px) {
+    .ds-message-composer-surface { grid-template-columns: minmax(0, 1fr); }
+    .ds-message-composer-actions { grid-column: 1; }
+  }
+}

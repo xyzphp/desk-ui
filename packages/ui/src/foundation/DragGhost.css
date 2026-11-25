@@ -1,0 +1,26 @@
+@layer ds {
+  /* 拖动影子：跟随指针的半透明副本，盖在窗口与浮层之上，不参与命中测试。 */
+  .ds-drag-ghost {
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 10050;
+    box-sizing: border-box;
+    margin: 0;
+    opacity: var(--ds-drag-ghost-opacity);
+    box-shadow: var(--shadow);
+    pointer-events: none;
+    transition: none;
+    animation: none;
+    will-change: transform;
+    cursor: grabbing;
+  }
+  .ds-drag-ghost * {
+    pointer-events: none;
+    transition: none;
+    animation: none;
+  }
+  .ds-drag-ghost-frame {
+    max-width: 100%;
+    background: var(--bg-panel);
+  }
+}

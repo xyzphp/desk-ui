@@ -1,0 +1,258 @@
+/* 画作类动态壁纸：水族馆「深海秘境」、森林「晨雾秘境」、草原「风的牧场」、星空「星海之境」。
+ * 样式与关键帧逐项移植自四份参考壁纸，色值是画作配套的固定颜色（check-quality.mjs 已登记为移植样式），类名统一加 ds- 前缀。
+ * 昼夜由根元素的 data-night 决定（跟随桌面深色主题），动画只在 data-play（开启动态壁纸、未减弱动态效果、页面可见）时播放，
+ * 否则停在负延迟对应的那一帧：画面完整但静止。 */
+@layer ds {
+  /* ---------- 壁纸底图与缩略图：场景代码加载前、以及资料卡等只用类名的地方直接显示画作 ---------- */
+  .ds-wp-aquarium { background: #055069 url("./assets/aquarium-day.webp") center / cover no-repeat; }
+  .ds-wp-forest { background: #305a49 url("./assets/forest.webp") center / cover no-repeat; }
+  .ds-wp-grassland { background: #152c39 url("./assets/grassland-day.webp") center / cover no-repeat; }
+  .ds-wp-galaxy { background: #071024 url("./assets/galaxy-day.webp") center / cover no-repeat; }
+  [data-theme="dark"] .ds-wp-aquarium { background-image: url("./assets/aquarium-night.webp"); }
+  [data-theme="dark"] .ds-wp-grassland { background-image: url("./assets/grassland-night.webp"); }
+  [data-theme="dark"] .ds-wp-galaxy { background-image: url("./assets/galaxy-night.webp"); }
+  /* 画作自带夜景，深色主题下不再统一压暗。 */
+  [data-theme="dark"] .ds-wallpaper:is(.ds-wp-aquarium, .ds-wp-forest, .ds-wp-grassland, .ds-wp-galaxy) { filter: none; }
+  .ds-wallpaper-picker > .ds-wp-aquarium, .ds-context-wallpaper.ds-wp-aquarium { background: url("./assets/thumb-aquarium-day.jpg") center / cover; }
+  .ds-wallpaper-picker > .ds-wp-forest, .ds-context-wallpaper.ds-wp-forest { background: url("./assets/thumb-forest.jpg") center / cover; }
+  .ds-wallpaper-picker > .ds-wp-grassland, .ds-context-wallpaper.ds-wp-grassland { background: url("./assets/thumb-grassland-day.jpg") center / cover; }
+  .ds-wallpaper-picker > .ds-wp-galaxy, .ds-context-wallpaper.ds-wp-galaxy { background: url("./assets/thumb-galaxy-day.jpg") center / cover; }
+  [data-theme="dark"] :is(.ds-wallpaper-picker > .ds-wp-aquarium, .ds-context-wallpaper.ds-wp-aquarium) { background-image: url("./assets/thumb-aquarium-night.jpg"); }
+  [data-theme="dark"] :is(.ds-wallpaper-picker > .ds-wp-grassland, .ds-context-wallpaper.ds-wp-grassland) { background-image: url("./assets/thumb-grassland-night.jpg"); }
+  [data-theme="dark"] :is(.ds-wallpaper-picker > .ds-wp-galaxy, .ds-context-wallpaper.ds-wp-galaxy) { background-image: url("./assets/thumb-galaxy-night.jpg"); }
+
+  .ds-aquarium, .ds-forest, .ds-grassland, .ds-galaxy { position: absolute; inset: 0; overflow: hidden; pointer-events: none; isolation: isolate; }
+  .ds-forest > svg, .ds-grassland > svg, .ds-gl-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: hidden; }
+
+  /* ---------- 水族馆 ---------- */
+  .ds-aq-stage {
+    position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px;
+    overflow: hidden; isolation: isolate; transform-origin: center; will-change: transform; background: #055069;
+  }
+  .ds-aq-stage > * { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+  .ds-aq-backdrop { object-fit: fill; user-select: none; transition: opacity 1.6s ease; }
+  .ds-aq-backdrop[data-kind="night"] { opacity: 0; }
+  .ds-aquarium[data-night] .ds-aq-backdrop[data-kind="night"] { opacity: 1; }
+  .ds-aq-sun-glow {
+    background: radial-gradient(ellipse 42% 44% at 48% -5%, rgba(193, 254, 255, .2), transparent 95%);
+    mix-blend-mode: screen; transition: opacity 1.4s;
+  }
+  .ds-aquarium[data-night] .ds-aq-sun-glow { opacity: 0; }
+  .ds-aq-night-glow {
+    background: radial-gradient(ellipse 44% 42% at 53% -9%, rgba(53, 118, 255, .2), transparent 90%);
+    opacity: 0; mix-blend-mode: screen; transition: opacity 1.4s;
+  }
+  .ds-aquarium[data-night] .ds-aq-night-glow { opacity: 1; }
+  .ds-aq-rays {
+    overflow: visible; mix-blend-mode: screen; opacity: .22; transform-origin: center top;
+    transition: opacity 1.4s; animation: ds-aq-rays 18s ease-in-out infinite alternate;
+  }
+  .ds-aquarium[data-night] .ds-aq-rays { opacity: .08; }
+  .ds-aq-vignette { background: radial-gradient(ellipse 93% 93% at center, transparent 50%, rgba(0, 20, 41, .24) 100%); }
+  .ds-aquarium[data-night] .ds-aq-vignette {
+    background: radial-gradient(ellipse 93% 93% at center, transparent 50%, rgba(0, 8, 31, .48) 100%);
+  }
+  @keyframes ds-aq-rays {
+    from { transform: translateX(-24px) skewX(-1.3deg); }
+    to { transform: translateX(26px) skewX(1.6deg); }
+  }
+
+  /* ---------- 森林 ---------- */
+  .ds-fs-painting image { filter: brightness(1) saturate(1.04); transition: filter 1.7s ease; }
+  .ds-forest[data-night] .ds-fs-painting image { filter: brightness(.38) saturate(.67) hue-rotate(11deg) contrast(1.1); }
+  .ds-fs-day-light { opacity: .22; transition: opacity 1.7s ease; }
+  .ds-forest[data-night] .ds-fs-day-light { opacity: 0; }
+  .ds-fs-night-wash { opacity: 0; transition: opacity 1.7s ease; }
+  .ds-forest[data-night] .ds-fs-night-wash { opacity: .74; }
+  .ds-fs-night { opacity: 0; transition: opacity 1.7s ease; }
+  .ds-forest[data-night] .ds-fs-night { opacity: 1; }
+  .ds-fs-sun-pulse { transition: opacity 1.5s ease; }
+  .ds-forest[data-night] .ds-fs-sun-pulse { opacity: 0; }
+  .ds-fs-sun-pulse > ellipse { opacity: .45; transform-origin: 510px 160px; animation: ds-fs-breath 9s ease-in-out infinite; }
+  .ds-fs-fog { animation: ds-fs-fog linear infinite alternate; }
+  .ds-fs-fog:nth-child(1) { animation-duration: 28s; --fogdx: 75px; }
+  .ds-fs-fog:nth-child(2) { animation-duration: 36s; animation-delay: -12s; --fogdx: -84px; }
+  .ds-fs-fog:nth-child(3) { animation-duration: 31s; animation-delay: -9s; --fogdx: 100px; }
+  .ds-fs-leaves[data-side="left"] { transform-origin: 190px 24px; animation: ds-fs-leaf-sway 8s ease-in-out infinite alternate; }
+  .ds-fs-leaves[data-side="right"] { transform-origin: 1460px 55px; animation: ds-fs-leaf-sway 6.3s ease-in-out infinite alternate-reverse; }
+  .ds-fs-falling-leaf { animation: ds-fs-leaf-fall linear infinite; }
+  .ds-fs-wave {
+    fill: none; stroke-linecap: round; transform-origin: center; transform-box: fill-box;
+    animation: ds-fs-wave ease-in-out infinite alternate;
+  }
+  .ds-fs-fall-line {
+    fill: none; stroke: #e5fff5; stroke-linecap: round; stroke-width: 3; stroke-dasharray: 9 16;
+    animation: ds-fs-water-drop 1.4s linear infinite;
+  }
+  .ds-fs-fall-line:nth-child(2) { animation-delay: -.5s; animation-duration: 1.12s; }
+  .ds-fs-fall-line:nth-child(3) { animation-delay: -.8s; animation-duration: 1.72s; }
+  .ds-fs-water-glow { opacity: .27; animation: ds-fs-water-shine 5.2s ease-in-out infinite alternate; }
+  .ds-fs-moon-reflection { animation: ds-fs-water-shine 4s ease-in-out infinite alternate; }
+  .ds-fs-star { animation: ds-fs-twinkle 3.5s ease-in-out infinite alternate; }
+  .ds-fs-firefly { transform-origin: center; transform-box: view-box; animation: ds-fs-fly ease-in-out infinite alternate; }
+  .ds-fs-pointer-glow { opacity: .08; transition: opacity 1s; }
+  .ds-forest[data-night] .ds-fs-pointer-glow { opacity: .34; }
+  .ds-fs-spark { fill: #fff0b5; transform-box: fill-box; transform-origin: center; animation: ds-fs-spark .85s ease-out forwards; }
+  .ds-fs-spark[data-night] { fill: #f6f7b2; }
+  .ds-fs-ripple {
+    fill: none; stroke: #e3ffff; stroke-width: 2.5; transform-box: fill-box; transform-origin: center;
+    animation: ds-fs-ripple 1.4s ease-out forwards;
+  }
+  .ds-fs-vignette { opacity: .34; }
+
+  @keyframes ds-fs-breath { 0%, 100% { opacity: .35; transform: scale(.98); } 50% { opacity: .6; transform: scale(1.04); } }
+  @keyframes ds-fs-fog { 0% { transform: translateX(-15px); opacity: .17; } 100% { transform: translateX(var(--fogdx)); opacity: .34; } }
+  @keyframes ds-fs-leaf-sway { 0% { transform: rotate(-.48deg) translateY(0); } 100% { transform: rotate(.56deg) translateY(2px); } }
+  @keyframes ds-fs-leaf-fall {
+    0% { transform: translate(0, 0) rotate(-15deg); opacity: 0; }
+    8% { opacity: .72; }
+    87% { opacity: .57; }
+    100% { transform: translate(var(--fallx), var(--fall)) rotate(150deg); opacity: 0; }
+  }
+  @keyframes ds-fs-wave {
+    0% { transform: translateX(-9px) scaleX(.83); opacity: .08; }
+    50% { opacity: .4; }
+    100% { transform: translateX(var(--drift)) scaleX(1.05); opacity: .12; }
+  }
+  @keyframes ds-fs-water-drop { to { stroke-dashoffset: -50; } }
+  @keyframes ds-fs-water-shine { from { opacity: .11; transform: translateX(-11px); } to { opacity: .34; transform: translateX(16px); } }
+  @keyframes ds-fs-twinkle { 0% { opacity: .1; } 100% { opacity: 1; } }
+  @keyframes ds-fs-fly {
+    0% { transform: translate(-5px, 6px); opacity: .25; }
+    50% { opacity: .94; }
+    100% { transform: translate(var(--ffdx), var(--ffdy)); opacity: .15; }
+  }
+  @keyframes ds-fs-spark {
+    from { transform: translate(0, 0) scale(1); opacity: .98; }
+    to { transform: translate(var(--dx), var(--dy)) scale(.15); opacity: 0; }
+  }
+  @keyframes ds-fs-ripple { 0% { transform: scale(.25); opacity: .75; } 100% { transform: scale(2.6); opacity: 0; } }
+
+  /* ---------- 草原 ---------- */
+  .ds-gl-canvas { z-index: 1; }
+  .ds-gl-layer { transition: opacity 1.5s ease; }
+  .ds-gl-layer[data-kind="night"] { opacity: 0; }
+  .ds-grassland[data-night] .ds-gl-layer[data-kind="night"] { opacity: 1; }
+  .ds-gl-night { opacity: 0; transition: opacity 1.6s ease; }
+  .ds-grassland[data-night] .ds-gl-night { opacity: 1; }
+  .ds-gl-glare { opacity: .55; transition: opacity 1.5s; }
+  .ds-grassland[data-night] .ds-gl-glare { opacity: 0; }
+  .ds-gl-patch {
+    transform-box: fill-box; transform-origin: 50% 100%; will-change: transform;
+    animation: ds-gl-bend var(--period) ease-in-out var(--delay) infinite alternate;
+  }
+  .ds-gl-patch:is([data-index="1"], [data-index="3"]) { animation-name: ds-gl-bend-b; }
+  .ds-gl-patch[data-index="2"] { animation-name: ds-gl-bend-c; }
+  .ds-gl-animal { transform-box: fill-box; transform-origin: 50% 100%; animation: ds-gl-graze var(--duration) ease-in-out infinite alternate; }
+  .ds-gl-animal[data-motion="far"] { animation-name: ds-gl-graze-far; }
+  .ds-gl-animal[data-motion="breath"] { animation-name: ds-gl-sheep-breath; }
+  .ds-gl-fog { transform-box: fill-box; animation: ds-gl-mist 28s ease-in-out infinite alternate; }
+  .ds-gl-fog[data-order="2"] { animation-duration: 36s; animation-delay: -12s; }
+  .ds-gl-fog[data-order="3"] { animation-duration: 41s; animation-delay: -21s; }
+  .ds-gl-cloud { transform-box: view-box; animation: ds-gl-cloud 45s linear infinite alternate; }
+  .ds-gl-cloud[data-second] { animation-duration: 60s; animation-direction: alternate-reverse; }
+  /* 原作的星星以画面左上角为原点缩放，闪烁时会整体漂移；这里改为绕自身中心闪烁。 */
+  .ds-gl-star { transform-box: fill-box; transform-origin: center; animation: ds-gl-twinkle 4s ease-in-out infinite alternate; }
+  .ds-gl-firefly { transform-box: view-box; animation: ds-gl-fly ease-in-out infinite alternate; }
+  .ds-gl-sun-beams { transform-origin: 310px 285px; animation: ds-gl-sun 10s ease-in-out infinite alternate; }
+
+  @keyframes ds-gl-bend {
+    from { transform: translateX(-5px) rotate(-1.4deg) skewX(-.5deg); }
+    to { transform: translateX(10px) rotate(1.8deg) skewX(.7deg); }
+  }
+  @keyframes ds-gl-bend-b { from { transform: translateX(7px) rotate(1.3deg); } to { transform: translateX(-9px) rotate(-1.4deg); } }
+  @keyframes ds-gl-bend-c { from { transform: translateX(-6px) rotate(-.8deg); } to { transform: translateX(11px) rotate(1.4deg); } }
+  @keyframes ds-gl-graze {
+    0% { transform: translateY(0) scaleY(1); }
+    45% { transform: translateY(1.2px) scaleY(.994); }
+    100% { transform: translateY(-1.7px) rotate(.7deg) scaleY(1.01); }
+  }
+  @keyframes ds-gl-graze-far { 0% { transform: translateX(-1px) rotate(-.4deg); } 100% { transform: translateX(2.4px) rotate(.6deg); } }
+  @keyframes ds-gl-sheep-breath { 0% { transform: translateY(-1px) scaleY(1.005); } 100% { transform: translateY(1.1px) scaleY(.986); } }
+  @keyframes ds-gl-mist { 0% { transform: translateX(-130px); opacity: .05; } 100% { transform: translateX(130px); opacity: .35; } }
+  @keyframes ds-gl-cloud { 0% { transform: translateX(-45px); } 100% { transform: translateX(100px); } }
+  @keyframes ds-gl-fly {
+    0% { transform: translate(-6px, 7px); opacity: .12; }
+    48% { opacity: .9; }
+    100% { transform: translate(var(--x), var(--y)); opacity: .17; }
+  }
+  @keyframes ds-gl-twinkle { 0% { opacity: .2; transform: scale(.7); } 100% { opacity: 1; transform: scale(1.1); } }
+  @keyframes ds-gl-sun { 0% { opacity: .18; transform: scale(.94); } 100% { opacity: .38; transform: scale(1.06); } }
+
+  /* ---------- 星空 ---------- */
+  .ds-gx-stage {
+    position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px;
+    overflow: hidden; isolation: isolate; transform-origin: center; will-change: transform;
+  }
+  .ds-gx-painting {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
+    pointer-events: none; user-select: none; transition: opacity 1.8s ease;
+  }
+  .ds-gx-painting[data-kind="night"] { opacity: 0; }
+  .ds-galaxy[data-night] .ds-gx-painting[data-kind="day"] { opacity: 0; }
+  .ds-galaxy[data-night] .ds-gx-painting[data-kind="night"] { opacity: 1; }
+  .ds-gx-nebula-drift {
+    position: absolute; inset: -14px; overflow: hidden; opacity: .18; mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(ellipse 54% 56% at 33% 28%, black 4%, rgba(0, 0, 0, .7) 48%, transparent 100%);
+    mask-image: radial-gradient(ellipse 54% 56% at 33% 28%, black 4%, rgba(0, 0, 0, .7) 48%, transparent 100%);
+    animation: ds-gx-nebula-glide 32s ease-in-out infinite alternate;
+  }
+  .ds-gx-nebula-drift .ds-gx-painting { left: 14px; top: 14px; width: 1672px; height: 941px; }
+  .ds-galaxy[data-night] .ds-gx-nebula-drift { opacity: .22; }
+  .ds-gx-nebula-glow {
+    position: absolute; left: -160px; top: -100px; width: 1120px; height: 650px;
+    background: radial-gradient(ellipse at 48% 45%, rgba(243, 113, 255, .19) 0%, rgba(68, 116, 255, .13) 28%, rgba(56, 218, 255, .065) 48%, transparent 69%);
+    mix-blend-mode: screen; filter: blur(24px);
+    animation: ds-gx-nebula-breathe 16s ease-in-out infinite alternate;
+  }
+  .ds-gx-orbital-glow {
+    position: absolute; left: 1212px; top: 85px; width: 263px; height: 270px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 208, 255, .06) 4%, rgba(162, 139, 249, .12) 32%, transparent 70%);
+    mix-blend-mode: screen; animation: ds-gx-halo-breathe 10s ease-in-out infinite alternate;
+  }
+  /* 月晕只在深夜出现：显隐放在外层，呼吸动画放在内层，避免动画的不透明度盖过夜间开关。 */
+  .ds-gx-moon { position: absolute; left: 768px; top: 353px; width: 200px; height: 190px; opacity: 0; transition: opacity 1.6s ease; }
+  .ds-galaxy[data-night] .ds-gx-moon { opacity: 1; }
+  .ds-gx-moon-halo {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(228, 237, 255, .17), rgba(177, 196, 255, .055) 42%, transparent 70%);
+    animation: ds-gx-halo-breathe 11s ease-in-out infinite alternate;
+  }
+  .ds-gx-horizon-haze {
+    position: absolute; left: 290px; top: 476px; width: 1060px; height: 172px; opacity: .1;
+    background: radial-gradient(ellipse at 50% 55%, rgba(251, 216, 255, .7), rgba(158, 130, 255, .2) 44%, transparent 69%);
+    filter: blur(28px); animation: ds-gx-haze-float 24s ease-in-out infinite alternate;
+  }
+  .ds-galaxy[data-night] .ds-gx-horizon-haze { opacity: .11; }
+  .ds-gx-orbit { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; mix-blend-mode: screen; }
+  .ds-gx-orbit-spark {
+    fill: none; stroke: #f5d5ff; stroke-width: 2.8; stroke-linecap: round; stroke-dasharray: .1 112 22 1340; opacity: .52;
+    animation: ds-gx-ring 17s linear infinite;
+  }
+  .ds-gx-orbit-spark[data-secondary] {
+    stroke: #a2eaff; stroke-width: 1.6; stroke-dasharray: .1 193 14 1300; opacity: .38;
+    animation-duration: 25s; animation-direction: reverse;
+  }
+  .ds-gx-stars { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; }
+
+  @keyframes ds-gx-nebula-glide {
+    0% { transform: translate(-22px, -7px) scale(1.012); }
+    50% { transform: translate(15px, 9px) scale(1.045); }
+    100% { transform: translate(30px, -11px) scale(1.012); }
+  }
+  @keyframes ds-gx-nebula-breathe {
+    0% { opacity: .45; transform: rotate(-3deg) translate(-24px, 8px) scale(.96); }
+    100% { opacity: .99; transform: rotate(4deg) translate(32px, -10px) scale(1.06); }
+  }
+  @keyframes ds-gx-halo-breathe { 0% { opacity: .2; transform: scale(.94); } 100% { opacity: .9; transform: scale(1.1); } }
+  @keyframes ds-gx-haze-float { to { transform: translateX(45px) translateY(-9px); } }
+  @keyframes ds-gx-ring { to { stroke-dashoffset: -1474; } }
+
+  /* ---------- 播放控制：放在最后并提高优先级，覆盖上面 animation 简写重置的播放状态 ---------- */
+  :is(.ds-aquarium, .ds-forest, .ds-grassland, .ds-galaxy):not([data-play]) * { animation-play-state: paused; }
+  /* 当前看不到的那一套（白天的夜景层、夜里的白天层）也暂停，省去不可见的动画开销。 */
+  .ds-forest:not([data-night]) .ds-fs-night *,
+  .ds-grassland:not([data-night]) :is(.ds-gl-night *, .ds-gl-layer[data-kind="night"] *),
+  .ds-grassland[data-night] .ds-gl-layer[data-kind="day"] *,
+  .ds-galaxy:not([data-night]) .ds-gx-moon * { animation-play-state: paused; }
+}

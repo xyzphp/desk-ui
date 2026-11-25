@@ -1,0 +1,26 @@
+@layer ds {
+  .ds-window-switcher { min-width: 0; }
+  .ds-window-switcher-list { display: flex; gap: var(--ds-space-md); min-width: 0; overflow: auto; padding: 3px; margin: 0; list-style: none; }
+  .ds-window-switcher-card {
+    position: relative; flex: 0 0 220px; min-width: 0; border: 1px solid var(--border);
+    border-radius: var(--ds-radius-md); background: var(--bg-panel);
+  }
+  .ds-window-switcher-card:where(:hover):where(:not([data-current="true"], :has(button:disabled))) { background: var(--hover); }
+  .ds-window-switcher-card[data-current="true"] { border-color: var(--ds-selection-border); background: var(--ds-selection-bg); }
+  .ds-window-switcher-card:has(button:focus-visible) { outline: 1px solid var(--ds-input-border-focus); outline-offset: 1px; }
+  .ds-window-switcher-card:has(button:disabled) { opacity: .45; }
+  .ds-window-switcher-preview {
+    display: grid; place-items: center; box-sizing: border-box; height: 116px; padding: var(--ds-space-md);
+    overflow: hidden; border-radius: var(--ds-radius-md) var(--ds-radius-md) 0 0; background: var(--bg-win); color: var(--text-2);
+  }
+  .ds-window-switcher-preview > .ds-icon { width: 36px; height: 36px; }
+  .ds-window-switcher-choice {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-sm); box-sizing: border-box; width: 100%; min-width: 0;
+    padding: var(--ds-space-md); border: 0; border-radius: 0 0 var(--ds-radius-md) var(--ds-radius-md);
+    background: transparent; color: var(--text); font: 13px var(--font); text-align: left; cursor: pointer;
+  }
+  .ds-window-switcher-choice::after { content: ''; position: absolute; inset: 0; border-radius: var(--ds-radius-md); }
+  .ds-window-switcher-choice:focus { outline: none; }
+  .ds-window-switcher-choice:disabled { cursor: default; }
+  .ds-window-switcher-title { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+}
