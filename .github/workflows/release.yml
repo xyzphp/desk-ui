@@ -1,7 +1,7 @@
 name: Release
 
-# 发布 @xyzos/desk-ui 到 npm。
-# 首次创建包可使用仓库 Secrets 中的 NPM_TOKEN；首版发布并在 npmjs.com 绑定可信发布者（OIDC）后，可移除 NPM_TOKEN。
+# 发布 @xyzos/desk-ui 到 npm。使用 npm 可信发布（OIDC），仓库与 CI 不保存 npm 令牌。
+# 需在 npmjs.com 保持可信发布者绑定（xyzphp/desk-ui + release.yml）；由 workflow_dispatch 手动触发。
 on:
   workflow_dispatch:
 
@@ -35,5 +35,3 @@ jobs:
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
