@@ -1,0 +1,19 @@
+@layer ds {
+  .ds-detail { display: flex; flex-direction: column; gap: var(--ds-space-lg); min-width: 0; }
+  .ds-detail-head { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-width: 0; }
+  .ds-detail-media { flex: none; }
+  .ds-detail-heading { display: flex; flex: 1 1 240px; flex-direction: column; gap: 6px; min-width: 0; }
+  .ds-detail-title { margin: 0; color: var(--text); font-size: 20px; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+  .ds-detail-description { margin: 0; color: var(--text-2); font-size: 13px; line-height: 1.5; }
+  .ds-detail-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ds-detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .ds-detail-body { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 20px; }
+  .ds-detail-body.has-aside { grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); }
+  .ds-detail-main { display: flex; flex-direction: column; gap: var(--ds-space-lg); min-width: 0; }
+  .ds-detail-aside { display: flex; flex-direction: column; gap: var(--ds-space-md); min-width: 0; }
+  .ds-detail-section { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .ds-detail-section-title { margin: 0; color: var(--text); font-size: 14px; font-weight: 650; }
+  @container ds-workspace (max-width: 600px) {
+    .ds-detail-body.has-aside { grid-template-columns: minmax(0, 1fr); }
+  }
+}

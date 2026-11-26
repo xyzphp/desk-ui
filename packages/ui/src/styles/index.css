@@ -40,10 +40,13 @@
 @import "../layout/SortableList.css";
 @import "../layout/Data.css";
 @import "../layout/Nav.css";
+@import "../layout/DetailLayout.css";
 @import "../domain/PermissionTree.css";
 @import "../domain/UploadZone.css";
 @import "../domain/FileCollection.css";
 @import "../domain/ImagePreview.css";
+@import "../domain/ImageGallery.css";
+@import "../domain/AppCard.css";
 @import "../domain/ImageCropper.css";
 @import "../domain/MarkdownView.css";
 @import "../domain/MarkdownEditor.css";

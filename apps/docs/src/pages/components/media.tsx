@@ -133,6 +133,7 @@ export const imagePreviewDoc: ComponentDoc = {
   usage: [
     'open 和 onClose 由宿主控制；关闭请求不直接修改 open。打开时把焦点放到关闭按钮，关闭或卸载后返回仍存在的触发器。',
     'items 包含 src、alt、可选 title 和 description。左右切图不循环；传 index / onIndexChange 可与外部缩略图同步，重新打开的位置由宿主选择。',
+    '详情页的一组截图或示例图直接用 ImageGallery：它负责缩略图条并在点击时打开本组件。',
     '使用原生 dialog.showModal 顶层展示与焦点隔离；zoomable 启用 25%–500% 缩放、滚轮 / 快捷键和拖拽平移。宿主可通过 toolbarActions 放入下载等业务操作，组件不发起请求。',
     '仅接受相对路径、HTTP(S)、blob 和 base64 栅格图片 data URL；拒绝脚本、凭据 URL、HTML 与 SVG data URL。图片资源采用 no-referrer；宿主仍负责 URL 来源、资源授权和远端内容复核。',
     'File 的临时预览 URL 由宿主创建，在不再使用或页面卸载时 revokeObjectURL。组件切图或关闭会移除旧图片节点，不缓存 URL。',
@@ -180,7 +181,7 @@ function FailedImageDemo() {
     { name: 'index / defaultIndex / onIndexChange', type: 'number / number / (index: number) => void', default: '0', description: '从 0 开始。受控更新等待宿主；越界值只在显示时夹紧，不回写。' },
     { name: 'toolbarActions', type: 'ReactNode', description: '可选，渲染在预览工具栏内；宿主操作由页面执行，组件不发请求。' },
     { name: 'zoomable', type: 'boolean', default: 'false', description: '启用缩放控制、滚轮缩放、键盘 +/-/0 与拖拽平移。' },
-    { name: 'labels', type: 'ImagePreviewLabels', description: '必填：close、previous、next、loading、error、retry、empty、count 与 zoomOut / zoomIn / resetZoom 文案。' },
+    { name: 'labels', type: 'Partial<ImagePreviewLabels>', default: 'ConfigProvider', description: '覆盖 close、previous、next、loading、error、retry、empty、count 与 zoomOut / zoomIn / resetZoom 文案；缺省取 ConfigProvider 的 imagePreview 分组。' },
     { name: 'className', type: 'string', description: '附加对话框类名；主体按原生预览使用深色衬底。' },
   ] }],
   a11y: ['使用有名称的原生 modal dialog，初始聚焦关闭按钮，浏览器负责焦点隔离和 Tab 循环；需要支持 showModal 的环境。', 'Esc 通过 cancel 请求关闭，左右方向键切换且首尾按钮禁用；从图片拖向背景不会误关闭。', '每张图片必须提供 alt；加载、错误及序号使用状态区域播报，切图和重试会重建图片，旧图回调不会更新新图状态。'],

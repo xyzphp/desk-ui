@@ -1,0 +1,63 @@
+@layer ds {
+  .ds-app-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: var(--ds-space-md);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ds-app-card-grid > li { display: flex; min-width: 0; }
+  .ds-app-card-grid > li > .ds-app-card { flex: 1; }
+  .ds-app-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--ds-radius-md);
+    background: var(--bg-panel);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ds-app-card.is-interactive:hover {
+    border-color: var(--ds-input-border-hover);
+    box-shadow: 0 6px 18px rgb(0 0 0 / calc(0.08 * var(--ds-shadow-strength)));
+  }
+  .ds-app-card-head { display: flex; gap: 12px; min-width: 0; }
+  .ds-app-card-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .ds-app-card-title { margin: 0; color: var(--text); font-size: 14px; font-weight: 650; line-height: 1.35; overflow-wrap: anywhere; }
+  .ds-app-card-open {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* 标题动作的点击区铺满整卡；标签与底栏操作提层，保持各自可点击。 */
+  .ds-app-card-open::after { content: ""; position: absolute; inset: 0; border-radius: var(--ds-radius-md); }
+  .ds-app-card-open:focus-visible { outline: none; }
+  .ds-app-card-open:focus-visible::after { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .ds-app-card-summary {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    color: var(--text-2);
+    font-size: 12px;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .ds-app-card-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ds-app-card-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; }
+  .ds-app-card-meta { min-width: 0; color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
+  .ds-app-card-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; margin-inline-start: auto; }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-app-card { transition: none; }
+  }
+}

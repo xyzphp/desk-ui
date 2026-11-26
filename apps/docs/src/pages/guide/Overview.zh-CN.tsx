@@ -122,10 +122,10 @@ export function OverviewZh({ componentCount, pageCount, categoryCount }: Overvie
           <li><strong>反馈</strong>：Tag、HelpTip / Tooltip、Notice、ToastProvider / useToast、AnchorPopover、Popconfirm、Coachmark / Tour、
             EmptyState、Result、Spinner / LoadingOverlay。</li>
           <li><strong>布局</strong>：Panel、Toolbar、SplitLayout / ResizableSplit、ResizeHandle、Sidebar、SearchField、List、PropertySheet、
-            DocumentPane、Disclosure、AppLayout / NavSidebar、Breadcrumb、Stack / Inline / Grid。</li>
+            DocumentPane、Disclosure、DetailLayout / DetailSection、AppLayout / NavSidebar、Breadcrumb、Stack / Inline / Grid。</li>
           <li><strong>数据</strong>：Table、Pagination、Tabs、Stepper、Calendar / MonthCalendar、Tree、PermissionTree、SelectionTree、
-            Statistic / StatCard、Timeline；文件大小展示复用 formatBytes。</li>
-          <li><strong>内容预览</strong>：ImagePreview，支持多图切换、加载失败重试与关闭后焦点返回。</li>
+            Statistic / StatCard、Timeline、AppCard / AppCardGrid；文件大小展示复用 formatBytes。</li>
+          <li><strong>内容预览</strong>：ImagePreview，支持多图切换、加载失败重试与关闭后焦点返回；ImageGallery 提供缩略图条并复用它放大。</li>
           <li><strong>通用模态</strong>：Modal 与四边 Drawer 共用内容 / 动作和原生模态层，SystemDialog 等确认特例复用同一底层。</li>
           <li><strong>标签输入</strong>：TagInput 支持确认、移除、粘贴校验、原生表单和可恢复草稿。</li>
           <li><strong>内容处理</strong>：ImageCropper 本地取景与导出、MarkdownEditor 源码格式 / 历史及宿主预览接入、SortableList 拖动与键盘排序。</li>

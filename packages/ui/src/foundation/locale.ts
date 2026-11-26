@@ -29,6 +29,8 @@ import type { GridLayoutLabels } from '../shell/useGridLayout';
 import type { DockWorkspaceLabels } from '../shell/DockWorkspace';
 import type { ChartLabels } from '../domain/Chart';
 import type { FileCollectionLabels } from '../domain/FileCollection';
+import type { ImagePreviewLabels } from '../domain/ImagePreview';
+import type { ImageGalleryLabels } from '../domain/ImageGallery';
 
 export interface CopyButtonLabels {
   copy: string;
@@ -178,6 +180,8 @@ export interface ComponentLabels {
   markdownView: MarkdownViewLabels;
   permissionTree: PermissionTreeNativeLabels;
   fileCollection: FileCollectionLabels;
+  imagePreview: ImagePreviewLabels;
+  imageGallery: ImageGalleryLabels;
   appIcon: { unread: (label: string, count: number) => string };
 }
 
@@ -497,6 +501,20 @@ export const zhCN: ComponentLabels = {
     apiChildren: (label) => `${label} API 权限`,
   },
   fileCollection: { grid: '图标视图', list: '列表视图', file: '文件' },
+  imagePreview: {
+    close: '关闭图片预览',
+    previous: '上一张图片',
+    next: '下一张图片',
+    loading: '正在载入图片…',
+    error: '图片加载失败',
+    retry: '重新加载',
+    empty: '暂无可预览图片',
+    count: (index, total) => `${index} / ${total}`,
+    zoomOut: '缩小图片',
+    zoomIn: '放大图片',
+    resetZoom: '适应窗口',
+  },
+  imageGallery: { open: (alt) => `查看大图：${alt}` },
   appIcon: { unread: (label, count) => `${label}，${count} 条未读` },
 };
 

@@ -179,8 +179,13 @@ export function Lead({ className, ...rest }: ComponentProps<'p'>) {
   return <p className={cx('ds-lead', className)} {...rest} />;
 }
 
-export function PropertySheet({ className, ...rest }: ComponentProps<'div'>) {
-  return <div className={cx('ds-property-sheet', className)} {...rest} />;
+export interface PropertySheetProps extends ComponentProps<'div'> {
+  /** compact：只读信息的紧凑行，名称列按最长名称对齐，用于侧栏信息面板。 */
+  density?: 'default' | 'compact';
+}
+
+export function PropertySheet({ density = 'default', className, ...rest }: PropertySheetProps) {
+  return <div className={cx('ds-property-sheet', density === 'compact' && 'ds-property-sheet--compact', className)} {...rest} />;
 }
 
 export interface PropertyProps extends Omit<ComponentProps<'div'>, 'children'> {

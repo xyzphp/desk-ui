@@ -279,9 +279,16 @@ export {
   type ListGroupProps,
   type ListItemProps,
   type ListDensity,
+  type PropertySheetProps,
   type PropertyProps,
   type DisclosureProps,
 } from './layout/Layout';
+export {
+  DetailLayout,
+  DetailSection,
+  type DetailLayoutProps,
+  type DetailSectionProps,
+} from './layout/DetailLayout';
 export { LoadMore, type LoadMoreProps, type LoadMoreLabels } from './layout/LoadMore';
 export {
   Table,
@@ -340,6 +347,12 @@ export {
   type ImagePreviewItem,
   type ImagePreviewLabels,
 } from './domain/ImagePreview';
+export {
+  ImageGallery,
+  type ImageGalleryProps,
+  type ImageGalleryLabels,
+} from './domain/ImageGallery';
+export { AppCard, AppCardGrid, type AppCardProps, type AppCardGridProps } from './domain/AppCard';
 export { MessageComposer, type MessageComposerProps, type MessageComposerLabels } from './domain/MessageComposer';
 export {
   AIToolbar,

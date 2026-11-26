@@ -62,6 +62,10 @@
   .ds-property { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 18px; align-items: start; min-width: 0; font-size: 13px; }
   .ds-property > span { padding-top: 8px; }
   .ds-property > div { min-width: 0; }
+  .ds-property-sheet--compact { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; }
+  .ds-property-sheet--compact > .ds-property { grid-column: 1 / -1; grid-template-columns: subgrid; gap: normal; font-size: 12px; }
+  .ds-property-sheet--compact > .ds-property > span { padding-top: 0; color: var(--text-2); }
+  .ds-property-sheet--compact > .ds-property > div { overflow-wrap: anywhere; }
 
   /* ai-models.css 的 .ai-more 与 app-workshop.css 的 .workshop-cell-details。 */
   .ds-disclosure { min-width: 0; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 12px; }

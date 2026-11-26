@@ -47,6 +47,9 @@ import docs41 from './pages/components/admin-shell?metadata';
 import docs42 from './pages/components/start-menu?metadata';
 import docs43 from './pages/components/language-switcher?metadata';
 import docs44 from './pages/components/guide-tour?metadata';
+import docs45 from './pages/components/app-card?metadata';
+import docs46 from './pages/components/image-gallery?metadata';
+import docs47 from './pages/components/detail-layout?metadata';
 
 /** 组件分类。每个分类在文档桌面上是一个应用图标，点击打开一个窗口，窗口左侧列出该分类下的页面。 */
 export interface DocCategory {
@@ -583,6 +586,9 @@ export const pages: DocPage[] = [
   component('property', 'layout', 'type', docs25.propertyRowDoc!, () =>
     import('./pages/components/layout').then((module) => module.propertyRowDoc),
   ),
+  component('detail-layout', 'layout', 'panel-right', docs47.detailLayoutDoc!, () =>
+    import('./pages/components/detail-layout').then((module) => module.detailLayoutDoc),
+  ),
   component('disclosure', 'layout', 'chevron-down', docs25.disclosureDoc!, () =>
     import('./pages/components/layout').then((module) => module.disclosureDoc),
   ),
@@ -619,6 +625,12 @@ export const pages: DocPage[] = [
   ),
   component('file-collection', 'data', 'files', docs39.fileCollectionDoc!, () =>
     import('./pages/components/file-collection').then((module) => module.fileCollectionDoc),
+  ),
+  component('app-card', 'data', 'app-window', docs45.appCardDoc!, () =>
+    import('./pages/components/app-card').then((module) => module.appCardDoc),
+  ),
+  component('image-gallery', 'data', 'image', docs46.imageGalleryDoc!, () =>
+    import('./pages/components/image-gallery').then((module) => module.imageGalleryDoc),
   ),
   component('pagination', 'data', 'chevron-right', docs29.paginationDoc!, () =>
     import('./pages/components/data').then((module) => module.paginationDoc),

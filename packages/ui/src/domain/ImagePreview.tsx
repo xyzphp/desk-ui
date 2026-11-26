@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode, type WheelEvent } from 'react';
 import { cx } from '../foundation/cx';
+import { useLabels } from '../foundation/ConfigProvider';
+import type { LabelOverrides } from '../foundation/locale';
 import { useControllable } from '../foundation/useControllable';
 import { useModalDialog } from '../foundation/useModalDialog';
 import { Button, IconButton } from '../primitives/Button';
@@ -33,7 +35,8 @@ export interface ImagePreviewProps {
   defaultIndex?: number;
   onIndexChange?: (index: number) => void;
   onClose: () => void;
-  labels: ImagePreviewLabels;
+  /** 覆盖默认文案；缺省取 ConfigProvider 的 imagePreview 分组。 */
+  labels?: LabelOverrides<ImagePreviewLabels>;
   /** Optional host-owned controls, such as a permission-checked download action. */
   toolbarActions?: ReactNode;
   /** Enables the original QuickLook zoom, wheel and pan controls. */
@@ -102,11 +105,12 @@ export function ImagePreview({
   defaultIndex = 0,
   onIndexChange,
   onClose,
-  labels,
+  labels: overrides,
   toolbarActions,
   zoomable = false,
   className,
 }: ImagePreviewProps) {
+  const labels = useLabels('imagePreview', overrides);
   const [current, setCurrent] = useControllable(index, defaultIndex, onIndexChange);
   const dialog = useRef<HTMLDialogElement>(null);
   const close = useRef<HTMLButtonElement>(null);

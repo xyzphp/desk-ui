@@ -316,14 +316,27 @@ export const listItemDoc: ComponentDoc = {
 export const propertyDoc: ComponentDoc = {
   name: { 'zh-CN': '属性表单', 'en-US': 'Property sheet' },
   summary: { 'zh-CN': '纵向组织属性行，统一详情页字段之间的间距。', 'en-US': 'Arranges property rows vertically, unifying spacing between detail-page fields.' },
-  usage: ['子项使用 Property，每行的标签与控件布局由属性行负责。', '需要错误与提示的字段使用 Field，不与属性行重复嵌套。'],
+  usage: ['子项使用 Property，每行的标签与控件布局由属性行负责。', '需要错误与提示的字段使用 Field，不与属性行重复嵌套。',
+    'density="compact" 用于只读信息（详情页信息栏的标识、作者、许可证等）：行距更紧、字号 12px，名称列按最长名称对齐，值可换行；带控件的编辑区保持默认。'],
   demos: [{ title: '详情编辑区', code: `<PropertySheet>
   <Property label="名称"><Input aria-label="名称" defaultValue="AI 工作助手" /></Property>
   <Property label="有效期"><Select aria-label="有效期" defaultValue="30"><option value="30">30 天</option><option value="0">永久</option></Select></Property>
   <Property label="状态"><Tag tone="success">已启用</Tag></Property>
-</PropertySheet>`, render: () => <PropertyDemo />, layout: 'stack' }],
+</PropertySheet>`, render: () => <PropertyDemo />, layout: 'stack' },
+  { title: '紧凑只读信息', code: `<PropertySheet density="compact">
+  <Property label="标识"><code>world-clock</code></Property>
+  <Property label="许可证">MIT</Property>
+  <Property label="源码仓库">github.com/example/world-clock</Property>
+</PropertySheet>`, render: () => <PropertySheet density="compact">
+    <Property label="标识"><code>world-clock</code></Property>
+    <Property label="许可证">MIT</Property>
+    <Property label="源码仓库">github.com/example/world-clock</Property>
+  </PropertySheet>, layout: 'stack' }],
   api: [
-    { component: 'PropertySheet', props: [{ name: '…div 属性', type: "ComponentProps<'div'>", description: '纵向排布各属性行。' }] },
+    { component: 'PropertySheet', props: [
+      { name: 'density', type: "'default' | 'compact'", default: "'default'", description: 'compact：只读信息的紧凑行，名称列按最长名称对齐。' },
+      { name: '…div 属性', type: "ComponentProps<'div'>", description: '纵向排布各属性行。' },
+    ] },
   ],
   a11y: ['Property 的名称是视觉标签；可交互控件仍需 aria-label 或使用 Field。'],
 };

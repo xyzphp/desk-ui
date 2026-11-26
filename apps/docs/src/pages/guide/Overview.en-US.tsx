@@ -122,10 +122,10 @@ export function OverviewEn({ componentCount, pageCount, categoryCount }: Overvie
           <li><strong>Feedback</strong>: Tag, HelpTip / Tooltip, Notice, ToastProvider / useToast, AnchorPopover, Popconfirm, Coachmark / Tour,
             EmptyState, Result, Spinner / LoadingOverlay.</li>
           <li><strong>Layout</strong>: Panel, Toolbar, SplitLayout / ResizableSplit, ResizeHandle, Sidebar, SearchField, List, PropertySheet,
-            DocumentPane, Disclosure, AppLayout / NavSidebar, Breadcrumb, Stack / Inline / Grid.</li>
+            DocumentPane, Disclosure, DetailLayout / DetailSection, AppLayout / NavSidebar, Breadcrumb, Stack / Inline / Grid.</li>
           <li><strong>Data</strong>: Table, Pagination, Tabs, Stepper, Calendar / MonthCalendar, Tree, PermissionTree, SelectionTree,
-            Statistic / StatCard, Timeline; file sizes reuse formatBytes.</li>
-          <li><strong>Content preview</strong>: ImagePreview with multi-image switching, retry on load failure, and focus restoration on close.</li>
+            Statistic / StatCard, Timeline, AppCard / AppCardGrid; file sizes reuse formatBytes.</li>
+          <li><strong>Content preview</strong>: ImagePreview with multi-image switching, retry on load failure, and focus restoration on close; ImageGallery adds a thumbnail strip that opens it.</li>
           <li><strong>Shared modals</strong>: Modal and the four-side Drawer share content / actions and the native modal layer; SystemDialog-style confirmations reuse the same base.</li>
           <li><strong>Tag input</strong>: TagInput supports confirm, remove, paste validation, native forms, and recoverable drafts.</li>
           <li><strong>Content tools</strong>: ImageCropper for local framing and export, MarkdownEditor for source formatting / history with host preview, and SortableList for drag and keyboard ordering.</li>
