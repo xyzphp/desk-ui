@@ -85,7 +85,13 @@
     --ds-shell-glass-bg-strong: initial;
     --ds-shell-glass-card: initial;
     --ds-shell-glass-bg-soft: initial;
+    --ds-shell-glass-track-bg: initial;
     --ds-shell-glass-chip-bg: initial;
+    --ds-shell-glass-active-bg: initial;
+    --ds-shell-glass-active-shadow: initial;
+    --ds-shell-glass-text: initial;
+    --ds-shell-glass-text-2: initial;
+    --ds-shell-glass-active-text: initial;
     --ds-shell-glass-border: initial;
     --ds-shell-glass-border-hover: initial;
     --ds-shell-glass-backdrop: initial;
@@ -94,6 +100,8 @@
     --ds-shell-glass-shadow-sm: initial;
     --ds-shell-glass-rim: initial;
     --ds-shell-glass-rim-content: initial;
+    --ds-shell-glass-motion: initial;
+    --ds-start-menu-motion: initial;
     --ds-shell-item-hover: initial;
     --ds-shell-panel-radius: initial;
     --ds-lock-veil-bg: initial;
@@ -126,7 +134,7 @@
     --ds-card-surface-shadow: var(--ds-liquid-glass-shadow);
     --ds-card-surface-rim: var(--ds-liquid-glass-rim);
     --ds-card-chip-bg: var(--ds-liquid-glass-chip-bg);
-    --ds-card-chip-border: var(--ds-liquid-glass-border);
+    --ds-card-chip-border: var(--ds-liquid-glass-chip-border);
     --menubar-background: var(--ds-liquid-glass-bg);
     --menubar-backdrop: var(--ds-liquid-glass-filter);
     --menubar-shadow: inset 0 -1px 0 var(--ds-liquid-glass-border), inset 0 1px 0 var(--ds-liquid-glass-border-hover), 0 4px 14px rgb(0 0 0 / calc(0.08 * var(--ds-shadow-strength)));
@@ -140,7 +148,13 @@
     --ds-shell-glass-bg-strong: var(--ds-liquid-glass-bg-strong);
     --ds-shell-glass-card: var(--ds-liquid-glass-card);
     --ds-shell-glass-bg-soft: var(--ds-liquid-glass-bg-soft);
+    --ds-shell-glass-track-bg: var(--ds-liquid-glass-track-bg);
     --ds-shell-glass-chip-bg: var(--ds-liquid-glass-chip-bg);
+    --ds-shell-glass-active-bg: var(--ds-liquid-glass-active-bg);
+    --ds-shell-glass-active-shadow: var(--ds-liquid-glass-active-shadow);
+    --ds-shell-glass-text: var(--ds-liquid-glass-text);
+    --ds-shell-glass-text-2: var(--ds-liquid-glass-text-2);
+    --ds-shell-glass-active-text: var(--ds-liquid-glass-active-text);
     --ds-shell-glass-border: var(--ds-liquid-glass-border);
     --ds-shell-glass-border-hover: var(--ds-liquid-glass-border-hover);
     --ds-shell-glass-backdrop: var(--ds-liquid-glass-filter);
@@ -149,18 +163,20 @@
     --ds-shell-glass-shadow-sm: var(--ds-liquid-glass-shadow-sm);
     --ds-shell-glass-rim: var(--ds-liquid-glass-rim);
     --ds-shell-glass-rim-content: "";
+    --ds-shell-glass-motion: ds-liquid-pop 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    --ds-start-menu-motion: ds-liquid-start-in 0.24s cubic-bezier(0.22, 1, 0.36, 1);
     --ds-shell-item-hover: var(--ds-liquid-glass-chip-bg);
     --ds-shell-panel-radius: calc(16px * var(--ds-radius-scale));
     --ds-lock-veil-bg: linear-gradient(180deg, rgba(12, 18, 30, .14), rgba(12, 18, 30, .38));
     --ds-lock-veil-backdrop: blur(12px) saturate(165%);
     --ds-lock-glass-field-bg: rgba(255, 255, 255, .18);
     --ds-lock-glass-field-focus: rgba(255, 255, 255, .28);
-    --ds-lock-glass-field-border: rgba(255, 255, 255, .44);
+    --ds-lock-glass-field-border: rgba(255, 255, 255, .3);
     --ds-lock-glass-backdrop: var(--ds-liquid-glass-filter-soft);
     --ds-lock-glass-shadow: var(--ds-liquid-glass-shadow-sm);
     --ds-lock-unlock-bg: rgba(255, 255, 255, .74);
     --ds-lock-unlock-hover: rgba(255, 255, 255, .88);
-    --ds-lock-unlock-border: rgba(255, 255, 255, .64);
+    --ds-lock-unlock-border: rgba(255, 255, 255, .42);
   }
   .ds-desktop *, .ds-desktop *::before, .ds-desktop *::after { box-sizing: border-box; }
   .ds-desktop :is(button, input, select, textarea) { font-family: inherit; }
@@ -260,7 +276,7 @@
   }
 
   /* 菜单栏 */
-  .ds-menubar { position: fixed; top: var(--menubar-top, 0); bottom: var(--menubar-bottom, auto); left: 0; right: 0; height: var(--system-bar-height, var(--menubar-h)); display: var(--menubar-display, grid); grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); justify-content: space-between; align-items: center; padding: 0 10px; background: var(--menubar-background, var(--bg-glass)); backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); -webkit-backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); box-shadow: var(--menubar-shadow, none); z-index: 9000; font-size: 13px; pointer-events: var(--menubar-pointer-events, auto); }
+  .ds-menubar { position: fixed; top: var(--menubar-top, 0); bottom: var(--menubar-bottom, auto); left: 0; right: 0; height: var(--system-bar-height, var(--menubar-h)); display: var(--menubar-display, grid); grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); justify-content: space-between; align-items: center; padding: 0 10px; background: var(--menubar-background, var(--bg-glass)); color: var(--ds-shell-glass-text, var(--text)); backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); -webkit-backdrop-filter: var(--menubar-backdrop, blur(30px) saturate(180%)); box-shadow: var(--menubar-shadow, none); z-index: 9000; font-size: 13px; pointer-events: var(--menubar-pointer-events, auto); }
   .ds-menubar-left, .ds-menubar-center, .ds-menubar-right { display: flex; align-items: center; min-width: 0; height: 100%; pointer-events: auto; }
   .ds-menubar-center { justify-content: center; }
   .ds-menubar-right { justify-content: flex-end; max-width: var(--menubar-right-max-width, none); }
@@ -323,14 +339,18 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1.5px;
+    padding: 1px;
     background: var(--ds-shell-glass-rim, none);
+    background-size: 220% 220%;
+    background-position: 0% 0%;
+    transition: background-position .6s cubic-bezier(.22, 1, .36, 1);
     -webkit-mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
     -webkit-mask-composite: xor;
     mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
     mask-composite: exclude;
     pointer-events: none;
   }
+  .ds-dock:where(:hover, :focus-within)::before { background-position: 100% 100%; }
   .ds-dock-item { position: relative; flex: 0 0 auto; width: var(--dock-item, 54px); height: var(--dock-item, 54px); display: flex; align-items: var(--dock-align, flex-end); justify-content: center; border: 0; padding: 0; background: transparent; border-radius: var(--dock-item-radius, 0px); cursor: pointer; transition: width .15s, height .15s, margin .15s; }
   .ds-dock-item:hover { background: var(--dock-hover-bg, transparent); }
   .ds-dock-item .ds-app-icon { --ds-app-icon-size: var(--dock-icon-size, 54px); width: var(--ds-app-icon-size, 100%); height: var(--ds-app-icon-size, 100%); }
@@ -339,7 +359,7 @@
   @keyframes ds-dock-bounce { 50% { transform: translateY(-18px); } }
   .ds-dock-dot { position: absolute; bottom: var(--dock-dot-bottom, -5px); width: var(--dock-dot-width, 4px); height: var(--dock-dot-height, 4px); border-radius: calc(4px * var(--ds-radius-scale)); background: var(--dock-dot-color, var(--text)); opacity: 0; }
   .ds-dock-item.is-running .ds-dock-dot { opacity: .8; }
-  .ds-dock-tip { display: var(--dock-tip-display, block); position: absolute; bottom: calc(100% + 14px); padding: 4px 10px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); color: var(--text); white-space: nowrap; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .15s; box-shadow: var(--ds-shell-glass-shadow-sm, 0 2px 10px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); }
+  .ds-dock-tip { display: var(--dock-tip-display, block); position: absolute; bottom: calc(100% + 14px); padding: 4px 10px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop-soft, none); color: var(--ds-shell-glass-text, var(--text)); white-space: nowrap; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .15s; box-shadow: var(--ds-shell-glass-shadow-sm, 0 2px 10px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); }
   .ds-dock-item:hover .ds-dock-tip, .ds-dock-item:focus-visible .ds-dock-tip { opacity: 1; }
   .ds-dock-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--dock-item-radius, calc(12px * var(--ds-radius-scale))); }
   .ds-dock-separator { flex: 0 0 1px; width: 1px; height: var(--dock-sep-height, 48px); margin: 0 6px 3px; background: var(--border); align-self: var(--dock-align, flex-end); }
@@ -359,7 +379,7 @@
       outline-offset: 2px;
     }
   }
-  @media (prefers-reduced-motion: reduce) { .ds-dock-item, .ds-dock-item .ds-app-icon, .ds-dock-wrap, .ds-dock-wrap.is-hidden, .ds-desktop-icon, .ds-wallpaper { transition: none; } .ds-dock-item.is-bouncing, .ds-wallpaper.is-animated { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .ds-dock::before, .ds-dock-item, .ds-dock-item .ds-app-icon, .ds-dock-wrap, .ds-dock-wrap.is-hidden, .ds-desktop-icon, .ds-wallpaper { transition: none; } .ds-dock-item.is-bouncing, .ds-wallpaper.is-animated { animation: none; } }
   @media (forced-colors: active) {
     .ds-desktop-icon-art, .ds-app-icon, .ds-app-icon .ds-icon { filter: none; }
     .ds-menubar, .ds-dock-wrap, .ds-dock, .ds-dock-tip {

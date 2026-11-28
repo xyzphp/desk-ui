@@ -2,7 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Scrollable, Workspace } from '../foundation/Workspace';
-import { List, ListItem, SearchField, Sidebar, SidebarAddButton, SplitLayout } from './Layout';
+import { List, ListItem, SearchField, Sidebar, SidebarAddButton, SplitLayout, DocumentPane } from './Layout';
+import { SettingsRow } from './Nav';
 
 describe('SearchField', () => {
   it('可省略装饰图标，并保留名称与原生输入', () => {
@@ -127,5 +128,41 @@ describe('Workspace / Scrollable', () => {
     expect(screen.getByTestId('root')).toHaveClass('ds-workspace', 'ds-scrollable');
     expect(container.querySelector('.area')).toHaveClass('ds-scrollable');
     expect(container.querySelector('.area')).not.toHaveClass('ds-workspace');
+  });
+
+  it('支持 surface="ambient" 为包含工具栏的工作区整体启用浅雾微光背景', () => {
+    const { container, rerender } = render(<Workspace>内容</Workspace>);
+    expect(container.firstElementChild).toHaveClass('ds-workspace');
+    expect(container.firstElementChild).not.toHaveClass('ds-workspace--ambient');
+    rerender(<Workspace surface="ambient">内容</Workspace>);
+    expect(container.firstElementChild).toHaveClass('ds-workspace', 'ds-workspace--ambient');
+  });
+});
+
+describe('DocumentPane', () => {
+  it('默认不附加 ambient 背景类，设置 surface="ambient" 后启用浅雾微光工作台背景', () => {
+    const { container, rerender } = render(<DocumentPane>内容</DocumentPane>);
+    expect(container.firstElementChild).toHaveClass('ds-document');
+    expect(container.firstElementChild).not.toHaveClass('ds-document--ambient');
+    rerender(<DocumentPane surface="ambient">内容</DocumentPane>);
+    expect(container.firstElementChild).toHaveClass('ds-document', 'ds-document--ambient');
+  });
+});
+
+describe('SettingsRow', () => {
+  it('渲染组标题与可选问号悬停提示且不改变组名称', () => {
+    const { rerender } = render(
+      <SettingsRow label="启用 AI 写作助手" tip="开启编辑区悬浮选区优化与表单智能补全">
+        <input type="checkbox" role="switch" aria-label="启用 AI 写作助手" />
+      </SettingsRow>,
+    );
+    expect(screen.getByRole('group', { name: '启用 AI 写作助手' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: '开启编辑区悬浮选区优化与表单智能补全' })).toBeInTheDocument();
+    rerender(
+      <SettingsRow label="启用 AI 写作助手">
+        <input type="checkbox" role="switch" aria-label="启用 AI 写作助手" />
+      </SettingsRow>,
+    );
+    expect(screen.queryByRole('img', { name: '开启编辑区悬浮选区优化与表单智能补全' })).toBeNull();
   });
 });

@@ -12,7 +12,11 @@ describe('Button', () => {
   });
 
   it('variant 与 pressed 映射为类名和 aria-pressed', () => {
-    render(<Button variant="primary" pressed>确定</Button>);
+    render(
+      <Button variant="primary" pressed>
+        确定
+      </Button>,
+    );
     const button = screen.getByRole('button', { name: '确定' });
     expect(button).toHaveClass('ds-button', 'ds-button--primary');
     expect(button).toHaveAttribute('aria-pressed', 'true');
@@ -20,7 +24,11 @@ describe('Button', () => {
 
   it('禁用时不触发点击', async () => {
     const onClick = vi.fn();
-    render(<Button disabled onClick={onClick}>删除</Button>);
+    render(
+      <Button disabled onClick={onClick}>
+        删除
+      </Button>,
+    );
     await userEvent.click(screen.getByRole('button', { name: '删除' }));
     expect(onClick).not.toHaveBeenCalled();
   });
@@ -44,6 +52,21 @@ describe('Field', () => {
     expect(input).toHaveAttribute('aria-invalid', 'true');
     expect(input).toHaveAccessibleDescription('名称不能为空');
     expect(screen.queryByText('最多 80 字')).not.toBeInTheDocument();
+  });
+
+  it('通过 tip 在标签旁渲染问号悬停提示，不污染控件名称且保留点击聚焦关联', () => {
+    const { container } = render(
+      <Field label="翻译目标语言" tip="用逗号分隔的可选翻译语言，首项为默认语言">
+        <Input />
+      </Field>,
+    );
+    const input = screen.getByRole('textbox', { name: '翻译目标语言' });
+    expect(
+      container
+        .querySelector('.ds-field-head label')
+        ?.contains(screen.getByRole('img', { name: '用逗号分隔的可选翻译语言，首项为默认语言' })),
+    ).toBe(false);
+    expect(input).not.toHaveAttribute('aria-describedby');
   });
 });
 

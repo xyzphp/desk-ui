@@ -135,7 +135,7 @@ export const appLayoutDoc: ComponentDoc = {
   },
   usage: [
     '以 AppLayout 包住导航侧栏与 AppMain，主区按剩余宽度伸展。',
-    'AppMain 提供容器查询上下文，内容区滚动与内边距由内部组件负责。',
+    'AppMain 提供容器查询上下文，内容区滚动与内边距由内部组件负责；需要浅雾工作台背景（如应用卡片目录与详情）时为 DocumentPane 设置 surface="ambient"。',
     '当前导航项与内容由调用方维护，布局本身不负责路由。',
   ],
   demos: [
@@ -180,6 +180,22 @@ export const appLayoutDoc: ComponentDoc = {
         { name: '…div 属性', type: "ComponentProps<'div'>", description: '可伸展的内容列，提供容器查询上下文。' },
       ],
     },
+    {
+      component: 'DocumentPane',
+      props: [
+        {
+          name: 'surface',
+          type: "'default' | 'ambient'",
+          default: "'default'",
+          description: 'default 沿用外层底色；ambient 提供柔和顶部微光与浅雾背景，衬托应用卡片与详情面板。',
+        },
+        {
+          name: '…div 属性',
+          type: "ComponentProps<'div'>",
+          description: '主区滚动文档容器，透传 className / ref 等属性。',
+        },
+      ],
+    },
   ],
   a11y: ['布局不改变子控件的语义与键盘顺序；导航区域需单独提供可访问名称。'],
 };
@@ -218,6 +234,7 @@ export const settingsRowDoc: ComponentDoc = {
       component: 'SettingsRow',
       props: [
         { name: 'label', type: 'string', description: '必填，可见标签及设置组名称。' },
+        { name: 'tip', type: 'string', description: '标签旁的问号悬停提示，用于收起说明小字以保持设置行紧凑。' },
         {
           name: 'layout',
           type: "'inline' | 'stacked'",

@@ -98,7 +98,12 @@ export function SearchField({ label, showIcon = true, variant = 'default', class
   return (
     <div className={cx('ds-search', variant === 'pill' && 'ds-search--pill', className)}>
       {showIcon && <Icon name="search" />}
-      <input className="ds-control-input" type="search" aria-label={label ?? rest.placeholder ?? labels.search} {...rest} />
+      <input
+        className="ds-control-input"
+        type="search"
+        aria-label={label ?? rest.placeholder ?? labels.search}
+        {...rest}
+      />
     </div>
   );
 }
@@ -143,12 +148,33 @@ export interface ListItemProps {
 }
 
 /** 列表项。选中态：浅色强调背景 + 强调色标题 + 勾选标记，与项目管理页一致。 */
-export function ListItem({ title, subtitle, icon, leading, selected, disabled, showSelectionMark = true, trailing, onSelect }: ListItemProps) {
+export function ListItem({
+  title,
+  subtitle,
+  icon,
+  leading,
+  selected,
+  disabled,
+  showSelectionMark = true,
+  trailing,
+  onSelect,
+}: ListItemProps) {
   const showCheck = selected && showSelectionMark;
   return (
     <li>
-      <button type="button" className="ds-list-item" aria-pressed={selected ?? false} disabled={disabled} onClick={onSelect}>
-        {leading ?? (icon && <span className="ds-list-icon"><Icon name={icon} /></span>)}
+      <button
+        type="button"
+        className="ds-list-item"
+        aria-pressed={selected ?? false}
+        disabled={disabled}
+        onClick={onSelect}
+      >
+        {leading ??
+          (icon && (
+            <span className="ds-list-icon">
+              <Icon name={icon} />
+            </span>
+          ))}
         <span className="ds-list-text">
           <strong>{title}</strong>
           {subtitle && <small>{subtitle}</small>}
@@ -164,9 +190,16 @@ export function ListItem({ title, subtitle, icon, leading, selected, disabled, s
   );
 }
 
+export type DocumentPaneSurface = 'default' | 'ambient';
+
+export interface DocumentPaneProps extends ComponentProps<'div'> {
+  /** default：沿用外层容器底色；ambient：带顶部柔和微光的浅雾工作台画布，适合应用卡片与详情页。 */
+  surface?: DocumentPaneSurface;
+}
+
 /** 主区可滚动的文档容器（内边距 24 / 28px）。 */
-export function DocumentPane({ className, ...rest }: ComponentProps<'div'>) {
-  return <div className={cx('ds-document', className)} {...rest} />;
+export function DocumentPane({ surface = 'default', className, ...rest }: DocumentPaneProps) {
+  return <div className={cx('ds-document', surface === 'ambient' && 'ds-document--ambient', className)} {...rest} />;
 }
 
 /** 文档大标题。 */
@@ -185,7 +218,12 @@ export interface PropertySheetProps extends ComponentProps<'div'> {
 }
 
 export function PropertySheet({ density = 'default', className, ...rest }: PropertySheetProps) {
-  return <div className={cx('ds-property-sheet', density === 'compact' && 'ds-property-sheet--compact', className)} {...rest} />;
+  return (
+    <div
+      className={cx('ds-property-sheet', density === 'compact' && 'ds-property-sheet--compact', className)}
+      {...rest}
+    />
+  );
 }
 
 export interface PropertyProps extends Omit<ComponentProps<'div'>, 'children'> {
@@ -220,7 +258,14 @@ export interface DisclosureProps extends Omit<ComponentProps<'div'>, 'title' | '
 
 /** 就地展开次级配置，折叠只隐藏内容，不卸载草稿。对应 .ai-more / .workshop-cell-details。 */
 export function Disclosure({
-  title, children, open, defaultOpen = false, onOpenChange, disabled, className, ...rest
+  title,
+  children,
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  disabled,
+  className,
+  ...rest
 }: DisclosureProps) {
   const id = useId();
   const [expanded, setExpanded] = useControllable(open, defaultOpen, onOpenChange);

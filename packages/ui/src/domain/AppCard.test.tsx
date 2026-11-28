@@ -27,7 +27,11 @@ describe('AppCard / AppCardGrid', () => {
           name="服务状态"
           onOpen={onOpen}
           meta="版本 1.0.0"
-          actions={<button type="button" onClick={onInstall}>安装</button>}
+          actions={
+            <button type="button" onClick={onInstall}>
+              安装
+            </button>
+          }
         />
       </>,
     );
@@ -41,11 +45,67 @@ describe('AppCard / AppCardGrid', () => {
   });
 
   it('没有打开动作时只展示名称；不可显示的图标地址回退为名称首字', () => {
-    const { container } = render(<AppCard name="示例应用" icon={{ image: 'javascript:alert(1)' }} headingLevel={2} actions={false} />);
+    const { container } = render(
+      <AppCard name="示例应用" icon={{ image: 'javascript:alert(1)' }} headingLevel={2} actions={false} />,
+    );
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: '示例应用' })).toBeInTheDocument();
     expect(container.querySelector('img')).toBeNull();
     expect(container.querySelector('[aria-hidden="true"]')).toHaveTextContent('示');
+  });
+
+  it('支持显式 tint 方向、auto 按种子稳定映射底色，以及独立于整卡的 headerAction', () => {
+    const onOpen = vi.fn();
+    const onMore = vi.fn();
+    const { rerender } = render(
+      <>
+        <AppCard
+          name="文章"
+          summary="文章写作与公开阅读"
+          tint="teal"
+          onOpen={onOpen}
+          headerAction={
+            <button type="button" onClick={onMore}>
+              更多
+            </button>
+          }
+          meta="v1.0.0"
+        />
+        <AppCard name="监控" tintSeed="chatgpt-monitor" />
+      </>,
+    );
+    expect(screen.getByRole('article', { name: '文章' })).toHaveAttribute('data-tint', 'teal');
+    const firstAutoTint = screen.getByRole('article', { name: '监控' }).getAttribute('data-tint');
+    expect(['blue', 'purple', 'teal', 'rose', 'amber']).toContain(firstAutoTint);
+    rerender(
+      <>
+        <AppCard name="文章" summary="文章写作与公开阅读" tint="teal" onOpen={onOpen} meta="v1.0.0" />
+        <AppCard name="监控（重命名）" tintSeed="chatgpt-monitor" />
+      </>,
+    );
+    expect(screen.getByRole('article', { name: '监控（重命名）' })).toHaveAttribute('data-tint', firstAutoTint);
+    fireEvent.click(screen.getByRole('button', { name: '更多' }));
+    expect(onMore).toHaveBeenCalledOnce();
+    expect(onOpen).not.toHaveBeenCalled();
+  });
+
+  it('支持 revealActions 悬停显示操作与禁用状态按钮', () => {
+    const onOpen = vi.fn();
+    render(
+      <AppCard
+        name="商店应用"
+        revealActions
+        onOpen={onOpen}
+        actions={
+          <button type="button" disabled>
+            已安装
+          </button>
+        }
+      />,
+    );
+    const card = screen.getByRole('article', { name: '商店应用' });
+    expect(card).toHaveAttribute('data-reveal-actions', '');
+    expect(screen.getByRole('button', { name: '已安装' })).toBeDisabled();
   });
 });

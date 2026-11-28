@@ -153,7 +153,7 @@ export const desktopCardDoc: ComponentDoc = {
     'en-US': 'Shared desktop card shell for clocks, todos, and extension apps, unifying title, actions, collapse, and footer.',
   },
   usage: [
-    '沿用原系统 18px 圆角、14px 内边距、半透明底板与中性边框；默认为常规毛玻璃（frosted），设置 cardStyle="liquid" 或外层 Desktop cardStyle="liquid" 时切换为高透液态玻璃折射滤镜、斜向菲涅耳高光环与厚玻璃内发光。',
+    '沿用原系统 18px 圆角、14px 内边距、半透明底板与中性边框；默认为常规毛玻璃（frosted），设置 cardStyle="liquid" 或外层 Desktop cardStyle="liquid" 时切换为高透液态玻璃折射滤镜、纤细斜向菲涅耳高光环与柔和内发光。',
     '标题与操作布局一致，主体通过 children 组合已有 List、Checkbox、Progress 等；独立迁移站已取消备忘录，原站来源仍用于说明组件设计。',
     '折叠使用 hidden 保留正文节点；variant="solid" 可嵌入普通应用。宽度与桌面位置交给外层布局，不自动抢占整张桌面。',
     hostBoundary,

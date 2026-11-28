@@ -9,9 +9,13 @@ import { Field } from './Field';
 describe('Chip / TagInput', () => {
   it('回车与逗号添加，重复 / 长度 / 数量拒绝，表单只提交已确认标签', async () => {
     const rejected = vi.fn();
-    const { container } = render(<form><Field label="标签">
-      <TagInput name="tags" defaultValue={['已有']} maxTags={2} maxTagLength={4} onReject={rejected} />
-    </Field></form>);
+    const { container } = render(
+      <form>
+        <Field label="标签">
+          <TagInput name="tags" defaultValue={['已有']} maxTags={2} maxTagLength={4} onReject={rejected} />
+        </Field>
+      </form>,
+    );
     const user = userEvent.setup();
     const input = screen.getByRole('textbox', { name: '标签' });
     await user.type(input, '新增,');
@@ -42,9 +46,11 @@ describe('Chip / TagInput', () => {
   it('输入法确认不添加或提交；required 校验已确认值，重置恢复标签和草稿', async () => {
     const ref = createRef<HTMLInputElement>();
     const submit = vi.fn((event) => event.preventDefault());
-    const { container } = render(<form onSubmit={submit}>
-      <TagInput ref={ref} aria-label="标签" required defaultInputValue="草稿" />
-    </form>);
+    const { container } = render(
+      <form onSubmit={submit}>
+        <TagInput ref={ref} aria-label="标签" required defaultInputValue="草稿" />
+      </form>,
+    );
     fireEvent.compositionStart(ref.current!);
     fireEvent.keyDown(ref.current!, { key: 'Enter' });
     fireEvent.compositionEnd(ref.current!);
@@ -59,9 +65,47 @@ describe('Chip / TagInput', () => {
   });
   it('只读不展示移除动作，独立 Chip 的禁用移除不可触发', async () => {
     const remove = vi.fn();
-    render(<><TagInput aria-label="标签" value={['只读']} readOnly /><Chip disabled onRemove={remove}>不可移除</Chip></>);
+    render(
+      <>
+        <TagInput aria-label="标签" value={['只读']} readOnly />
+        <Chip disabled onRemove={remove}>
+          不可移除
+        </Chip>
+      </>,
+    );
     expect(screen.queryByRole('button', { name: '移除标签：只读' })).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: '移除标签：不可移除' }));
     expect(remove).not.toHaveBeenCalled();
+  });
+
+  it('提供 options 时支持点击预设标签切换多选并与已有上限校验联动', async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(
+      <Field label="翻译目标语言">
+        <TagInput
+          defaultValue={['简体中文']}
+          options={['简体中文', 'English', '日本語']}
+          maxTags={2}
+          onValueChange={onChange}
+        />
+      </Field>,
+    );
+    const zh = screen.getByRole('button', { name: '简体中文' });
+    const en = screen.getByRole('button', { name: 'English' });
+    const ja = screen.getByRole('button', { name: '日本語' });
+    expect(zh).toHaveAttribute('aria-pressed', 'true');
+    expect(en).toHaveAttribute('aria-pressed', 'false');
+
+    await user.click(en);
+    expect(en).toHaveAttribute('aria-pressed', 'true');
+    expect(onChange).toHaveBeenLastCalledWith(['简体中文', 'English']);
+
+    await user.click(ja);
+    expect(ja).toHaveAttribute('aria-pressed', 'false');
+
+    await user.click(zh);
+    expect(zh).toHaveAttribute('aria-pressed', 'false');
+    expect(onChange).toHaveBeenLastCalledWith(['English']);
   });
 });

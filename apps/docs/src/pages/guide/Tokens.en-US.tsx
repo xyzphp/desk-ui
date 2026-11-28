@@ -80,11 +80,17 @@ const colors: Swatch[] = [
   { token: '--ds-liquid-glass-bg', label: 'Liquid glass base', note: 'Clear translucent tint for cards, trees, groups, columns, and shell bars (MenuBar, Dock, Taskbar, Mode bar)' },
   { token: '--ds-liquid-glass-bg-strong', label: 'Liquid glass strong base', note: 'Balanced clear tint for Start menu, popovers, context menus, toasts, lock countdown, sign-in card, Dock sort panel, favorites, and filter bars' },
   { token: '--ds-liquid-glass-card', label: 'Liquid glass inner card', note: 'Crisp elevated glass fill for bookmark cards, task cards, sign-in inputs, and active method tabs' },
-  { token: '--ds-liquid-glass-bg-soft', label: 'Liquid glass soft base', note: 'Airy translucent tint for nested groups, Start menu footer, segmented tracks, and add-triggers' },
+  { token: '--ds-liquid-glass-bg-soft', label: 'Liquid glass soft base', note: 'Airy translucent tint for nested groups, Start menu footer, and add-triggers' },
+  { token: '--ds-liquid-glass-track-bg', label: 'Liquid glass track base', note: 'Recessed contrast well for segmented controls inside glass popovers' },
   { token: '--ds-liquid-glass-chip-bg', label: 'Liquid glass chip base', note: 'Chip and pill surface for header controls, Start search pill, popover controls, inline notifications, and hover states' },
-  { token: '--ds-liquid-glass-border', label: 'Liquid glass specular border', note: 'Base luminous rim stroke for glass surfaces' },
-  { token: '--ds-liquid-glass-border-hover', label: 'Liquid glass hover border', note: 'Brighter specular rim stroke on hover' },
-  { token: '--ds-liquid-glass-rim', label: 'Liquid glass Fresnel rim', note: '135deg diagonal specular border ring rendered via masked ::before on main containers, Start menu, and macOS Dock' },
+  { token: '--ds-liquid-glass-chip-border', label: 'Liquid glass chip border', note: 'Subtle translucent stroke for secondary header controls, chips, and dial rings inside glass cards' },
+  { token: '--ds-liquid-glass-active-bg', label: 'Liquid glass active pill base', note: 'High-contrast luminous glass pill for selected segmented options and active theme cards' },
+  { token: '--ds-liquid-glass-text', label: 'Liquid glass primary text', note: 'Crisp high-contrast primary foreground on glass cards, popovers, menu bar, and Start menu' },
+  { token: '--ds-liquid-glass-text-2', label: 'Liquid glass secondary text', note: 'Vibrant alpha-blended secondary text that stays legible over colorful wallpapers' },
+  { token: '--ds-liquid-glass-active-text', label: 'Liquid glass active text', note: 'Legible accent or crisp foreground for active glass pills' },
+  { token: '--ds-liquid-glass-border', label: 'Liquid glass specular border', note: 'Delicate translucent rim stroke for glass surfaces' },
+  { token: '--ds-liquid-glass-border-hover', label: 'Liquid glass hover border', note: 'Softly brightened specular rim stroke on hover' },
+  { token: '--ds-liquid-glass-rim', label: 'Liquid glass Fresnel rim', note: '1px 135deg diagonal specular border ring rendered via masked ::before with smooth refraction glide on hover/open' },
 ];
 
 interface Metric {
@@ -127,23 +133,23 @@ const metrics: Metric[] = [
   },
   {
     token: '--ds-liquid-glass-filter',
-    value: 'blur(14px) saturate(210% / 195%)',
-    use: 'Clear low-haze, high-chroma backdrop filter for liquid glass cards, Start menu, floating panels, shell bars, navigation groups, and board columns (210% light / 195% dark)',
+    value: 'blur(18px) saturate(165% / 160%)',
+    use: 'Balanced low-noise backdrop filter for liquid glass cards, Start menu, floating panels, shell bars, navigation groups, and board columns (165% light / 160% dark)',
   },
   {
     token: '--ds-liquid-glass-filter-soft',
-    value: 'blur(10px) saturate(195% / 185%)',
-    use: 'Lighter backdrop filter for liquid glass search bars, favorites, toolbars, Dock tooltips, and secondary triggers (195% light / 185% dark)',
+    value: 'blur(12px) saturate(155% / 150%)',
+    use: 'Lighter backdrop filter for liquid glass search bars, favorites, toolbars, Dock tooltips, and secondary triggers (155% light / 150% dark)',
   },
   {
     token: '--ds-liquid-glass-shadow',
-    value: 'Tight elevation + multi-edge specular & inner glow',
-    use: 'Elevation and internal wet-glass luminescence for primary liquid glass containers and shell panels (upward shadow extent <= 11px to stay within container gaps)',
+    value: 'Tight elevation + hairline top specular & soft inner glow',
+    use: 'Subtle elevation and gentle inner luminescence for primary liquid glass containers and shell panels (upward shadow extent <= 11px to stay within container gaps)',
   },
   {
     token: '--ds-liquid-glass-shadow-sm',
-    value: 'Soft elevation + inner rim highlights & glow',
-    use: 'Subtle glass elevation and rim glow for search bars, favorites, Start menu search pill, Dock tooltips, bookmark cards, and task cards',
+    value: 'Soft elevation + hairline top highlight & subtle glow',
+    use: 'Subtle glass elevation and top sheen for search bars, favorites, Start menu search pill, Dock tooltips, bookmark cards, and task cards',
   },
   {
     token: '--ds-drag-shadow',

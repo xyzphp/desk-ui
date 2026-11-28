@@ -1,14 +1,15 @@
 /* 弹层、菜单、右键菜单、通知、系统弹窗、外观选择器、日历。 */
 @layer ds {
-  .ds-popover { min-width: min(220px, calc(100vw - 16px)); padding: 6px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: var(--ds-shell-panel-radius, var(--radius)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); box-shadow: var(--ds-shell-glass-shadow, var(--shadow)); animation: ds-pop .16s ease-out; }
+  .ds-popover { min-width: min(220px, calc(100vw - 16px)); padding: 6px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: var(--ds-shell-panel-radius, var(--radius)); background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); color: var(--ds-shell-glass-text, var(--text)); backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px) saturate(180%)); box-shadow: var(--ds-shell-glass-shadow, var(--shadow)); animation: var(--ds-shell-glass-motion, ds-pop .16s ease-out); }
   .ds-popover--control { width: 300px; padding: 14px; }
   .ds-popover--calendar { width: 260px; padding: 14px; }
   .ds-popover--system { --ds-menu-active-bg: var(--accent); --ds-menu-active-color: var(--ds-on-accent); }
   @keyframes ds-pop { from { opacity: 0; } }
-  .ds-popover-title { margin: 6px 0 8px; color: var(--text-2); font-size: 12px; font-weight: 600; }
+  @keyframes ds-liquid-pop { from { opacity: 0; transform: translateY(-4px) scale(.965); } }
+  .ds-popover-title { margin: 6px 0 8px; color: var(--ds-shell-glass-text-2, var(--text-2)); font-size: 12px; font-weight: 600; }
   .ds-popover-title:first-child { margin-top: 0; }
 
-  .ds-menu-item { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 10px; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .ds-menu-item { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 10px; border: 0; border-radius: calc(5px * var(--ds-radius-scale)); background: transparent; color: var(--ds-shell-glass-text, var(--text)); font: inherit; text-align: left; cursor: pointer; transition: background-color .16s ease, color .16s ease; }
   .ds-menu-item .ds-icon { width: 15px; height: 15px; }
   .ds-menu-item:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: -2px; }
   .ds-menu-item:where(:hover, :focus-visible):not(:disabled) { background: var(--ds-menu-active-bg, var(--ds-selection-bg)); color: var(--ds-menu-active-color, var(--accent)); }
@@ -17,18 +18,19 @@
   .ds-context-menu {
     display: flex; min-width: min(220px, calc(100vw - 16px)); max-width: min(292px, calc(100vw - 16px));
     flex-direction: column; gap: 2px; padding: 5px; border: 1px solid var(--ds-shell-glass-border, color-mix(in srgb, var(--border) 130%, transparent));
-    border-radius: var(--ds-shell-panel-radius, calc(10px * var(--ds-radius-scale))); background: var(--ds-shell-glass-bg-strong, color-mix(in srgb, var(--bg-glass-strong) 96%, transparent)); color: var(--text);
+    border-radius: var(--ds-shell-panel-radius, calc(10px * var(--ds-radius-scale))); background: var(--ds-shell-glass-bg-strong, color-mix(in srgb, var(--bg-glass-strong) 96%, transparent)); color: var(--ds-shell-glass-text, var(--text));
     box-shadow: var(--ds-shell-glass-shadow, 0 12px 34px rgb(0 0 0 / calc(.24 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, .35));
     backdrop-filter: var(--ds-shell-glass-backdrop, blur(24px) saturate(150%)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(24px) saturate(150%));
+    animation: var(--ds-shell-glass-motion, none);
   }
-  .ds-context-item { display: flex; flex-shrink: 0; min-height: 34px; align-items: center; gap: 10px; padding: 0 9px; border: 1px solid transparent; border-radius: calc(7px * var(--ds-radius-scale)); background: transparent; color: inherit; font: inherit; font-size: 13px; text-align: left; cursor: default; }
-  .ds-context-item > .ds-icon { width: 16px; height: 16px; color: var(--text-2); }
+  .ds-context-item { display: flex; flex-shrink: 0; min-height: 34px; align-items: center; gap: 10px; padding: 0 9px; border: 1px solid transparent; border-radius: calc(7px * var(--ds-radius-scale)); background: transparent; color: inherit; font: inherit; font-size: 13px; text-align: left; cursor: default; transition: background-color .16s ease, border-color .16s ease; }
+  .ds-context-item > .ds-icon { width: 16px; height: 16px; color: var(--ds-shell-glass-text-2, var(--text-2)); }
   .ds-context-label { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
   .ds-context-label:has(.ds-context-wallpaper) { display: flex; align-items: center; gap: 10px; }
   .ds-context-wallpaper { display: inline-block; width: 36px; height: 24px; flex: 0 0 36px; border: 1px solid var(--border); border-radius: calc(5px * var(--ds-radius-scale)); }
   .ds-context-check { display: grid; width: 16px; height: 16px; flex: 0 0 16px; place-items: center; }
   .ds-context-check .ds-icon { width: 15px; height: 15px; color: var(--accent); }
-  .ds-context-item > kbd { margin-left: auto; color: var(--text-2); font: inherit; font-size: 12px; }
+  .ds-context-item > kbd { margin-left: auto; color: var(--ds-shell-glass-text-2, var(--text-2)); font: inherit; font-size: 12px; }
   .ds-context-item:where(:hover, :focus-visible, [aria-expanded="true"]):not(:disabled) { border-color: var(--ds-shell-glass-border, var(--border)); background: var(--ds-shell-item-hover, var(--hover)); }
   .ds-context-item:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: -1px; }
   .ds-menu-item:disabled { opacity: .5; cursor: default; }
@@ -39,13 +41,13 @@
   .ds-notification {
     display: flex; box-sizing: border-box; width: 100%; gap: 10px; padding: 12px 14px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(16px * var(--ds-radius-scale));
     background: var(--ds-shell-glass-bg-strong, var(--bg-glass-strong)); backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px)); -webkit-backdrop-filter: var(--ds-shell-glass-backdrop, blur(40px));
-    box-shadow: var(--ds-shell-glass-shadow, 0 10px 30px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); color: var(--text); font: inherit; text-align: left;
+    box-shadow: var(--ds-shell-glass-shadow, 0 10px 30px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)))); color: var(--ds-shell-glass-text, var(--text)); font: inherit; text-align: left;
     animation: ds-slide-in .3s cubic-bezier(.2, .9, .3, 1.2); cursor: pointer;
   }
   .ds-notification-copy { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .ds-notification .ds-app-icon { --ds-app-icon-size: 36px; width: 36px; height: 36px; }
   .ds-notification h4 { margin: 0 0 2px; font-size: 13px; }
-  .ds-notification p { margin: 0; color: var(--text-2); font-size: 12px; line-height: 1.4; }
+  .ds-notification p { margin: 0; color: var(--ds-shell-glass-text-2, var(--text-2)); font-size: 12px; line-height: 1.4; }
   .ds-notification--inline {
     border: 1px solid var(--ds-shell-glass-border, var(--border)); border-radius: var(--ds-radius-md); background: var(--ds-shell-glass-chip-bg, var(--bg-panel));
     backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: var(--ds-shell-glass-shadow-sm, none); animation: none;
@@ -64,7 +66,7 @@
 
   /* 外观选择：分段控件、主题卡片、强调色、壁纸缩略图（控制中心） */
   .ds-segmented { display: flex; gap: 4px; margin: 0 0 8px; padding: 3px; border-radius: calc(9px * var(--ds-radius-scale)); background: var(--hover); }
-  .ds-popover .ds-segmented { border: 1px solid var(--ds-shell-glass-border, transparent); background: var(--ds-shell-glass-bg-soft, var(--hover)); }
+  .ds-popover .ds-segmented { border: 1px solid var(--ds-shell-glass-border, transparent); background: var(--ds-shell-glass-track-bg, var(--hover)); }
   .ds-segmented--settings {
     --ds-segment-flex: 0 0 auto; --ds-segment-height: 24px; --ds-segment-padding: 12px; --ds-segment-border: 0px;
     --ds-segment-radius: calc(5px * var(--ds-radius-scale)); --ds-segment-active: var(--text); --ds-segment-shadow: 0 1px 3px rgb(0 0 0 / calc(.2 * var(--ds-shadow-strength)));
@@ -74,6 +76,16 @@
     flex: var(--ds-segment-flex, 1); min-width: 0; min-height: var(--ds-segment-height, 30px); padding: 4px var(--ds-segment-padding, 5px);
     border: var(--ds-segment-border, 1px) solid transparent; border-radius: var(--ds-segment-radius, calc(7px * var(--ds-radius-scale))); background: transparent;
     color: var(--text); font: inherit; font-size: 12px; white-space: nowrap; cursor: pointer;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .2s ease, transform .16s cubic-bezier(.22, 1, .36, 1);
+  }
+  .ds-segmented button:where(:active):not(:disabled) { transform: scale(.96); }
+  .ds-popover .ds-segmented button {
+    color: var(--ds-shell-glass-text-2, var(--text));
+    font-weight: 500;
+  }
+  .ds-popover .ds-segmented button:where(:hover):not(:disabled):not([aria-pressed="true"]) {
+    background: var(--ds-shell-glass-chip-bg, transparent);
+    color: var(--ds-shell-glass-text, var(--text));
   }
   .ds-segmented button[aria-pressed="true"] {
     border-color: var(--border); background: var(--bg-panel); color: var(--ds-segment-active, var(--accent));
@@ -81,14 +93,21 @@
   }
   .ds-popover .ds-segmented button[aria-pressed="true"] {
     border-color: var(--ds-shell-glass-border, var(--border));
-    background: var(--ds-shell-glass-chip-bg, var(--bg-panel));
+    background: var(--ds-shell-glass-active-bg, var(--bg-panel));
+    color: var(--ds-shell-glass-active-text, var(--ds-segment-active, var(--accent)));
+    font-weight: 600;
+    box-shadow: var(--ds-shell-glass-active-shadow, var(--ds-segment-shadow, 0 1px 3px rgb(0 0 0 / calc(.12 * var(--ds-shadow-strength)))));
   }
   .ds-segmented button:disabled { opacity: .45; cursor: not-allowed; }
   .ds-segmented button:focus-visible, .ds-theme-picker button:focus-visible, .ds-accent-picker button:focus-visible, .ds-wallpaper-picker button:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: 2px; }
   .ds-theme-picker { display: flex; gap: 8px; margin-bottom: 8px; }
-  .ds-theme-picker button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; border: 2px solid transparent; border-radius: calc(10px * var(--ds-radius-scale)); background: var(--hover); color: var(--text); font: inherit; font-size: 12px; cursor: pointer; }
+  .ds-theme-picker button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; border: 2px solid transparent; border-radius: calc(10px * var(--ds-radius-scale)); background: var(--hover); color: var(--text); font: inherit; font-size: 12px; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .2s ease, transform .16s cubic-bezier(.22, 1, .36, 1); }
+  .ds-theme-picker button:where(:active):not(:disabled) { transform: scale(.96); }
+  .ds-popover .ds-theme-picker button { color: var(--ds-shell-glass-text-2, var(--text)); font-weight: 500; }
   .ds-popover .ds-theme-picker button:not([aria-pressed="true"]) { border-color: var(--ds-shell-glass-border, transparent); background: var(--ds-shell-glass-chip-bg, var(--hover)); }
+  .ds-popover .ds-theme-picker button:where(:hover):not(:disabled):not([aria-pressed="true"]) { background: var(--ds-shell-glass-active-bg, var(--hover)); color: var(--ds-shell-glass-text, var(--text)); }
   .ds-theme-picker button[aria-pressed="true"] { border-color: var(--accent); }
+  .ds-popover .ds-theme-picker button[aria-pressed="true"] { background: var(--ds-shell-glass-active-bg, var(--hover)); color: var(--ds-shell-glass-active-text, var(--text)); font-weight: 600; box-shadow: var(--ds-shell-glass-active-shadow, none); }
   .ds-swatch { width: 44px; height: 30px; border-radius: calc(6px * var(--ds-radius-scale)); box-shadow: 0 0 0 .5px var(--border); }
   .ds-swatch--light { background: var(--ds-theme-swatch-light); }
   .ds-swatch--dark { background: var(--ds-theme-swatch-dark); }
@@ -114,12 +133,18 @@
   }
 
   .ds-calendar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 600; }
-  .ds-calendar-head button { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-chip-bg, var(--hover)); color: var(--text); cursor: pointer; }
+  .ds-calendar-head button { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--ds-shell-glass-border, transparent); border-radius: calc(6px * var(--ds-radius-scale)); background: var(--ds-shell-glass-chip-bg, var(--hover)); color: var(--ds-shell-glass-text, var(--text)); cursor: pointer; transition: background-color .16s ease, transform .14s cubic-bezier(.22, 1, .36, 1); }
+  .ds-calendar-head button:where(:active):not(:disabled) { transform: scale(.92); }
   .ds-calendar-head button:focus-visible { outline: 2px solid var(--focus-outline); outline-offset: 2px; }
   .ds-calendar-head .ds-icon { width: 15px; height: 15px; }
   .ds-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 2px; }
-  .ds-calendar-weekday { padding: 4px 0; color: var(--text-2); font-size: 12px; }
+  .ds-calendar-weekday { padding: 4px 0; color: var(--ds-shell-glass-text-2, var(--text-2)); font-size: 12px; }
   .ds-calendar-day { padding: 6px 0; border-radius: 50%; font-size: 12px; }
   .ds-calendar-day.is-today { background: var(--accent); color: var(--ds-on-accent); font-weight: 700; }
-  .ds-calendar-day.is-muted { opacity: .3; }
+  .ds-calendar-day.is-muted { opacity: .4; }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-popover, .ds-context-menu, .ds-notification { animation: none; }
+    .ds-menu-item, .ds-context-item, .ds-segmented button, .ds-theme-picker button, .ds-calendar-head button { transition: none; }
+    .ds-segmented button:where(:active):not(:disabled), .ds-theme-picker button:where(:active):not(:disabled), .ds-calendar-head button:where(:active):not(:disabled) { transform: none; }
+  }
 }

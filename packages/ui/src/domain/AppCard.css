@@ -1,34 +1,146 @@
 @layer ds {
   .ds-app-card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-    gap: var(--ds-space-md);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 264px), 1fr));
+    gap: var(--ds-space-lg);
     min-width: 0;
     margin: 0;
     padding: 0;
     list-style: none;
   }
-  .ds-app-card-grid > li { display: flex; min-width: 0; }
-  .ds-app-card-grid > li > .ds-app-card { flex: 1; }
+  .ds-app-card-grid > li {
+    display: flex;
+    min-width: 0;
+  }
+  .ds-app-card-grid > li > .ds-app-card {
+    flex: 1;
+  }
+
   .ds-app-card {
+    --ds-card-tint: var(--ds-accent-blue);
+    --ds-card-tint-end: var(--ds-accent-cyan);
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
     min-width: 0;
-    padding: 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--ds-radius-md);
-    background: var(--bg-panel);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    min-height: 162px;
+    padding: 14px 16px;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid color-mix(in srgb, var(--ds-card-tint) var(--ds-app-card-border-mix), var(--border));
+    border-radius: calc(16px * var(--ds-radius-scale));
+    background: linear-gradient(
+      135deg,
+      var(--bg-panel) 0%,
+      color-mix(in srgb, var(--ds-card-tint) var(--ds-app-card-stop-mid), var(--bg-panel)) 42%,
+      color-mix(in srgb, var(--ds-card-tint-end) var(--ds-app-card-stop-end), var(--bg-panel)) 100%
+    );
+    box-shadow:
+      0 8px 24px rgb(0 0 0 / calc(0.045 * var(--ds-shadow-strength))),
+      var(--ds-app-card-inset);
+    transition:
+      transform 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease;
   }
+  /* 顶部柔光高光与右上角漫反射光斑，营造轻质工作台层次感。 */
+  .ds-app-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--ds-app-card-sheen);
+  }
+  .ds-app-card::after {
+    content: '';
+    position: absolute;
+    top: -36px;
+    right: -36px;
+    z-index: 0;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: var(--ds-app-card-glow);
+    opacity: 0.85;
+  }
+  .ds-app-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 多种轻透超淡渐变与中性珍珠底色，统一按同频双色斜向过渡映射到同一表面模板。 */
+  .ds-app-card[data-tint='purple'] {
+    --ds-card-tint: var(--ds-accent-purple);
+    --ds-card-tint-end: var(--ds-accent-blue);
+  }
+  .ds-app-card[data-tint='teal'] {
+    --ds-card-tint: var(--ds-accent-cyan);
+    --ds-card-tint-end: var(--ds-accent-green);
+  }
+  .ds-app-card[data-tint='rose'] {
+    --ds-card-tint: var(--ds-accent-pink);
+    --ds-card-tint-end: var(--ds-accent-purple);
+  }
+  .ds-app-card[data-tint='amber'] {
+    --ds-card-tint: var(--ds-accent-orange);
+    --ds-card-tint-end: var(--ds-accent-pink);
+  }
+  .ds-app-card[data-tint='neutral'] {
+    --ds-card-tint: var(--ds-accent-gray);
+    --ds-card-tint-end: var(--ds-accent-gray);
+    border-color: var(--border);
+    background: linear-gradient(
+      135deg,
+      var(--bg-panel) 0%,
+      color-mix(in srgb, var(--bg-win) 35%, var(--bg-panel)) 46%,
+      color-mix(in srgb, var(--ds-accent-gray) var(--ds-app-card-stop-end), var(--bg-panel)) 100%
+    );
+  }
+
   .ds-app-card.is-interactive:hover {
-    border-color: var(--ds-input-border-hover);
-    box-shadow: 0 6px 18px rgb(0 0 0 / calc(0.08 * var(--ds-shadow-strength)));
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--ds-card-tint) var(--ds-app-card-border-hover-mix), var(--border));
+    box-shadow:
+      0 14px 30px rgb(0 0 0 / calc(0.08 * var(--ds-shadow-strength))),
+      var(--ds-app-card-inset);
   }
-  .ds-app-card-head { display: flex; gap: 12px; min-width: 0; }
-  .ds-app-card-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .ds-app-card-title { margin: 0; color: var(--text); font-size: 14px; font-weight: 650; line-height: 1.35; overflow-wrap: anywhere; }
+  .ds-app-card[data-tint='neutral'].is-interactive:hover {
+    border-color: var(--ds-input-border-hover);
+  }
+
+  .ds-app-card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+  }
+  .ds-app-card-icon {
+    flex-shrink: 0;
+    box-shadow: 0 5px 14px rgb(0 0 0 / calc(0.1 * var(--ds-shadow-strength)));
+  }
+  .ds-app-card-heading {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .ds-app-card-head-action {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .ds-app-card-title {
+    margin: 0;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
   .ds-app-card-open {
     padding: 0;
     border: 0;
@@ -39,10 +151,20 @@
     text-decoration: none;
     cursor: pointer;
   }
-  /* 标题动作的点击区铺满整卡；标签与底栏操作提层，保持各自可点击。 */
-  .ds-app-card-open::after { content: ""; position: absolute; inset: 0; border-radius: var(--ds-radius-md); }
-  .ds-app-card-open:focus-visible { outline: none; }
-  .ds-app-card-open:focus-visible::after { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  /* 标题动作的点击区铺满整卡；标签、头部动作与底栏操作提层，保持各自可点击。 */
+  .ds-app-card-open::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: calc(16px * var(--ds-radius-scale));
+  }
+  .ds-app-card-open:focus-visible {
+    outline: none;
+  }
+  .ds-app-card-open:focus-visible::after {
+    outline: 2px solid var(--ds-focus-ring);
+    outline-offset: -2px;
+  }
   .ds-app-card-summary {
     display: -webkit-box;
     margin: 0;
@@ -53,11 +175,107 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  .ds-app-card-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; }
-  .ds-app-card-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; }
-  .ds-app-card-meta { min-width: 0; color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
-  .ds-app-card-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; margin-inline-start: auto; }
+
+  .ds-app-card-tags {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .ds-app-card-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+    margin-top: auto;
+    padding-top: 2px;
+  }
+  .ds-app-card-meta {
+    min-width: 0;
+    color: color-mix(in srgb, var(--text) 72%, var(--text-2));
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+  .ds-app-card-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-inline-start: auto;
+  }
+  .ds-app-card[data-reveal-actions] .ds-app-card-actions {
+    opacity: 0;
+    transform: translateY(3px);
+    pointer-events: none;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+  .ds-app-card[data-reveal-actions]:is(:hover, :focus-within) .ds-app-card-actions {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .ds-app-card-actions > .ds-button {
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: calc(8px * var(--ds-radius-scale));
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .ds-app-card-actions > .ds-button:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    pointer-events: auto;
+    border-color: color-mix(in srgb, var(--border) 96%, transparent);
+    background: var(--ds-app-card-action-quiet-bg);
+    color: var(--text-2);
+  }
+  .ds-app-card-actions
+    > .ds-button:not(.ds-button--primary):not(.ds-button--quiet):not(.ds-button--danger):not(:disabled) {
+    border-color: color-mix(in srgb, var(--border) 110%, transparent);
+    background: var(--ds-app-card-action-bg);
+  }
+  .ds-app-card-actions > .ds-button--quiet:not(:disabled) {
+    border: 1px dashed color-mix(in srgb, var(--border) 125%, transparent);
+    background: var(--ds-app-card-action-quiet-bg);
+    color: var(--text-2);
+  }
+  .ds-app-card-actions > .ds-button--quiet:hover:not(:disabled) {
+    color: var(--text);
+    background: var(--hover);
+  }
+  .ds-app-card-actions > .ds-button--primary:not(:disabled) {
+    border-color: transparent;
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 72%, var(--ds-accent-cyan)));
+    box-shadow: 0 6px 14px color-mix(in srgb, var(--accent) calc(20% * var(--ds-shadow-strength)), transparent);
+  }
+  .ds-app-card-actions > .ds-button--primary:hover:not(:disabled) {
+    filter: brightness(1.04);
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 72%, var(--ds-accent-cyan)));
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .ds-app-card[data-reveal-actions] .ds-app-card-actions {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .ds-app-card { transition: none; }
+    .ds-app-card,
+    .ds-app-card[data-reveal-actions] .ds-app-card-actions {
+      transition: none;
+    }
+    .ds-app-card.is-interactive:hover {
+      transform: none;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { useId, type ComponentProps, type ReactNode } from 'react';
 import { cx } from '../foundation/cx';
 import { Icon, type IconName } from '../foundation/Icon';
+import { HelpTip } from '../primitives/Feedback';
 
 /** 应用窗口内的"左侧导航 + 右侧内容"外框，对应系统设置的 .ui.settings-app。 */
 export function AppLayout({ className, ...rest }: ComponentProps<'div'>) {
@@ -14,19 +15,37 @@ export function AppMain({ className, ...rest }: ComponentProps<'div'>) {
 
 export interface SettingsRowProps extends Omit<ComponentProps<'div'>, 'role' | 'aria-labelledby'> {
   label: string;
+  /** 标签旁的问号悬停提示，用于收起长段说明以保持设置行紧凑。 */
+  tip?: string;
   layout?: 'inline' | 'stacked';
   /** 堆叠布局中与标签同一行的操作。 */
   actions?: ReactNode;
 }
 
 /** 系统设置的独立选项面板，来源于 apps.css 的 .row。 */
-export function SettingsRow({ label, layout = 'inline', actions, children, className, ...rest }: SettingsRowProps) {
+export function SettingsRow({
+  label,
+  tip,
+  layout = 'inline',
+  actions,
+  children,
+  className,
+  ...rest
+}: SettingsRowProps) {
   const id = useId();
   const stacked = layout === 'stacked';
+  const title = <span id={id}>{label}</span>;
   return (
     <div {...rest} className={cx('ds-settings-row', className)} data-layout={layout} role="group" aria-labelledby={id}>
       <div className="ds-settings-row-head">
-        <span id={id}>{label}</span>
+        {tip ? (
+          <div className="ds-settings-row-label">
+            {title}
+            <HelpTip text={tip} />
+          </div>
+        ) : (
+          title
+        )}
         <div className="ds-settings-row-actions">{stacked ? actions : children}</div>
       </div>
       {stacked && children}

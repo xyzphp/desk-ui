@@ -163,4 +163,20 @@ describe('Table', () => {
     ref.current!.scrollTop = 12;
     expect(ref.current!.scrollTop).toBe(12);
   });
+
+  it('传入 minWidth 时设置表格最小宽度，避免窄容器挤扁自适应列', () => {
+    render(
+      <Table
+        caption="接口列表"
+        minWidth="620px"
+        columns={[
+          { key: 'method', header: '方法', width: '104px' },
+          { key: 'path', header: '路径' },
+        ]}
+        rows={[{ method: 'GET', path: '/articles' }]}
+        rowKey={(row) => row.path}
+      />,
+    );
+    expect(screen.getByRole('table')).toHaveStyle({ minWidth: '620px' });
+  });
 });

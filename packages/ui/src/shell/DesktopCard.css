@@ -8,6 +8,7 @@
     box-shadow: var(--ds-card-surface-shadow, none);
     backdrop-filter: var(--ds-card-surface-backdrop, blur(26px) saturate(155%));
     -webkit-backdrop-filter: var(--ds-card-surface-backdrop, blur(26px) saturate(155%));
+    transition: border-color .22s ease, box-shadow .24s cubic-bezier(.22, 1, .36, 1), background-color .22s ease;
     contain: layout style;
   }
   .ds-desktop-card-toolbar-title { display: flex; align-items: center; gap: 6px; min-width: 0; font-weight: 600; }
@@ -21,6 +22,7 @@
     box-shadow: var(--ds-card-surface-shadow, var(--ds-widget-shadow));
     backdrop-filter: var(--ds-card-surface-backdrop, none);
     -webkit-backdrop-filter: var(--ds-card-surface-backdrop, none);
+    transition: border-color .22s ease, box-shadow .24s cubic-bezier(.22, 1, .36, 1), background-color .22s ease;
     contain: layout style;
     font: 13px var(--font);
   }
@@ -48,7 +50,16 @@
     --ds-card-surface-shadow: var(--ds-liquid-glass-shadow);
     --ds-card-surface-rim: var(--ds-liquid-glass-rim);
     --ds-card-chip-bg: var(--ds-liquid-glass-chip-bg);
-    --ds-card-chip-border: var(--ds-liquid-glass-border);
+    --ds-card-chip-border: var(--ds-liquid-glass-chip-border);
+  }
+  :where(
+    .ds-desktop[data-card-style="liquid"] .ds-desktop-card-toolbar,
+    .ds-desktop[data-card-style="liquid"] .ds-desktop-card,
+    .ds-desktop-card-toolbar[data-card-style="liquid"],
+    .ds-desktop-card[data-card-style="liquid"]
+  ):not(.is-solid):not([data-placement="note"]):not([data-card-style="frosted"]) {
+    --text: var(--ds-liquid-glass-text);
+    --text-2: var(--ds-liquid-glass-text-2);
   }
   :where(
     .ds-desktop[data-card-style="liquid"] .ds-desktop-card-toolbar,
@@ -60,13 +71,24 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1.5px;
+    padding: 1px;
     background: var(--ds-card-surface-rim, none);
+    background-size: 220% 220%;
+    background-position: 0% 0%;
+    transition: background-position .6s cubic-bezier(.22, 1, .36, 1);
     -webkit-mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
     -webkit-mask-composite: xor;
     mask: var(--ds-liquid-glass-rim-mask) content-box, var(--ds-liquid-glass-rim-mask);
     mask-composite: exclude;
     pointer-events: none;
+  }
+  :where(
+    .ds-desktop[data-card-style="liquid"] .ds-desktop-card-toolbar,
+    .ds-desktop[data-card-style="liquid"] .ds-desktop-card,
+    .ds-desktop-card-toolbar[data-card-style="liquid"],
+    .ds-desktop-card[data-card-style="liquid"]
+  ):not(.is-solid):not([data-placement="note"]):not([data-card-style="frosted"]):where(:hover, :focus-within)::before {
+    background-position: 100% 100%;
   }
   .ds-desktop-card.is-solid {
     background: var(--bg-panel);
@@ -86,8 +108,9 @@
   .ds-desktop-card-symbol > .ds-icon { width: 16px; height: 16px; }
   .ds-desktop-card-meta { max-width: 100%; padding: 3px 7px; border: 1px solid var(--ds-card-chip-border, var(--border)); border-radius: calc(7px * var(--ds-radius-scale)); background: var(--ds-card-chip-bg, var(--bg-glass-strong)); color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
   .ds-desktop-card-actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-  .ds-desktop-card-action { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; padding: 0; border: var(--ds-card-action-border, 1px solid var(--ds-card-chip-border, color-mix(in srgb, var(--text) 14%, transparent))); border-radius: var(--ds-card-action-radius, calc(8px * var(--ds-radius-scale))); background: var(--ds-card-action-bg, var(--ds-card-chip-bg, var(--bg-glass-strong))); color: var(--text-2); cursor: pointer; }
-  .ds-desktop-card-action:where(:hover):not(:disabled) { color: var(--accent); }
+  .ds-desktop-card-action { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; padding: 0; border: var(--ds-card-action-border, 1px solid var(--ds-card-chip-border, color-mix(in srgb, var(--text) 14%, transparent))); border-radius: var(--ds-card-action-radius, calc(8px * var(--ds-radius-scale))); background: var(--ds-card-action-bg, var(--ds-card-chip-bg, var(--bg-glass-strong))); color: var(--text-2); cursor: pointer; transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .16s cubic-bezier(.22, 1, .36, 1); }
+  .ds-desktop-card-action:where(:hover):not(:disabled) { color: var(--accent); background: var(--ds-shell-glass-active-bg, var(--ds-card-action-bg, var(--ds-card-chip-bg, var(--bg-glass-strong)))); }
+  .ds-desktop-card-action:where(:active):not(:disabled) { transform: scale(.94); }
   .ds-desktop-card-action > .ds-icon { width: 14px; height: 14px; }
   .ds-desktop-card-action:focus-visible { outline: 1px solid var(--ds-input-border-focus); outline-offset: 2px; }
   .ds-desktop-card-action:disabled { opacity: .45; cursor: default; }
@@ -163,6 +186,10 @@
   .ds-clock-card[data-compact] .ds-clock-time { font-size: 23px; letter-spacing: -.5px; }
   .ds-clock-card[data-compact] .ds-clock-seconds { font-size: 12px; }
   .ds-clock-date { margin: 6px 0 0; color: var(--text-2); font-size: 12px; }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-desktop-card, .ds-desktop-card-toolbar, .ds-desktop-card::before, .ds-desktop-card-toolbar::before, .ds-desktop-card-action { transition: none; }
+    .ds-desktop-card-action:where(:active):not(:disabled) { transform: none; }
+  }
   @media (forced-colors: active) {
     .ds-desktop-card, .ds-desktop-card-toolbar {
       border-color: CanvasText; background: Canvas; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;

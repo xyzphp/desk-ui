@@ -12,7 +12,7 @@ export const detailLayoutDoc: ComponentDoc = {
     '用于应用、成员、项目等单个对象的只读详情。带编辑的设置页用 PropertySheet 与 FormSection；整页侧栏导航用 SplitLayout。',
     '头部只放一个主操作；状态提示（Notice）放在正文开头。正文由若干 DetailSection 组成，小节没有边框，标题级别自动取 headingLevel 的下一级。',
     'aside 放若干 Panel，信息面板里的键值对用 PropertySheet density="compact"：名称列按最长名称对齐，值可换行。不传 aside 时正文占满整行。',
-    '信息栏宽 220–300px，所在 Workspace 窄于 600px 时改为单栏，正文在前。',
+    '信息栏宽 220–300px，所在 Workspace 窄于 860px 时改为单栏，正文在前。',
   ],
   demos: [
     { title: '应用详情', description: '安装后头部操作变为状态标签，正文开头出现提示。', layout: 'stack', code: source, render: () => <DetailLayoutDemo /> },

@@ -13,7 +13,7 @@
   .ds-detail-aside { display: flex; flex-direction: column; gap: var(--ds-space-md); min-width: 0; }
   .ds-detail-section { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   .ds-detail-section-title { margin: 0; color: var(--text); font-size: 14px; font-weight: 650; }
-  @container ds-workspace (max-width: 600px) {
+  @container ds-workspace (max-width: 860px) {
     .ds-detail-body.has-aside { grid-template-columns: minmax(0, 1fr); }
   }
 }

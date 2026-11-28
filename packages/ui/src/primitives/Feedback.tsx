@@ -12,7 +12,9 @@ export interface CheckboxProps extends Omit<ComponentProps<'input'>, 'type' | 'c
 export function Checkbox({ className, children, indeterminate = false, ref, ...rest }: CheckboxProps) {
   const input = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => input.current!, []);
-  useLayoutEffect(() => { if (input.current) input.current.indeterminate = indeterminate; });
+  useLayoutEffect(() => {
+    if (input.current) input.current.indeterminate = indeterminate;
+  });
   return (
     <label className={cx('ds-checkbox', className)}>
       <input className="ds-control-input" type="checkbox" {...rest} ref={input} />
@@ -62,11 +64,13 @@ export interface TagProps extends Omit<ComponentProps<'span'>, 'color'> {
   color?: TagColor;
   /** 圆角：默认小圆角，pill 为全圆角。 */
   shape?: 'default' | 'pill';
+  /** 在文字前显示带柔光光晕的状态圆点（常与 shape="pill" 搭配）。 */
+  dot?: boolean;
   icon?: IconName;
 }
 
 /** 状态标签。颜色走语义令牌，页面不写色值。对应 .workspace-status / .account-status-tag。 */
-export function Tag({ tone = 'neutral', color, shape, icon, className, children, ...rest }: TagProps) {
+export function Tag({ tone = 'neutral', color, shape, dot = false, icon, className, children, ...rest }: TagProps) {
   return (
     <span
       className={cx(
@@ -74,10 +78,12 @@ export function Tag({ tone = 'neutral', color, shape, icon, className, children,
         !color && tone !== 'neutral' && `ds-tag--${tone}`,
         color && `ds-tag--color ds-tag--${color}`,
         shape === 'pill' && 'ds-tag--pill',
+        dot && 'ds-tag--dot',
         className,
       )}
       {...rest}
     >
+      {dot && <span className="ds-tag-dot" aria-hidden="true" />}
       {icon && <Icon name={icon} size={12} />}
       {children}
     </span>
@@ -124,10 +130,13 @@ export interface HelpTipProps {
 /** 问号悬停提示。可聚焦，键盘聚焦时同样展示。必要提示统一用它，不堆叠说明小字。 */
 export function HelpTip({ text, className }: HelpTipProps) {
   return (
-    <Tooltip text={text}>{(trigger) => <span
-      {...trigger}
-      className={cx('ds-help-tip', className)} tabIndex={0} role="img" aria-label={text}
-    ><Icon name="help-circle" /></span>}</Tooltip>
+    <Tooltip text={text}>
+      {(trigger) => (
+        <span {...trigger} className={cx('ds-help-tip', className)} tabIndex={0} role="img" aria-label={text}>
+          <Icon name="help-circle" />
+        </span>
+      )}
+    </Tooltip>
   );
 }
 

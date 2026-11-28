@@ -8,7 +8,11 @@ describe('Switch', () => {
     const user = userEvent.setup();
     const onCheckedChange = vi.fn();
     const onChange = vi.fn();
-    render(<Switch onCheckedChange={onCheckedChange} onChange={onChange}>显示提示</Switch>);
+    render(
+      <Switch onCheckedChange={onCheckedChange} onChange={onChange}>
+        显示提示
+      </Switch>,
+    );
     const control = screen.getByRole('switch', { name: '显示提示' });
 
     await user.click(screen.getByText('显示提示'));
@@ -23,13 +27,21 @@ describe('Switch', () => {
   it('受控状态等待 props 更新，禁用状态不触发回调', async () => {
     const user = userEvent.setup();
     const onCheckedChange = vi.fn();
-    const { rerender } = render(<Switch checked={false} onCheckedChange={onCheckedChange}>显示提示</Switch>);
+    const { rerender } = render(
+      <Switch checked={false} onCheckedChange={onCheckedChange}>
+        显示提示
+      </Switch>,
+    );
     const control = screen.getByRole('switch', { name: '显示提示' });
     await user.click(control);
     expect(onCheckedChange).toHaveBeenCalledWith(true);
     expect(control).not.toBeChecked();
 
-    rerender(<Switch checked disabled onCheckedChange={onCheckedChange}>显示提示</Switch>);
+    rerender(
+      <Switch checked disabled onCheckedChange={onCheckedChange}>
+        显示提示
+      </Switch>,
+    );
     expect(control).toBeChecked();
     expect(control).toBeDisabled();
     await user.click(screen.getByText('显示提示'));
@@ -41,7 +53,9 @@ describe('Switch', () => {
     const onCheckedChange = vi.fn();
     render(
       <form aria-label="偏好">
-        <Switch name="tips" value="enabled" defaultChecked onCheckedChange={onCheckedChange}>显示提示</Switch>
+        <Switch name="tips" value="enabled" defaultChecked onCheckedChange={onCheckedChange}>
+          显示提示
+        </Switch>
         <button type="reset">重置</button>
       </form>,
     );
@@ -72,6 +86,17 @@ describe('Tag 装饰色与胶囊标签', () => {
     expect(decorated).toHaveClass('ds-tag--color', 'ds-tag--purple', 'ds-tag--pill');
     expect(decorated).not.toHaveClass('ds-tag--success');
     expect(decorated).not.toHaveAttribute('color');
+  });
+
+  it('dot 在文字前渲染装饰圆点并追加描边圆点类', () => {
+    render(
+      <Tag tone="success" shape="pill" dot>
+        已启用
+      </Tag>,
+    );
+    const tag = screen.getByText('已启用');
+    expect(tag).toHaveClass('ds-tag', 'ds-tag--success', 'ds-tag--pill', 'ds-tag--dot');
+    expect(tag.querySelector('.ds-tag-dot')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('CapsuleTag 渲染两段并透传属性', () => {

@@ -38,6 +38,8 @@ export interface TableProps<T> {
   empty?: ReactNode;
   /** 单元格内容允许换行（说明类表格）；默认单行省略，适合数据列表。 */
   wrap?: boolean;
+  /** 表格最小宽度（如 "620px"）；容器窄于该宽度时在滚动容器内横向滚动，避免固定布局挤扁自适应列。 */
+  minWidth?: string;
   className?: string;
   /** 横纵滚动的容器；宿主据此采集 / 恢复滚动位置。 */
   ref?: Ref<HTMLDivElement>;
@@ -60,12 +62,13 @@ export function Table<T>({
   caption,
   empty,
   wrap,
+  minWidth,
   className,
   ref,
 }: TableProps<T>) {
   return (
     <div ref={ref} className={cx('ds-table-scroll', className)}>
-      <table className={cx('ds-table', wrap && 'ds-table--wrap')}>
+      <table className={cx('ds-table', wrap && 'ds-table--wrap')} style={minWidth ? { minWidth } : undefined}>
         <caption className="ds-visually-hidden">{caption}</caption>
         <colgroup>
           {columns.map((c) => (

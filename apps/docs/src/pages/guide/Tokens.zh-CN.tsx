@@ -80,11 +80,17 @@ const colors: Swatch[] = [
   { token: '--ds-liquid-glass-bg', label: '液态玻璃底色', note: '卡片、导航树、分组、看板列与菜单栏 / Dock / 任务栏 / 模式栏的高透纯色玻璃底' },
   { token: '--ds-liquid-glass-bg-strong', label: '液态玻璃强调底色', note: '开始菜单、弹出面板、右键菜单、浮动通知、锁屏倒计时、登录卡片、Dock 排序面板及收藏/筛选栏的通透玻璃底' },
   { token: '--ds-liquid-glass-card', label: '液态玻璃内卡底色', note: '导航书签卡、任务卡片与登录页输入框 / 激活页签等内层玻璃卡面' },
-  { token: '--ds-liquid-glass-bg-soft', label: '液态玻璃柔和底色', note: '嵌套分组、开始菜单底栏、分段底槽与添加触发区的轻透玻璃底' },
+  { token: '--ds-liquid-glass-bg-soft', label: '液态玻璃柔和底色', note: '嵌套分组、开始菜单底栏与添加触发区的轻透玻璃底' },
+  { token: '--ds-liquid-glass-track-bg', label: '液态玻璃分段底槽', note: '控制中心等弹层内分段选择器的内凹对比底槽' },
   { token: '--ds-liquid-glass-chip-bg', label: '液态玻璃胶囊底色', note: '顶栏按钮、开始菜单搜索栏、导航/控制中心胶囊、内联通知卡与悬停态底色' },
-  { token: '--ds-liquid-glass-border', label: '液态玻璃高光边框', note: '玻璃轮廓的基础边缘反光描边' },
-  { token: '--ds-liquid-glass-border-hover', label: '液态玻璃悬停边框', note: '卡片悬停时增强的高光描边' },
-  { token: '--ds-liquid-glass-rim', label: '液态玻璃菲涅耳高光环', note: '主容器、开始菜单与悬浮 Dock 外缘 135° 斜向高光折射环（::before 镂空描边）' },
+  { token: '--ds-liquid-glass-chip-border', label: '液态玻璃胶囊细边', note: '卡片头部按钮、胶囊与表盘等次级控件的柔和玻璃描边' },
+  { token: '--ds-liquid-glass-active-bg', label: '液态玻璃选中胶囊底色', note: '控制中心分段选中项与当前主题卡的高对比高亮玻璃胶囊' },
+  { token: '--ds-liquid-glass-text', label: '液态玻璃主文字', note: '玻璃卡片、弹层、菜单栏与开始菜单的高对比正文色' },
+  { token: '--ds-liquid-glass-text-2', label: '液态玻璃次级文字', note: '按主题半透明混合的自适应次级文字，避免在彩底壁纸上发灰糊成一片' },
+  { token: '--ds-liquid-glass-active-text', label: '液态玻璃选中文字', note: '液态玻璃选中胶囊内的强调或高对比前景色' },
+  { token: '--ds-liquid-glass-border', label: '液态玻璃高光边框', note: '玻璃轮廓的轻透边缘描边' },
+  { token: '--ds-liquid-glass-border-hover', label: '液态玻璃悬停边框', note: '卡片悬停时柔和增强的高光描边' },
+  { token: '--ds-liquid-glass-rim', label: '液态玻璃菲涅耳高光环', note: '主容器、开始菜单与悬浮 Dock 外缘 1px 135° 斜向流光折射环（::before 镂空描边，悬停或展开平滑流光）' },
 ];
 
 interface Metric {
@@ -127,22 +133,22 @@ const metrics: Metric[] = [
   },
   {
     token: '--ds-liquid-glass-filter',
-    value: 'blur(14px) saturate(210% / 195%)',
-    use: '液态玻璃卡片、开始菜单、浮动浮层、系统栏、导航与看板的核心高饱和折射滤镜（浅色 210%，深色 195%）',
+    value: 'blur(18px) saturate(165% / 160%)',
+    use: '液态玻璃卡片、开始菜单、浮动浮层、系统栏、导航与看板的柔和折射滤镜（浅色 165%，深色 160%，避免高饱和杂色干扰文字）',
   },
   {
     token: '--ds-liquid-glass-filter-soft',
-    value: 'blur(10px) saturate(195% / 185%)',
-    use: '液态玻璃搜索框、常用收藏、工具栏、Dock 提示泡与轻触发区的轻量折射滤镜（浅色 195%，深色 185%）',
+    value: 'blur(12px) saturate(155% / 150%)',
+    use: '液态玻璃搜索框、常用收藏、工具栏、Dock 提示泡与轻触发区的轻量折射滤镜（浅色 155%，深色 150%）',
   },
   {
     token: '--ds-liquid-glass-shadow',
-    value: '不越界外阴影 + 多向内高光与内发光',
-    use: '液态玻璃主容器与系统壳层面板的立体投影与厚玻璃内发光（上方外阴影扩散 <= 11px，避免跨间距波及相邻卡片）',
+    value: '不越界外阴影 + 纤细顶缘高光与柔和内发光',
+    use: '液态玻璃主容器与系统壳层面板的轻透立体投影与微弱内发光（上方外阴影扩散 <= 11px，避免跨间距波及相邻卡片）',
   },
   {
     token: '--ds-liquid-glass-shadow-sm',
-    value: '轻外阴影 + 环绕内高光与内发光',
+    value: '轻外阴影 + 纤细顶缘高光与微弱内发光',
     use: '液态玻璃搜索框、常用收藏、开始菜单输入栏、Dock 提示泡与内部卡片的轻量高光投影',
   },
   {

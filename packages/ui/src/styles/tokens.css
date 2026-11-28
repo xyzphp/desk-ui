@@ -23,8 +23,8 @@
   /* 皮肤可调的两个比例：圆角与投影强度。所有圆角 / 投影都乘以它们，默认 1 即内置取值；皮肤只改这两个数，不逐条覆盖。 */
   --ds-radius-scale: 1;
   --ds-shadow-strength: 1;
-  --ds-drag-ghost-opacity: .88;
-  --ds-drag-source-opacity: .45;
+  --ds-drag-ghost-opacity: 0.88;
+  --ds-drag-source-opacity: 0.45;
   --radius: calc(12px * var(--ds-radius-scale));
   --focus-outline: color-mix(in srgb, var(--accent) 76%, white);
   --focus-glow: color-mix(in srgb, var(--accent) 20%, transparent);
@@ -99,7 +99,8 @@
   --ds-dialog-overlay: rgba(0, 0, 0, 0.18);
   --ds-dialog-danger: #ff3b30;
   --ds-dialog-on-action: #fff;
-  --ds-widget-shadow: 0 8px 26px rgb(0 0 0 / calc(0.16 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  --ds-widget-shadow:
+    0 8px 26px rgb(0 0 0 / calc(0.16 * var(--ds-shadow-strength))), inset 0 1px 0 rgba(255, 255, 255, 0.24);
   --ds-drag-shadow: 0 16px 32px rgb(0 0 0 / calc(0.25 * var(--ds-shadow-strength)));
   /* apps.css 的 .custom-app-widget-logo / 指标条 / 错误状态。 */
   --ds-widget-logo-base: #fff;
@@ -140,7 +141,7 @@
   --ds-wallpaper-dusk-glow-c: #8f6fd6;
   /* 动态壁纸的细颗粒噪点：静态 SVG 分形噪声贴图，叠加模式消除渐变色带断层。 */
   --ds-wallpaper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --ds-wallpaper-grain-opacity: .09;
+  --ds-wallpaper-grain-opacity: 0.09;
   --ds-on-accent: #fff;
   --ds-shade: #000;
   --ds-desktop-foreground: #fff;
@@ -172,42 +173,52 @@
   color-scheme: light;
   --bg-glass: rgba(255, 255, 255, 0.62);
   --bg-glass-strong: rgba(246, 246, 248, 0.86);
-  /* 液态玻璃：高透纯色玻璃底 + 清晰低雾高饱和 backdrop-filter + 斜向菲涅耳高光环与厚玻璃内发光；
+  /* 液态玻璃：平衡透光度纯色玻璃底 + 柔和低噪 backdrop-filter + 纤细斜向流光菲涅耳高光与高对比文字；
    * 纯色底板与不越界外阴影（上方扩散 <= 11px）减少 Windows Chromium 局部交换对相邻卡片的横切重绘。 */
-  --ds-liquid-glass-bg: rgba(255, 255, 255, 0.28);
-  --ds-liquid-glass-bg-strong: rgba(255, 255, 255, 0.38);
-  --ds-liquid-glass-card: rgba(255, 255, 255, 0.62);
-  --ds-liquid-glass-bg-soft: rgba(255, 255, 255, 0.2);
-  --ds-liquid-glass-chip-bg: rgba(255, 255, 255, 0.36);
-  --ds-liquid-glass-border: rgba(255, 255, 255, 0.5);
-  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.86);
+  --ds-liquid-glass-bg: rgba(255, 255, 255, 0.44);
+  --ds-liquid-glass-bg-strong: rgba(255, 255, 255, 0.64);
+  --ds-liquid-glass-card: rgba(255, 255, 255, 0.78);
+  --ds-liquid-glass-bg-soft: rgba(255, 255, 255, 0.32);
+  --ds-liquid-glass-track-bg: rgba(15, 23, 42, 0.08);
+  --ds-liquid-glass-chip-bg: rgba(255, 255, 255, 0.48);
+  --ds-liquid-glass-chip-border: rgba(255, 255, 255, 0.32);
+  --ds-liquid-glass-active-bg: rgba(255, 255, 255, 0.92);
+  --ds-liquid-glass-active-shadow:
+    0 2px 6px rgba(15, 23, 42, 0.1), 0 0 0 0.5px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  --ds-liquid-glass-text: #111318;
+  --ds-liquid-glass-text-2: rgba(17, 19, 24, 0.72);
+  --ds-liquid-glass-active-text: color-mix(in srgb, var(--accent) 82%, var(--ds-liquid-glass-text));
+  --ds-liquid-glass-border: rgba(255, 255, 255, 0.34);
+  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.56);
   --ds-liquid-glass-rim-mask: linear-gradient(#fff 0 0);
   --ds-liquid-glass-rim: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.96) 0%,
-    rgba(255, 255, 255, 0.22) 28%,
-    rgba(255, 255, 255, 0.04) 54%,
-    rgba(255, 255, 255, 0.78) 100%
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(255, 255, 255, 0.12) 22%,
+    rgba(255, 255, 255, 0.02) 45%,
+    rgba(255, 255, 255, 0.44) 55%,
+    rgba(255, 255, 255, 0.06) 72%,
+    rgba(255, 255, 255, 0.28) 100%
   );
-  --ds-liquid-glass-filter: blur(14px) saturate(210%);
-  --ds-liquid-glass-filter-soft: blur(10px) saturate(195%);
+  --ds-liquid-glass-filter: blur(18px) saturate(165%);
+  --ds-liquid-glass-filter-soft: blur(12px) saturate(155%);
   --ds-liquid-glass-shadow:
-    0 10px 14px rgb(0 0 0 / calc(0.14 * var(--ds-shadow-strength))),
-    0 0 0 0.5px rgba(255, 255, 255, 0.44),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.94),
-    inset 1.5px 0 1px rgba(255, 255, 255, 0.58),
-    inset 0 -1.5px 1px rgba(255, 255, 255, 0.48),
-    inset -1px 0 1px rgba(255, 255, 255, 0.28),
-    inset 0 0 22px rgba(255, 255, 255, 0.24);
+    0 10px 14px rgb(0 0 0 / calc(0.11 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36), inset 0 0 16px rgba(255, 255, 255, 0.09);
   --ds-liquid-glass-shadow-sm:
-    0 6px 10px rgb(0 0 0 / calc(0.09 * var(--ds-shadow-strength))),
-    0 0 0 0.5px rgba(255, 255, 255, 0.38),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
-    inset 1px 0 1px rgba(255, 255, 255, 0.48),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.38),
-    inset 0 0 16px rgba(255, 255, 255, 0.18);
+    0 6px 10px rgb(0 0 0 / calc(0.07 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.06);
   --bg-win: #f5f5f7;
   --bg-panel: #ffffff;
+  --ds-app-card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 36%);
+  --ds-app-card-glow: radial-gradient(circle, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
+  --ds-app-card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  --ds-app-card-stop-mid: 2.5%;
+  --ds-app-card-stop-end: 6%;
+  --ds-app-card-border-mix: 10%;
+  --ds-app-card-border-hover-mix: 22%;
+  --ds-app-card-action-bg: rgba(255, 255, 255, 0.78);
+  --ds-app-card-action-quiet-bg: rgba(255, 255, 255, 0.45);
   --ds-note-yellow: #fff5cd;
   --ds-note-blue: #e8f0ff;
   --ds-note-green: #e6f5e7;
@@ -225,39 +236,48 @@
   color-scheme: dark;
   --bg-glass: rgba(40, 40, 46, 0.55);
   --bg-glass-strong: rgba(36, 36, 40, 0.88);
-  --ds-liquid-glass-bg: rgba(20, 24, 36, 0.32);
-  --ds-liquid-glass-bg-strong: rgba(24, 28, 40, 0.44);
-  --ds-liquid-glass-card: rgba(34, 38, 50, 0.58);
-  --ds-liquid-glass-bg-soft: rgba(24, 28, 40, 0.22);
+  --ds-liquid-glass-bg: rgba(18, 22, 34, 0.5);
+  --ds-liquid-glass-bg-strong: rgba(20, 24, 36, 0.68);
+  --ds-liquid-glass-card: rgba(38, 44, 62, 0.76);
+  --ds-liquid-glass-bg-soft: rgba(24, 28, 42, 0.38);
+  --ds-liquid-glass-track-bg: rgba(0, 0, 0, 0.26);
   --ds-liquid-glass-chip-bg: rgba(255, 255, 255, 0.13);
-  --ds-liquid-glass-border: rgba(255, 255, 255, 0.24);
-  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.46);
+  --ds-liquid-glass-chip-border: rgba(255, 255, 255, 0.12);
+  --ds-liquid-glass-active-bg: rgba(255, 255, 255, 0.22);
+  --ds-liquid-glass-active-shadow: 0 2px 6px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  --ds-liquid-glass-text: #f5f7fb;
+  --ds-liquid-glass-text-2: rgba(245, 247, 251, 0.76);
+  --ds-liquid-glass-active-text: var(--ds-liquid-glass-text);
+  --ds-liquid-glass-border: rgba(255, 255, 255, 0.14);
+  --ds-liquid-glass-border-hover: rgba(255, 255, 255, 0.28);
   --ds-liquid-glass-rim: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.62) 0%,
-    rgba(255, 255, 255, 0.14) 28%,
-    rgba(255, 255, 255, 0.03) 54%,
-    rgba(255, 255, 255, 0.44) 100%
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 22%,
+    rgba(255, 255, 255, 0.01) 45%,
+    rgba(255, 255, 255, 0.24) 55%,
+    rgba(255, 255, 255, 0.04) 72%,
+    rgba(255, 255, 255, 0.14) 100%
   );
-  --ds-liquid-glass-filter: blur(14px) saturate(195%);
-  --ds-liquid-glass-filter-soft: blur(10px) saturate(185%);
+  --ds-liquid-glass-filter: blur(18px) saturate(160%);
+  --ds-liquid-glass-filter-soft: blur(12px) saturate(150%);
   --ds-liquid-glass-shadow:
-    0 10px 14px rgb(0 0 0 / calc(0.32 * var(--ds-shadow-strength))),
-    0 0 0 0.5px rgba(255, 255, 255, 0.16),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
-    inset 1.5px 0 1px rgba(255, 255, 255, 0.26),
-    inset 0 -1.5px 1px rgba(255, 255, 255, 0.2),
-    inset -1px 0 1px rgba(255, 255, 255, 0.12),
-    inset 0 0 24px rgba(255, 255, 255, 0.09);
+    0 10px 14px rgb(0 0 0 / calc(0.28 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 18px rgba(255, 255, 255, 0.04);
   --ds-liquid-glass-shadow-sm:
-    0 6px 10px rgb(0 0 0 / calc(0.24 * var(--ds-shadow-strength))),
-    0 0 0 0.5px rgba(255, 255, 255, 0.14),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.42),
-    inset 1px 0 1px rgba(255, 255, 255, 0.22),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.16),
-    inset 0 0 16px rgba(255, 255, 255, 0.07);
+    0 6px 10px rgb(0 0 0 / calc(0.2 * var(--ds-shadow-strength))), 0 0 0 0.5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 12px rgba(255, 255, 255, 0.03);
   --bg-win: #1e1e20;
   --bg-panel: #2a2a2d;
+  --ds-app-card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 36%);
+  --ds-app-card-glow: radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+  --ds-app-card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --ds-app-card-stop-mid: 4.5%;
+  --ds-app-card-stop-end: 9%;
+  --ds-app-card-border-mix: 13%;
+  --ds-app-card-border-hover-mix: 26%;
+  --ds-app-card-action-bg: rgba(255, 255, 255, 0.09);
+  --ds-app-card-action-quiet-bg: rgba(255, 255, 255, 0.04);
   --ds-note-yellow: #49402c;
   --ds-note-blue: #28394b;
   --ds-note-green: #2d4135;

@@ -212,7 +212,7 @@ export const tableDoc: ComponentDoc = {
   usage: [
     '列通过 columns 声明；缺省 render 时读取行对象的同名字段。',
     '排序是受控的：传入 sort 与 onSortChange，在回调里对 rows 重新排序（或请求服务端）。',
-    '数据列表默认单行省略；说明类表格（如本页 API）用 wrap 允许换行。',
+    '数据列表默认单行省略；说明类表格（如本页 API）用 wrap 允许换行。多列含固定列宽时可配合 minWidth，在窄容器内转为横向滚动，避免挤扁自适应列。',
     '行选中用 onRowSelect + selectedKey，行可聚焦并支持 Enter / Space。',
     '需要分页时在同一个 Panel 下组合 Pagination；Table 只接收当前页 rows，不自行切片或请求。',
   ],
@@ -249,6 +249,7 @@ export const tableDoc: ComponentDoc = {
         { name: 'sort / onSortChange', type: 'SortState / (next) => void', description: '受控排序。' },
         { name: 'selectedKey / onRowSelect', type: 'string / (row) => void', description: '行选中。' },
         { name: 'wrap', type: 'boolean', description: '单元格允许换行。' },
+        { name: 'minWidth', type: 'string', description: '表格最小宽度（如 "620px"），容器更窄时横向滚动。' },
         { name: 'ref', type: 'Ref<HTMLDivElement>', description: '滚动容器，供宿主采集 / 恢复横纵滚动位置。' },
         { name: 'empty', type: 'ReactNode', description: '无数据时显示的内容，通常是 EmptyState。' },
       ],

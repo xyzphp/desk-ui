@@ -16,6 +16,7 @@
   .ds-window.is-inactive > .ds-window-titlebar > .ds-window-title { color: var(--text-2); }
   .ds-window-body { position: relative; flex: 1; min-height: 0; overflow: auto; }
   .ds-window-body--contained { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+  .ds-window-body--contained > :is(.ds-app, .ds-workspace) { flex: 1; min-height: 0; }
 
   .ds-resizer { position: absolute; z-index: 5; padding: 0; border: 0; background: transparent; }
   .ds-resizer:focus-visible { outline: 1px solid var(--focus-outline); outline-offset: -2px; }

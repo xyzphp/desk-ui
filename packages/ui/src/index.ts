@@ -47,12 +47,7 @@ export {
 } from './layout/MonthCalendar';
 export { CheckboxGroup, type CheckboxGroupProps, type CheckboxOption } from './primitives/CheckboxGroup';
 export { FieldAddon, type FieldAddonProps } from './primitives/FieldAddon';
-export {
-  InputGroup,
-  InputGroupAddon,
-  type InputGroupProps,
-  type InputGroupAddonProps,
-} from './primitives/InputGroup';
+export { InputGroup, InputGroupAddon, type InputGroupProps, type InputGroupAddonProps } from './primitives/InputGroup';
 export { FormSection, FormActions, type FormSectionProps, type FormActionsProps } from './layout/Form';
 export { ColorPicker, type ColorPickerProps, type ColorPickerLabels, type ColorPreset } from './primitives/ColorPicker';
 export { Timeline, type TimelineProps, type TimelineItem } from './layout/Timeline';
@@ -97,7 +92,7 @@ export { DropdownMenu, type DropdownMenuProps } from './primitives/DropdownMenu'
 export { Popconfirm, type PopconfirmProps, type PopconfirmLabels } from './primitives/Popconfirm';
 export { useControllable } from './foundation/useControllable';
 export { Icon, iconNames, type IconName, type IconProps } from './foundation/Icon';
-export { Workspace, Scrollable } from './foundation/Workspace';
+export { Workspace, Scrollable, type WorkspaceProps, type WorkspaceSurface } from './foundation/Workspace';
 export { ConfigProvider, useLabels, useLocale, type ConfigProviderProps } from './foundation/ConfigProvider';
 export { enUS } from './foundation/localeEnUS';
 export { defineMessages, matchLocale, pickMessages, useMessages, type MessageCatalog } from './foundation/messages';
@@ -166,7 +161,7 @@ export type {
 export { Modal, type ModalProps, type ModalLabels } from './shell/Modal';
 export { Drawer, type DrawerProps } from './shell/Drawer';
 export { Chip, type ChipProps, type ChipLabels } from './primitives/Chip';
-export { TagInput, type TagInputProps } from './primitives/TagInput';
+export { TagInput, type TagInputProps, type TagInputOption } from './primitives/TagInput';
 export type { TagInputLabels, TagRejection, TagRejectionReason } from './primitives/tagInputModel';
 export { ResizeHandle, type ResizeHandleProps, type ResizeHandleLabels } from './layout/ResizeHandle';
 export { ResizableSplit, type ResizableSplitProps } from './layout/ResizableSplit';
@@ -279,16 +274,13 @@ export {
   type ListGroupProps,
   type ListItemProps,
   type ListDensity,
+  type DocumentPaneProps,
+  type DocumentPaneSurface,
   type PropertySheetProps,
   type PropertyProps,
   type DisclosureProps,
 } from './layout/Layout';
-export {
-  DetailLayout,
-  DetailSection,
-  type DetailLayoutProps,
-  type DetailSectionProps,
-} from './layout/DetailLayout';
+export { DetailLayout, DetailSection, type DetailLayoutProps, type DetailSectionProps } from './layout/DetailLayout';
 export { LoadMore, type LoadMoreProps, type LoadMoreLabels } from './layout/LoadMore';
 export {
   Table,
@@ -347,12 +339,8 @@ export {
   type ImagePreviewItem,
   type ImagePreviewLabels,
 } from './domain/ImagePreview';
-export {
-  ImageGallery,
-  type ImageGalleryProps,
-  type ImageGalleryLabels,
-} from './domain/ImageGallery';
-export { AppCard, AppCardGrid, type AppCardProps, type AppCardGridProps } from './domain/AppCard';
+export { ImageGallery, type ImageGalleryProps, type ImageGalleryLabels } from './domain/ImageGallery';
+export { AppCard, AppCardGrid, type AppCardProps, type AppCardGridProps, type AppCardTint } from './domain/AppCard';
 export { MessageComposer, type MessageComposerProps, type MessageComposerLabels } from './domain/MessageComposer';
 export {
   AIToolbar,
