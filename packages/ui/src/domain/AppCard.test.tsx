@@ -78,6 +78,9 @@ describe('AppCard / AppCardGrid', () => {
     expect(screen.getByRole('article', { name: '文章' })).toHaveAttribute('data-tint', 'teal');
     const firstAutoTint = screen.getByRole('article', { name: '监控' }).getAttribute('data-tint');
     expect(['blue', 'purple', 'teal', 'rose', 'amber']).toContain(firstAutoTint);
+    fireEvent.click(screen.getByRole('button', { name: '更多' }));
+    expect(onMore).toHaveBeenCalledOnce();
+    expect(onOpen).not.toHaveBeenCalled();
     rerender(
       <>
         <AppCard name="文章" summary="文章写作与公开阅读" tint="teal" onOpen={onOpen} meta="v1.0.0" />
@@ -85,9 +88,6 @@ describe('AppCard / AppCardGrid', () => {
       </>,
     );
     expect(screen.getByRole('article', { name: '监控（重命名）' })).toHaveAttribute('data-tint', firstAutoTint);
-    fireEvent.click(screen.getByRole('button', { name: '更多' }));
-    expect(onMore).toHaveBeenCalledOnce();
-    expect(onOpen).not.toHaveBeenCalled();
   });
 
   it('支持 revealActions 悬停显示操作与禁用状态按钮', () => {
